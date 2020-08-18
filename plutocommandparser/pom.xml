@@ -1,0 +1,22 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>cz.tefek</groupId>
+  <artifactId>plutocommandparser</artifactId>
+  <version>0.1</version>
+  <name>plutocommandparser</name>
+  <description>Pluto Command Parser</description>
+  <properties>
+    <maven.compiler.source>11</maven.compiler.source>
+    <maven.compiler.target>11</maven.compiler.target>
+    <maven.compiler.release>11</maven.compiler.release>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+  </properties>
+  <dependencies>
+    <dependency>
+        <groupId>cz.tefek</groupId>
+        <artifactId>plutoio2</artifactId>
+        <version>0.2</version>
+    </dependency>
+  </dependencies>
+</project>
