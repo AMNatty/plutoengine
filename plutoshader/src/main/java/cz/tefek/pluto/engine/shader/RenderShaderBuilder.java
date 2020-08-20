@@ -5,10 +5,6 @@ import org.lwjgl.opengl.GL33;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Modifier;
 
-import cz.tefek.io.asl.resource.ResourceAddress;
-import cz.tefek.io.asl.resource.ResourceSubscriber;
-import cz.tefek.io.pluto.debug.Logger;
-import cz.tefek.io.pluto.debug.SmartSeverity;
 import cz.tefek.pluto.engine.shader.type.FragmentShader;
 import cz.tefek.pluto.engine.shader.type.VertexShader;
 import cz.tefek.pluto.engine.shader.uniform.Uniform;
@@ -16,6 +12,10 @@ import cz.tefek.pluto.engine.shader.uniform.UniformBase;
 import cz.tefek.pluto.engine.shader.uniform.UniformMat4;
 import cz.tefek.pluto.engine.shader.uniform.auto.AutoViewportProjection;
 import cz.tefek.pluto.engine.shader.uniform.auto.AutomaticUniforms;
+import cz.tefek.pluto.io.asl.resource.ResourceAddress;
+import cz.tefek.pluto.io.asl.resource.ResourceSubscriber;
+import cz.tefek.pluto.io.logger.Logger;
+import cz.tefek.pluto.io.logger.SmartSeverity;
 
 public class RenderShaderBuilder
 {

@@ -8,11 +8,11 @@ import java.util.Vector;
 import org.lwjgl.opengl.GL33;
 import org.lwjgl.system.MemoryUtil;
 
-import cz.tefek.io.pluto.debug.Logger;
-import cz.tefek.io.pluto.debug.SmartSeverity;
 import cz.tefek.pluto.engine.graphics.gl.DrawMode;
 import cz.tefek.pluto.engine.graphics.gl.vbo.ArrayBuffer;
 import cz.tefek.pluto.engine.graphics.gl.vbo.IndexArrayBuffer;
+import cz.tefek.pluto.io.logger.Logger;
+import cz.tefek.pluto.io.logger.SmartSeverity;
 
 public class VertexArray
 {

@@ -191,8 +191,8 @@
     </dependency>
     <dependency>
       <groupId>cz.tefek</groupId>
-      <artifactId>plutoio2</artifactId>
-      <version>0.2</version>
+      <artifactId>plutolib</artifactId>
+      <version>0.3</version>
     </dependency>
   </dependencies>
   <build>

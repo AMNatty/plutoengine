@@ -1,15 +1,5 @@
 package cz.tefek.pluto.engine.graphics;
 
-import cz.tefek.io.asl.resource.ResourceAddress;
-import cz.tefek.io.asl.resource.ResourceSubscriber;
-import cz.tefek.io.modloader.Mod;
-import cz.tefek.io.modloader.ModEntry;
-import cz.tefek.io.modloader.ModLoaderCore;
-import cz.tefek.io.modloader.event.ModPreLoad;
-import cz.tefek.io.modloader.event.ModPreLoadEvent;
-import cz.tefek.io.modloader.event.ModUnload;
-import cz.tefek.io.modloader.event.ModUnloadEvent;
-import cz.tefek.io.pluto.debug.Logger;
 import cz.tefek.pluto.engine.graphics.font.FontManager;
 import cz.tefek.pluto.engine.graphics.font.FontShader;
 import cz.tefek.pluto.engine.graphics.texture.MagFilter;
@@ -18,6 +8,16 @@ import cz.tefek.pluto.engine.graphics.texture.WrapMode;
 import cz.tefek.pluto.engine.graphics.texture.texture2d.RectangleTexture;
 import cz.tefek.pluto.engine.gui.font.FontRenderer;
 import cz.tefek.pluto.engine.shader.RenderShaderBuilder;
+import cz.tefek.pluto.io.asl.resource.ResourceAddress;
+import cz.tefek.pluto.io.asl.resource.ResourceSubscriber;
+import cz.tefek.pluto.io.logger.Logger;
+import cz.tefek.pluto.modloader.Mod;
+import cz.tefek.pluto.modloader.ModEntry;
+import cz.tefek.pluto.modloader.ModLoaderCore;
+import cz.tefek.pluto.modloader.event.ModPreLoad;
+import cz.tefek.pluto.modloader.event.ModPreLoadEvent;
+import cz.tefek.pluto.modloader.event.ModUnload;
+import cz.tefek.pluto.modloader.event.ModUnloadEvent;
 
 /**
  * @author 493msi

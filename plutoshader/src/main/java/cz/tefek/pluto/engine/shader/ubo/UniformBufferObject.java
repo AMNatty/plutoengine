@@ -2,9 +2,9 @@ package cz.tefek.pluto.engine.shader.ubo;
 
 import org.lwjgl.opengl.GL33;
 
-import cz.tefek.io.pluto.debug.Logger;
-import cz.tefek.io.pluto.debug.SmartSeverity;
 import cz.tefek.pluto.engine.shader.ShaderBase;
+import cz.tefek.pluto.io.logger.Logger;
+import cz.tefek.pluto.io.logger.SmartSeverity;
 
 public final class UniformBufferObject
 {

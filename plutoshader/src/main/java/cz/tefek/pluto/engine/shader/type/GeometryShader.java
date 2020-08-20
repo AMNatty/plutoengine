@@ -1,7 +1,7 @@
 package cz.tefek.pluto.engine.shader.type;
 
-import cz.tefek.io.asl.resource.ResourceAddress;
 import cz.tefek.pluto.engine.shader.ShaderCompiler;
+import cz.tefek.pluto.io.asl.resource.ResourceAddress;
 
 public final class GeometryShader implements IShader
 {

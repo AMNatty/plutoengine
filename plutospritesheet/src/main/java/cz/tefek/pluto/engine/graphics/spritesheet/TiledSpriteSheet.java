@@ -2,11 +2,11 @@ package cz.tefek.pluto.engine.graphics.spritesheet;
 
 import java.util.Vector;
 
-import cz.tefek.io.pluto.debug.Logger;
-import cz.tefek.io.pluto.debug.Severity;
 import cz.tefek.pluto.engine.graphics.sprite.Sprite;
 import cz.tefek.pluto.engine.graphics.sprite.SpriteDisposable;
 import cz.tefek.pluto.engine.graphics.sprite.TileSprite;
+import cz.tefek.pluto.io.logger.Logger;
+import cz.tefek.pluto.io.logger.Severity;
 
 public abstract class TiledSpriteSheet<T> extends SpriteSheet<T>
 {

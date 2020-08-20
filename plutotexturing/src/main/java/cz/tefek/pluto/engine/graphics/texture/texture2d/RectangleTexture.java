@@ -4,10 +4,10 @@ import java.util.Arrays;
 
 import org.lwjgl.opengl.GL33;
 
-import cz.tefek.io.pluto.debug.Logger;
-import cz.tefek.io.pluto.debug.Severity;
 import cz.tefek.pluto.engine.graphics.texture.Texture;
 import cz.tefek.pluto.engine.graphics.texture.WrapMode;
+import cz.tefek.pluto.io.logger.Logger;
+import cz.tefek.pluto.io.logger.Severity;
 
 public class RectangleTexture extends Texture
 {

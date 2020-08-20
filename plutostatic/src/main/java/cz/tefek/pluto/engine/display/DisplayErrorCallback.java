@@ -2,8 +2,8 @@ package cz.tefek.pluto.engine.display;
 
 import org.lwjgl.glfw.GLFWErrorCallback;
 
-import cz.tefek.io.pluto.debug.Logger;
-import cz.tefek.io.pluto.debug.SmartSeverity;
+import cz.tefek.pluto.io.logger.Logger;
+import cz.tefek.pluto.io.logger.SmartSeverity;
 
 public class DisplayErrorCallback extends GLFWErrorCallback
 {

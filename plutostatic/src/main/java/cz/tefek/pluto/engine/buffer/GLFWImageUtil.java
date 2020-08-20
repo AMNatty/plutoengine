@@ -3,7 +3,7 @@ package cz.tefek.pluto.engine.buffer;
 import org.lwjgl.BufferUtils;
 import org.lwjgl.glfw.GLFWImage;
 
-import cz.tefek.tpl.TPL;
+import cz.tefek.pluto.tpl.TPL;
 
 /**
  * A utility class to load image files for use in GLFW.

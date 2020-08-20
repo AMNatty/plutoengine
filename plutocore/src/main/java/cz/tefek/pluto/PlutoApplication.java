@@ -6,14 +6,14 @@ import org.lwjgl.glfw.GLFW;
 import org.lwjgl.opengl.GL;
 import org.lwjgl.opengl.GL33;
 
-import cz.tefek.io.modloader.ModLoaderCore;
-import cz.tefek.io.pluto.debug.Logger;
-import cz.tefek.io.pluto.debug.SmartSeverity;
-import cz.tefek.l10n.PlutoL10n;
 import cz.tefek.pluto.engine.buffer.GLFWImageUtil;
 import cz.tefek.pluto.engine.display.Display;
 import cz.tefek.pluto.engine.display.DisplayBuilder;
 import cz.tefek.pluto.engine.input.InputBus;
+import cz.tefek.pluto.io.logger.Logger;
+import cz.tefek.pluto.io.logger.SmartSeverity;
+import cz.tefek.pluto.l10n.PlutoL10n;
+import cz.tefek.pluto.modloader.ModLoaderCore;
 
 public abstract class PlutoApplication
 {

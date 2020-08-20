@@ -5,8 +5,8 @@ import org.lwjgl.opengl.ARBUniformBufferObject;
 import org.lwjgl.opengl.GL33;
 import org.lwjgl.opengl.GLCapabilities;
 
-import cz.tefek.io.pluto.debug.Logger;
-import cz.tefek.io.pluto.debug.SmartSeverity;
+import cz.tefek.pluto.io.logger.Logger;
+import cz.tefek.pluto.io.logger.SmartSeverity;
 
 public class GLDebugInfo
 {

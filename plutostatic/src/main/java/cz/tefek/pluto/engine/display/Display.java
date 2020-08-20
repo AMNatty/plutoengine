@@ -11,9 +11,10 @@ import org.lwjgl.opengl.GL33;
 import org.lwjgl.opengl.GLDebugMessageARBCallback;
 import org.lwjgl.system.MemoryUtil;
 
-import cz.tefek.io.pluto.debug.Logger;
-import cz.tefek.io.pluto.debug.Severity;
 import cz.tefek.pluto.engine.gl.GLDebugInfo;
+import cz.tefek.pluto.io.logger.Logger;
+import cz.tefek.pluto.io.logger.Severity;
+import cz.tefek.pluto.io.logger.SmartSeverity;
 
 /**
  * A wrapper class to provide abstraction over GLFW windows.
@@ -200,7 +201,7 @@ public class Display
                 public void invoke(int source, int type, int id, int severity, int length, long message, long userParam)
                 {
                     var mes = GLDebugMessageARBCallback.getMessage(length, message);
-                    System.err.println(mes);
+                    Logger.log(SmartSeverity.WARNING, mes);
                 }
             };
 

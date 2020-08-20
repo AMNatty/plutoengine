@@ -6,9 +6,6 @@ import java.util.Map;
 import java.io.BufferedReader;
 import java.nio.file.Files;
 
-import cz.tefek.io.asl.resource.ResourceAddress;
-import cz.tefek.io.pluto.debug.Logger;
-import cz.tefek.io.pluto.debug.SmartSeverity;
 import cz.tefek.pluto.engine.graphics.texture.MagFilter;
 import cz.tefek.pluto.engine.graphics.texture.MinFilter;
 import cz.tefek.pluto.engine.graphics.texture.Texture;
@@ -16,6 +13,9 @@ import cz.tefek.pluto.engine.graphics.texture.WrapMode;
 import cz.tefek.pluto.engine.graphics.texture.texture2d.RectangleTexture;
 import cz.tefek.pluto.engine.gui.font.CharacterInfo;
 import cz.tefek.pluto.engine.gui.font.Font;
+import cz.tefek.pluto.io.asl.resource.ResourceAddress;
+import cz.tefek.pluto.io.logger.Logger;
+import cz.tefek.pluto.io.logger.SmartSeverity;
 
 public class FontManager
 {

@@ -1,18 +1,18 @@
 package cz.tefek.pluto.engine.graphics;
 
-import cz.tefek.io.asl.resource.ResourceSubscriber;
-import cz.tefek.io.modloader.Mod;
-import cz.tefek.io.modloader.ModEntry;
-import cz.tefek.io.modloader.ModLoaderCore;
-import cz.tefek.io.modloader.event.ModPreLoad;
-import cz.tefek.io.modloader.event.ModPreLoadEvent;
-import cz.tefek.io.modloader.event.ModUnload;
-import cz.tefek.io.modloader.event.ModUnloadEvent;
-import cz.tefek.io.pluto.debug.Logger;
 import cz.tefek.pluto.engine.ModLWJGL;
 import cz.tefek.pluto.engine.graphics.spritesheet.FramebufferTiledSpriteSheet;
 import cz.tefek.pluto.engine.shader.PlutoShaderMod;
 import cz.tefek.pluto.engine.shader.RenderShaderBuilder;
+import cz.tefek.pluto.io.asl.resource.ResourceSubscriber;
+import cz.tefek.pluto.io.logger.Logger;
+import cz.tefek.pluto.modloader.Mod;
+import cz.tefek.pluto.modloader.ModEntry;
+import cz.tefek.pluto.modloader.ModLoaderCore;
+import cz.tefek.pluto.modloader.event.ModPreLoad;
+import cz.tefek.pluto.modloader.event.ModPreLoadEvent;
+import cz.tefek.pluto.modloader.event.ModUnload;
+import cz.tefek.pluto.modloader.event.ModUnloadEvent;
 
 @ModEntry(modid = PlutoSpriteSheetMod.MOD_ID, version = "0.2", dependencies = { ModLWJGL.class, PlutoShaderMod.class }, author = "493msi", build = 1, displayName = "Pluto SpriteSheet", description = "A library to manage, store and draw sprites.")
 public class PlutoSpriteSheetMod

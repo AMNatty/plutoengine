@@ -8,12 +8,12 @@ import org.lwjgl.system.MemoryUtil;
 import java.awt.image.BufferedImage;
 import java.nio.ByteBuffer;
 
-import cz.tefek.io.asl.resource.ResourceAddress;
-import cz.tefek.io.pluto.debug.Logger;
-import cz.tefek.io.pluto.debug.Severity;
-import cz.tefek.io.pluto.debug.SmartSeverity;
-import cz.tefek.tpl.TPL;
-import cz.tefek.tpl.TPNImage;
+import cz.tefek.pluto.io.asl.resource.ResourceAddress;
+import cz.tefek.pluto.io.logger.Logger;
+import cz.tefek.pluto.io.logger.Severity;
+import cz.tefek.pluto.io.logger.SmartSeverity;
+import cz.tefek.pluto.tpl.TPL;
+import cz.tefek.pluto.tpl.TPNImage;
 
 public abstract class Texture
 {

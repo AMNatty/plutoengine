@@ -2,8 +2,8 @@ package cz.tefek.pluto.engine.shader;
 
 import org.lwjgl.opengl.GL33;
 
-import cz.tefek.io.pluto.debug.Logger;
-import cz.tefek.io.pluto.debug.SmartSeverity;
+import cz.tefek.pluto.io.logger.Logger;
+import cz.tefek.pluto.io.logger.SmartSeverity;
 
 public abstract class ShaderBase implements IShaderProgram
 {
