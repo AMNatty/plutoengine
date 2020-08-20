@@ -11,7 +11,7 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <lwjgl.version>3.2.3</lwjgl.version>
-    <joml.version>1.9.17</joml.version>
+    <joml.version>1.9.25</joml.version>
     <steamworks4j.version>1.8.0</steamworks4j.version>
     <steamworks4j-server.version>1.8.0</steamworks4j-server.version>
   </properties>
@@ -119,8 +119,6 @@
       <groupId>org.lwjgl</groupId>
       <artifactId>lwjgl-stb</artifactId>
     </dependency>
-    <!-- <dependency> <groupId>org.lwjgl</groupId> <artifactId>lwjgl-jemalloc</artifactId> 
-      </dependency> -->
     <dependency>
       <groupId>org.lwjgl</groupId>
       <artifactId>lwjgl</artifactId>
@@ -170,13 +168,6 @@
       <groupId>org.lwjgl</groupId>
       <artifactId>lwjgl-stb</artifactId>
       <classifier>${lwjgl.natives}</classifier>
-    </dependency>
-    <!-- <dependency> <groupId>org.lwjgl</groupId> <artifactId>lwjgl-jemalloc</artifactId> 
-      <classifier>${lwjgl.natives}</classifier> </dependency> -->
-    <dependency>
-      <groupId>org.joml</groupId>
-      <artifactId>joml</artifactId>
-      <version>${joml.version}</version>
     </dependency>
     <dependency>
       <groupId>com.code-disaster.steamworks4j</groupId>

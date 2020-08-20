@@ -13,10 +13,12 @@ import java.io.InputStream;
 
 import cz.tefek.io.asl.resource.ResourceHelper;
 import cz.tefek.io.pluto.debug.Logger;
-import cz.tefek.io.pluto.debug.Severity;
+import cz.tefek.io.pluto.debug.SmartSeverity;
 
 /**
  * Unzips mod packages from the packages folder into the mods folder. WIP
+ * 
+ * 2020 Update: Still WIP
  *
  * @author 493msi
  */
@@ -24,14 +26,14 @@ public class ModInstaller
 {
     public static void unpackNewMods()
     {
-        Logger.log("[Pluto Mod Loader] Looking for new mod packages to install.");
+        Logger.log(SmartSeverity.MODULE, "Looking for new mod packages to install.");
 
         File f = new File(ResourceHelper.GLOBAL_ROOT + "packages/");
         if (!f.exists())
         {
             f.mkdir();
 
-            Logger.log("[Pluto Mod Loader] Package folder does not exist, creating it and aborting unpacking.");
+            Logger.log(SmartSeverity.MODULE, "Package folder does not exist, creating it and aborting unpacking.");
 
             return;
         }
@@ -40,15 +42,15 @@ public class ModInstaller
 
         if (files.size() == 0)
         {
-            Logger.log("[Pluto Mod Loader] No mod package found.");
+            Logger.log(SmartSeverity.MODULE, "No mod package found.");
         }
         else
         {
-            Logger.log("[Pluto Mod Loader] Found " + files.size() + " mod packages.");
+            Logger.log(SmartSeverity.MODULE_PLUS, "Found " + files.size() + " mod packages.");
 
             for (String file : files)
             {
-                Logger.log("[Pluto Mod Loader] Mod package found: " + file + ", installing it.");
+                Logger.log(SmartSeverity.MODULE_PLUS, "Mod package found: " + file + ", installing it.");
 
                 try
                 {
@@ -56,7 +58,7 @@ public class ModInstaller
                 }
                 catch (IOException e)
                 {
-                    Logger.log(Severity.ERROR, "Unpacking of " + file + " failed!");
+                    Logger.log(SmartSeverity.MODULE_ERROR, "Unpacking of " + file + " failed!");
                     Logger.logException(e);
                 }
 

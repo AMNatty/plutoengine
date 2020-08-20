@@ -61,37 +61,37 @@ public class Logger
         System.out.close();
     }
 
-    public static void log(Object string)
+    public static synchronized void log(Object string)
     {
         log(Severity.NONE, string);
     }
 
-    public static void logf(String string, Object... o)
+    public static synchronized void logf(String string, Object... o)
     {
         System.out.printf(string, o);
     }
 
-    public static void logNoLine(Object string)
+    public static synchronized void logNoLine(Object string)
     {
         System.out.print(string);
     }
 
-    public static void logException(Exception e)
+    public static synchronized void logException(Exception e)
     {
         e.printStackTrace();
     }
 
-    public static void log(ISeverity s, Object string)
+    public static synchronized void log(ISeverity s, Object string)
     {
         (s.isStdErr() ? System.err : System.out).println(s.getDisplayName() + string);
     }
 
-    public static void logf(ISeverity s, String string, Object... o)
+    public static synchronized void logf(ISeverity s, String string, Object... o)
     {
         (s.isStdErr() ? System.err : System.out).printf(s.getDisplayName() + string, o);
     }
 
-    public static void logNoLine(ISeverity s, Object string)
+    public static synchronized void logNoLine(ISeverity s, Object string)
     {
         (s.isStdErr() ? System.err : System.out).print(s.getDisplayName() + string);
     }

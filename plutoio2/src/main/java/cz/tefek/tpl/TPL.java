@@ -24,7 +24,7 @@ import cz.tefek.io.pluto.debug.SmartSeverity;
 public class TPL
 {
     private static final int PLACEHOLDER_SIZE = 16;
-    private static final int PLACEHOLDER_CHECKEDBOARD = 16;
+    private static final int PLACEHOLDER_CHECKEDBOARD = 8;
     private static final int PLACEHOLDER_CHECKEDBOARD_SQUARE_SIZE = PLACEHOLDER_SIZE / PLACEHOLDER_CHECKEDBOARD;
 
     public static TPNImage load(ResourceAddress file)

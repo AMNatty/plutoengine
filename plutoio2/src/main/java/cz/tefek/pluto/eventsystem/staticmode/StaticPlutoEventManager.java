@@ -11,7 +11,7 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 
 import cz.tefek.io.pluto.debug.Logger;
-import cz.tefek.io.pluto.debug.Severity;
+import cz.tefek.io.pluto.debug.SmartSeverity;
 import cz.tefek.pluto.eventsystem.EventData;
 
 /**
@@ -68,7 +68,7 @@ public class StaticPlutoEventManager
             }
         }
 
-        Logger.log(Severity.INFO, "Event handler " + clazz.getCanonicalName() + " scan found " + methodsFound + " method callback(s).");
+        Logger.log(SmartSeverity.EVENT_PLUS, "Event handler " + clazz.getCanonicalName() + " scan found " + methodsFound + " method callback(s).");
     }
 
     public static void registerEvent(Class<? extends Annotation> annotation)
@@ -78,14 +78,14 @@ public class StaticPlutoEventManager
         {
             if (eventRegistry.containsKey(annotation))
             {
-                Logger.log(Severity.ERROR, "Annotation " + annotation.getCanonicalName() + " is already registered!");
+                Logger.log(SmartSeverity.EVENT_ERROR, "Annotation " + annotation.getCanonicalName() + " is already registered!");
                 return;
             }
             else
             {
                 eventRegistry.put(annotation, new ArrayList<Method>());
 
-                Logger.log(Severity.INFO, "Event " + annotation.getCanonicalName() + " successfully registered!");
+                Logger.log(SmartSeverity.EVENT_PLUS, "Event " + annotation.getCanonicalName() + " successfully registered!");
 
                 short retroactivelyFound = 0;
 
@@ -110,7 +110,7 @@ public class StaticPlutoEventManager
                     }
                 }
 
-                Logger.log(Severity.INFO, "Retroactive method checking found " + retroactivelyFound + " item(s).");
+                Logger.log(SmartSeverity.EVENT_PLUS, "Retroactive method checking found " + retroactivelyFound + " item(s).");
 
                 // Let's check the Method orphanage for some potential
                 // candidates.
@@ -138,12 +138,12 @@ public class StaticPlutoEventManager
 
                 orphans.removeAll(foundParents);
 
-                Logger.log(Severity.INFO, orphansFound + " orphan method(s) was/were bound and " + (orphansBefore - orphans.size()) + " removed from the storage!");
+                Logger.log(SmartSeverity.EVENT_PLUS, orphansFound + " orphan method(s) was/were bound and " + (orphansBefore - orphans.size()) + " removed from the storage!");
             }
         }
         else
         {
-            Logger.log(Severity.ERROR, "Annotation " + annotation.getCanonicalName() + " is not annotated with @Event, can't register it.");
+            Logger.log(SmartSeverity.EVENT_ERROR, "Annotation " + annotation.getCanonicalName() + " is not annotated with @Event, can't register it.");
         }
     }
 
@@ -168,7 +168,7 @@ public class StaticPlutoEventManager
 
                     if (params.length == 0)
                     {
-                        Logger.log(Severity.WARNING, "Method " + m.toGenericString() + " has no parameters, will not be invoked by event!");
+                        Logger.log(SmartSeverity.EVENT_WARNING, "Method " + m.toGenericString() + " has no parameters, will not be invoked by event!");
                     }
 
                     for (int i = 0; i < params.length; i++)
@@ -177,7 +177,7 @@ public class StaticPlutoEventManager
 
                         if (!EventData.class.isAssignableFrom(parameter))
                         {
-                            Logger.log(Severity.ERROR, "Method " + m.toGenericString() + " contains invalid parameters. Only EventData instances are permitted.");
+                            Logger.log(SmartSeverity.EVENT_ERROR, "Method " + m.toGenericString() + " contains invalid parameters. Only EventData instances are permitted.");
                             mostSuitableParam = null;
                             break;
                         }
@@ -211,12 +211,12 @@ public class StaticPlutoEventManager
             }
             else
             {
-                Logger.log(Severity.ERROR, "There is no event like " + event.getCanonicalName() + " registered.");
+                Logger.log(SmartSeverity.EVENT_ERROR, "There is no event like " + event.getCanonicalName() + " registered.");
             }
         }
         else
         {
-            Logger.log(Severity.ERROR, event.getCanonicalName() + " is not an event!");
+            Logger.log(SmartSeverity.EVENT_ERROR, event.getCanonicalName() + " is not an event!");
         }
     }
 

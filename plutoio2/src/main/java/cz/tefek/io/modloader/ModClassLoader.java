@@ -1,16 +1,18 @@
 package cz.tefek.io.modloader;
 
-import java.io.File;
-import java.net.URL;
-import java.net.URLClassLoader;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Enumeration;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
+import java.io.File;
+import java.net.URL;
+import java.net.URLClassLoader;
+
 import cz.tefek.io.asl.resource.ResourceHelper;
 import cz.tefek.io.pluto.debug.Logger;
+import cz.tefek.io.pluto.debug.SmartSeverity;
 
 /**
  * Class-loads all valid mods. The only requirement for the mod is to have a
@@ -25,7 +27,7 @@ public class ModClassLoader
 
     public static void loadJars()
     {
-        Logger.log("[Pluto Mod Loader] Looking for installed mods.");
+        Logger.log(SmartSeverity.MODULE, "Looking for installed mods.");
 
         File modDir = new File(ResourceHelper.GLOBAL_ROOT + "mods/");
 
@@ -33,7 +35,7 @@ public class ModClassLoader
         {
             modDir.mkdir();
 
-            Logger.log("[Pluto Mod Loader] No mod found.");
+            Logger.log(SmartSeverity.MODULE, " No mod found.");
 
             return;
         }
@@ -42,11 +44,11 @@ public class ModClassLoader
 
         if (mods.size() == 0)
         {
-            Logger.log("[Pluto Mod Loader] No mod found.");
+            Logger.log(SmartSeverity.MODULE, "No mod found.");
         }
         else
         {
-            Logger.log("[Pluto Mod Loader] Found " + mods.size() + " mod(s) to load.");
+            Logger.log(SmartSeverity.MODULE, "Found " + mods.size() + " mod(s) to load.");
 
             try
             {
@@ -67,11 +69,11 @@ public class ModClassLoader
         {
             if (mods.size() == 1)
             {
-                Logger.log("[Pluto Mod Loader] There is one mod to load.");
+                Logger.log(SmartSeverity.MODULE, "There is one mod to load.");
             }
             else
             {
-                Logger.log("[Pluto Mod Loader] There are " + mods.size() + " mods to load.");
+                Logger.log(SmartSeverity.MODULE, "There are " + mods.size() + " mods to load.");
             }
 
             for (String modname : mods)
@@ -125,28 +127,28 @@ public class ModClassLoader
 
                     jarFile.close();
 
-                    Logger.log("[Pluto Mod Loader] Loaded mod jar file: " + modname + "/mod.jar");
+                    Logger.log(SmartSeverity.MODULE_PLUS, "Loaded mod jar file: " + modname + "/mod.jar");
                     i++;
                 }
                 else
                 {
-                    Logger.log("[Pluto Mod Loader] Failed to load mod jar file: " + modname + ".");
-                    Logger.log("[Pluto Mod Loader] Reason: Missing mod.jar file.");
+                    Logger.log(SmartSeverity.MODULE_WARNING, "Failed to load mod jar file: " + modname + ".");
+                    Logger.log(SmartSeverity.MODULE_WARNING, "Reason: Missing mod.jar file.");
                 }
             }
 
             if (i < 1 || i == 0)
             {
-                System.out.println("[Pluto Mod Loader] Loading mods complete, loaded " + i + " mods.");
+                Logger.log(SmartSeverity.MODULE, "Loading mods complete, loaded " + i + " mods.");
             }
             else
             {
-                System.out.println("[Pluto Mod Loader] Loading mods complete, loaded " + i + " mod.");
+                Logger.log(SmartSeverity.MODULE, "Loading mods complete, loaded " + i + " mod.");
             }
         }
         else
         {
-            Logger.log("[Pluto Mod Loader] There aren't any mods, skipping initialising phase.");
+            Logger.log(SmartSeverity.MODULE, "There aren't any mods, skipping initialising phase.");
         }
     }
 }

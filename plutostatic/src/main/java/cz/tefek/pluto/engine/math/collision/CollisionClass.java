@@ -21,4 +21,10 @@ public class CollisionClass
     {
         return this.selfCollision;
     }
+
+    @Override
+    public int hashCode()
+    {
+        return this.id;
+    }
 }

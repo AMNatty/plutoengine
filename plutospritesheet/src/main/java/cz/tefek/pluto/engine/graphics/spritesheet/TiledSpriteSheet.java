@@ -100,21 +100,24 @@ public abstract class TiledSpriteSheet<T> extends SpriteSheet<T>
 
     public abstract void copyToNewImage();
 
-    public TileSprite<TiledSpriteSheet<T>> addSprite(Sprite<T> sprite, int index)
+    public TileSprite<TiledSpriteSheet<T>> addSpriteSpecial(Sprite<T> sprite, int index, boolean allowSpriteDownscaling)
     {
-        if (!this.aspectRatiosMatch(sprite))
+        if (!allowSpriteDownscaling)
         {
-            throw new IllegalArgumentException("Sprite and spritesheet aspect ratios do not match!");
-        }
+            if (!this.aspectRatiosMatch(sprite))
+            {
+                throw new IllegalArgumentException("Sprite and spritesheet aspect ratios do not match!");
+            }
 
-        if (!this.isMultiple(sprite))
-        {
-            throw new IllegalArgumentException("The sprite and the spritesheet do not have a common resolution to scale to.");
-        }
+            if (!this.isMultiple(sprite))
+            {
+                throw new IllegalArgumentException("The sprite and the spritesheet do not have a common resolution to scale to.");
+            }
 
-        if (sprite.getWidth() > this.tileWidth)
-        {
-            this.upscale(sprite.getWidth() / this.tileWidth);
+            if (sprite.getWidth() > this.tileWidth)
+            {
+                this.upscale(sprite.getWidth() / this.tileWidth);
+            }
         }
 
         while (this.requiresExpanding(index))
@@ -141,6 +144,11 @@ public abstract class TiledSpriteSheet<T> extends SpriteSheet<T>
         this.sprites.set(index, copySprite);
 
         return copySprite;
+    }
+
+    public TileSprite<TiledSpriteSheet<T>> addSprite(Sprite<T> sprite, int index)
+    {
+        return this.addSpriteSpecial(sprite, index, false);
     }
 
     private boolean aspectRatiosMatch(Sprite<?> sprite)

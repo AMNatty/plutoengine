@@ -9,10 +9,26 @@ public enum SmartSeverity implements ISeverity
 {
     ADDED("[+] ", false),
     REMOVED("[-] ", false),
+
     ZERO("[0] ", false),
+
     INFO("[i] ", false),
     WARNING("[!] ", true),
-    ERROR("[X] ", true);
+    ERROR("[X] ", true),
+
+    AUDIO("[♪] ", false),
+
+    MODULE("[i] [M] ", false),
+    MODULE_PLUS("[+] [M] ", false),
+    MODULE_MINUS("[-] [M] ", false),
+    MODULE_WARNING("[!] [M] ", true),
+    MODULE_ERROR("[X] [M] ", true),
+
+    EVENT("[i] [E] ", false),
+    EVENT_PLUS("[+] [E] ", false),
+    EVENT_MINUS("[-] [E] ", false),
+    EVENT_WARNING("[!] [E] ", true),
+    EVENT_ERROR("[X] [E] ", true);
 
     private String displayName;
     private boolean usesStdErr;

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 
 import cz.tefek.io.asl.resource.ResourceHelper;
 import cz.tefek.io.modloader.event.ModLoad;
@@ -20,26 +21,26 @@ import cz.tefek.pluto.eventsystem.staticmode.StaticPlutoEventManager;
 
 public class ModLoaderCore
 {
-    public static final String MOD_ID_STRING_PATTERN = "[a-z0-9_]+";
+    public static final String MOD_ID_STRING_PATTERN = "[a-z0-9]+[a-z0-9_]*";
     public static final String FULL_MOD_ID_STRING_PATTERN = "^" + MOD_ID_STRING_PATTERN + "$";
 
     static ModLoadingPhase loadingPhase = ModLoadingPhase.WAITING;
 
     private static final List<Mod> modArchive = new ArrayList<>();
 
-    private static final LinkedList<Mod> loadBuffer = new LinkedList<>();
+    private static final Queue<Mod> loadBuffer = new LinkedList<>();
 
     public static void registerMod(Class<?> modClass, String modDataRoot)
     {
         if (loadingPhase != ModLoadingPhase.WAITING && loadingPhase != ModLoadingPhase.CLASSLOADING)
         {
-            Logger.log(SmartSeverity.ERROR, "Cannot register mod during loading phase " + loadingPhase.name() + "!");
+            Logger.log(SmartSeverity.MODULE_ERROR, "Cannot register mod during loading phase " + loadingPhase.name() + "!");
             return;
         }
 
         if (getModByMainClass(modClass) != null)
         {
-            Logger.log(SmartSeverity.WARNING, "[Pluto Mod Loader] Mod class " + modClass.getCanonicalName() + " is already registered, skipping it.");
+            Logger.log(SmartSeverity.MODULE_WARNING, "Mod class " + modClass.getCanonicalName() + " is already registered, skipping it.");
             return;
         }
 
@@ -66,8 +67,8 @@ public class ModLoaderCore
 
         if (!mod.getModID().matches(FULL_MOD_ID_STRING_PATTERN))
         {
-            Logger.log(SmartSeverity.WARNING, "[Pluto Mod Loader] Modid " + mod.getModID() + " contains invalid characters (or none at all), mod will not be loaded.");
-            Logger.log(SmartSeverity.WARNING, "[Pluto Mod Loader] Only lowercase letters (a to z) and numbers (0 to 9) are allowed characters.");
+            Logger.log(SmartSeverity.MODULE_WARNING, "Mod id " + mod.getModID() + " contains invalid characters (or none at all), mod will not be loaded.");
+            Logger.log(SmartSeverity.MODULE_WARNING, "Only lowercase letters (a to z) and numbers (0 to 9) are allowed characters.");
             return;
         }
 
@@ -142,23 +143,23 @@ public class ModLoaderCore
 
         while (loadBuffer.peek() != null)
         {
-            var mod = loadBuffer.removeFirst();
+            var mod = loadBuffer.remove();
             StaticPlutoEventManager.registerEventHandler(mod.getMainClass());
             modArchive.add(mod);
         }
 
         if (!modArchive.isEmpty())
         {
-            Logger.log("[Pluto Mod Loader] Initializing mod(s)...");
+            Logger.log(SmartSeverity.MODULE, "Initializing mod(s)...");
             initMods();
 
             if (loadingPhase == ModLoadingPhase.FINISHING)
             {
-                Logger.log("[Pluto Mod Loader] Initializing mod(s) finished.");
+                Logger.log(SmartSeverity.MODULE, "Initializing mod(s) finished.");
             }
             else
             {
-                Logger.log("[Pluto Mod Loader] Initializing mod(s) was canceled due to error(s).");
+                Logger.log(SmartSeverity.MODULE_ERROR, "Initializing mod(s) was canceled due to error(s).");
             }
         }
     }
@@ -189,7 +190,7 @@ public class ModLoaderCore
 
     public static void unloadProcedure()
     {
-        Logger.log("[Pluto Mod Loader] Unloading all mods.");
+        Logger.log(SmartSeverity.MODULE_MINUS, "Unloading all mods.");
         StaticPlutoEventManager.fireEvent(ModUnload.class, new ModUnloadEvent());
         modArchive.clear();
     }
@@ -207,8 +208,8 @@ public class ModLoaderCore
         }
         catch (Exception e)
         {
-            Logger.log("[Pluto Mod Loader] Problem encountered while preloading mods.");
-            Logger.log("[Pluto Mod Loader] Mod loading stopped.");
+            Logger.log(SmartSeverity.MODULE_ERROR, "Problem encountered while pre-loading mods.");
+            Logger.log(SmartSeverity.MODULE_ERROR, "Mod loading stopped.");
 
             Logger.logException(e);
 
@@ -228,8 +229,8 @@ public class ModLoaderCore
         }
         catch (Exception e)
         {
-            Logger.log("[Pluto Mod Loader] Problem encountered while loading mods.");
-            Logger.log("[Pluto Mod Loader] Mod loading stopped.");
+            Logger.log(SmartSeverity.MODULE_ERROR, "Problem encountered while loading mods.");
+            Logger.log(SmartSeverity.MODULE_ERROR, "Mod loading stopped.");
 
             Logger.logException(e);
 
@@ -249,8 +250,8 @@ public class ModLoaderCore
         }
         catch (Exception e)
         {
-            Logger.log("[Pluto Mod Loader] Problem encountered while loading mods.");
-            Logger.log("[Pluto Mod Loader] Mod loading stopped.");
+            Logger.log(SmartSeverity.MODULE_ERROR, "Problem encountered while post-loading mods.");
+            Logger.log(SmartSeverity.MODULE_ERROR, "Mod loading stopped.");
 
             Logger.logException(e);
 
