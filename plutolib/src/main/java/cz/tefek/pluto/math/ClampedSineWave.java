@@ -1,26 +1,26 @@
-package cz.tefek.pluto.engine.math;
+package cz.tefek.pluto.math;
 
 /**
  * A clamped sine wave generator, for animations, mostly.
  * 
- * @since 0.2
+ * @since 0.3
  * @author 493msi
  */
 public class ClampedSineWave
 {
     /**
-     * Gets a clamped value of the abs(sine) function from the given parameters as a
-     * {@link double}.
+     * Gets a clamped value of the abs(sine) function from the given parameters
+     * as a {@link double}.
      * 
      * @param animationProgress The animation progress in frames.
-     * @param frameOffset       The animation offset in frames.
-     * @param animationFrames   The total amount of animation frames.
-     * @param bottomClamp       The sine wave clamp, minimum value.
-     * @param topClamp          The sine wave clamp, maximum value.
+     * @param frameOffset The animation offset in frames.
+     * @param animationFrames The total amount of animation frames.
+     * @param bottomClamp The sine wave clamp, minimum value.
+     * @param topClamp The sine wave clamp, maximum value.
      * 
      * @return The resulting value
      * 
-     * @since 0.2
+     * @since 0.3
      * @author 493msi
      */
     public static double getAbsolute(double animationProgress, double frameOffset, double animationFrames, double bottomClamp, double topClamp)
@@ -34,14 +34,14 @@ public class ClampedSineWave
      * {@link double}.
      * 
      * @param animationProgress The animation progress in frames.
-     * @param frameOffset       The animation offset in frames.
-     * @param animationFrames   The total amount of animation frames.
-     * @param bottomClamp       The sine wave clamp, minimum value.
-     * @param topClamp          The sine wave clamp, maximum value.
+     * @param frameOffset The animation offset in frames.
+     * @param animationFrames The total amount of animation frames.
+     * @param bottomClamp The sine wave clamp, minimum value.
+     * @param topClamp The sine wave clamp, maximum value.
      * 
      * @return The resulting value
      * 
-     * @since 0.2
+     * @since 0.3
      * @author 493msi
      */
     public static double get(double animationProgress, double frameOffset, double animationFrames, float bottomClamp, float topClamp)
@@ -55,13 +55,13 @@ public class ClampedSineWave
      * {@link double}.
      * 
      * @param animationProgress The animation progress in frames.
-     * @param animationFrames   The total amount of animation frames.
-     * @param bottomClamp       The sine wave clamp, minimum value.
-     * @param topClamp          The sine wave clamp, maximum value.
+     * @param animationFrames The total amount of animation frames.
+     * @param bottomClamp The sine wave clamp, minimum value.
+     * @param topClamp The sine wave clamp, maximum value.
      * 
      * @return The resulting value
      * 
-     * @since 0.2
+     * @since 0.3
      * @author 493msi
      */
     public static double get(double animationProgress, double animationFrames, float bottomClamp, float topClamp)

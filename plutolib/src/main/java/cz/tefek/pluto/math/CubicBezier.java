@@ -1,4 +1,4 @@
-package cz.tefek.pluto.engine.math;
+package cz.tefek.pluto.math;
 
 /**
  * A class to generate a cubic bezier interpolation function. Not very
@@ -20,7 +20,7 @@ public class CubicBezier
      * @param cpx2 the X position of the direction the function "arrives from"
      * @param cpy2 the Y position of the direction the function "arrives from"
      * 
-     * @since 0.2
+     * @since 0.3
      * @author 493msi
      */
     public CubicBezier(double cpx1, double cpy1, double cpx2, double cpy2)
@@ -44,29 +44,33 @@ public class CubicBezier
      * 
      * @return the approximate Y position for the given X position
      * 
-     * @since 0.2
+     * @since 0.3
      * @author 493msi
      */
     public double forX(double xIn)
     {
         if (xIn < 0)
-            return forX(0);
+        {
+            return this.forX(0);
+        }
 
         if (xIn > 1)
-            return forX(1);
+        {
+            return this.forX(1);
+        }
 
         double t = 0.5;
 
         double x;
-        double y = 3 * (1 - t) * (1 - t) * t * b + 3 * (1 - t) * t * t * d + t * t * t;
+        double y = 3 * (1 - t) * (1 - t) * t * this.b + 3 * (1 - t) * t * t * this.d + t * t * t;
 
         double delta = 0.25;
         boolean uh;
 
         for (int i = 0; i < iterations; i++)
         {
-            x = 3 * (1 - t) * (1 - t) * t * a + 3 * (1 - t) * t * t * c + t * t * t;
-            y = 3 * (1 - t) * (1 - t) * t * b + 3 * (1 - t) * t * t * d + t * t * t;
+            x = 3 * (1 - t) * (1 - t) * t * this.a + 3 * (1 - t) * t * t * this.c + t * t * t;
+            y = 3 * (1 - t) * (1 - t) * t * this.b + 3 * (1 - t) * t * t * this.d + t * t * t;
 
             uh = x > xIn;
 

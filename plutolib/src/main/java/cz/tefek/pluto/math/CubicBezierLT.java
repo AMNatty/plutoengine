@@ -1,4 +1,4 @@
-package cz.tefek.pluto.engine.math;
+package cz.tefek.pluto.math;
 
 /**
  * A class to generate a cubic bezier interpolation function. This
@@ -21,7 +21,7 @@ public class CubicBezierLT
      * @param cpx2 the X position of the direction the function "arrives from"
      * @param cpy2 the Y position of the direction the function "arrives from"
      * 
-     * @since 0.2
+     * @since 0.3
      * @author 493msi
      */
     public CubicBezierLT(double cpx1, double cpy1, double cpx2, double cpy2)
@@ -37,7 +37,7 @@ public class CubicBezierLT
 
         for (int i = 0; i < tableSize; i++)
         {
-            values[i] = cubicBezier.forX(i / upperBound);
+            this.values[i] = cubicBezier.forX(i / this.upperBound);
         }
     }
 
@@ -49,17 +49,21 @@ public class CubicBezierLT
      * 
      * @return the approximate Y position for the given X position
      * 
-     * @since 0.2
+     * @since 0.3
      * @author 493msi
      */
     public double forX(double xIn)
     {
         if (xIn < 0)
-            return forX(0);
+        {
+            return this.forX(0);
+        }
 
         if (xIn > 1)
-            return forX(1);
+        {
+            return this.forX(1);
+        }
 
-        return values[(int) (xIn * upperBound)];
+        return this.values[(int) (xIn * this.upperBound)];
     }
 }
