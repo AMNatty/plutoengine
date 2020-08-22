@@ -1,4 +1,4 @@
-package cz.tefek.plutodb;
+package cz.tefek.pluto.lmdb;
 
 import java.util.Collections;
 import java.util.HashSet;

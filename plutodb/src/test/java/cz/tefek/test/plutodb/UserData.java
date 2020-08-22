@@ -2,7 +2,7 @@ package cz.tefek.test.plutodb;
 
 import java.nio.ByteBuffer;
 
-import cz.tefek.plutodb.ILMDBValueRecipe;
+import cz.tefek.pluto.lmdb.ILMDBValueRecipe;
 
 public class UserData implements ILMDBValueRecipe
 {

@@ -1,4 +1,4 @@
-package cz.tefek.plutodb;
+package cz.tefek.pluto.lmdb;
 
 public class LMDBSchema<K extends LMDBKey, E extends ILMDBValueRecipe>
 {

@@ -2,9 +2,9 @@ package cz.tefek.test.plutodb;
 
 import java.io.File;
 
-import cz.tefek.plutodb.LMDBEnvironment;
-import cz.tefek.plutodb.LMDBSchema;
-import cz.tefek.plutodb.LMDBStringKey;
+import cz.tefek.pluto.lmdb.LMDBEnvironment;
+import cz.tefek.pluto.lmdb.LMDBSchema;
+import cz.tefek.pluto.lmdb.LMDBStringKey;
 
 public class LMDBTest
 {

@@ -1,4 +1,4 @@
-package cz.tefek.plutodb;
+package cz.tefek.pluto.lmdb;
 
 import org.lwjgl.system.MemoryStack;
 import org.lwjgl.util.lmdb.LMDB;
