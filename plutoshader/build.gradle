@@ -1,0 +1,8 @@
+apply plugin: 'java-library'
+
+description = ""
+
+dependencies {
+	api project(":plutotexturing")
+	api project(":plutomesher")
+}

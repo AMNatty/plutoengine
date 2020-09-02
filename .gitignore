@@ -1,6 +1,19 @@
-/*/target/
 /*/.settings
+
+# Ignore Eclipse project files
 /*/.project
 /*/.classpath
 /.project
+
+# Ignore IDEA project files
+/*/.idea
+
 *.log
+
+/.gradle/
+
+# Ignore Gradle project-specific cache directory
+.gradle
+
+# Ignore Gradle build output directory
+build

@@ -7,9 +7,9 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-import cz.tefek.io.pluto.debug.Logger;
-import cz.tefek.io.pluto.debug.SmartSeverity;
 import cz.tefek.pluto.command.CommandBase;
+import cz.tefek.pluto.io.logger.Logger;
+import cz.tefek.pluto.io.logger.SmartSeverity;
 
 public final class CommandRegistry
 {
@@ -33,17 +33,19 @@ public final class CommandRegistry
     {
         if (this.aliasTable.containsKey(alias))
         {
-            Logger.logf(SmartSeverity.ERROR, "Alias '%s' for command '%s' is already used, skipping.\n", alias, command.name());
+            Logger.logf(SmartSeverity.ERROR, "Alias '%s' for command '%s' is already used, skipping.%n", alias, command.name());
 
             return;
         }
+
+        this.aliasTable.put(alias, command);
     }
 
     public static void registerCommand(CommandBase command)
     {
         if (!instance.commands.add(command))
         {
-            Logger.logf(SmartSeverity.ERROR, "Command '%s' is already registered, skipping.\n", command.name());
+            Logger.logf(SmartSeverity.ERROR, "Command '%s' is already registered, skipping.%n", command.name());
             return;
         }
 

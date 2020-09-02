@@ -1,0 +1,42 @@
+import org.gradle.internal.os.OperatingSystem
+
+allprojects {
+    apply plugin: 'java'
+
+    group = "cz.tefek"
+    version = "20.1.0"
+}
+
+subprojects {
+    project.ext.lwjglVersion = "3.2.3"
+
+    project.ext.jomlVersion = "1.9.25"
+    project.ext.steamworks4jVersion = "1.8.0"
+    project.ext.steamworks4jServerVersion = "1.8.0"
+
+    switch (OperatingSystem.current()) {
+        case OperatingSystem.LINUX:
+            project.ext.lwjglNatives = "natives-linux"
+            break
+        case OperatingSystem.MAC_OS:
+            project.ext.lwjglNatives = "natives-macos"
+            break
+        case OperatingSystem.WINDOWS:
+            project.ext.lwjglNatives = "natives-windows"
+            break
+    }
+
+    tasks.withType(JavaCompile) {
+        options.encoding = "UTF-8"
+    }
+
+    java {
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
+    }
+
+    repositories {
+        mavenCentral()
+    }
+}
+

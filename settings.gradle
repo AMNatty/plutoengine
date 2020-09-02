@@ -1,0 +1,13 @@
+include 'plutolib',
+        'plutodb',
+        'plutocommandparser',
+        'plutostatic',
+        'plutotexturing',
+        'plutomesher',
+        'plutoshader',
+        'plutoframebuffer',
+        'plutospritesheet',
+        'plutogui',
+        'plutocore'
+
+rootProject.name = 'plutoengine'

@@ -13,11 +13,7 @@ public abstract class CommandPlatform
         switch (failure)
         {
             case UNRESOLVED_PREFIX:
-                return false;
-
             case UNRESOLVED_COMMAND_NAME:
-                return false;
-
             case UNRESOLVED_UNEXPECTED_STATE:
                 return false;
 

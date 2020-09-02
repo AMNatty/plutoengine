@@ -1,0 +1,8 @@
+apply plugin: 'java-library'
+
+description = ""
+
+dependencies {
+	api project(":plutoframebuffer")
+	api project(":plutoshader")
+}
