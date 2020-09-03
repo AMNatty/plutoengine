@@ -2,14 +2,18 @@ package cz.tefek.pluto.engine.input;
 
 import org.lwjgl.glfw.GLFW;
 
+import javax.annotation.concurrent.ThreadSafe;
+
 import cz.tefek.pluto.engine.display.Display;
 
+@ThreadSafe
 public class InputBus
 {
     private static ThreadLocal<KeyboardInputCallback> keyboard = new ThreadLocal<>();
     private static ThreadLocal<MouseButtonCallback> mouseButton = new ThreadLocal<>();
     private static ThreadLocal<CursorPositionCallback> cursorPosition = new ThreadLocal<>();
     private static ThreadLocal<ScrollInputCallback> scroll = new ThreadLocal<>();
+    private static ThreadLocal<KeyboardCharInput> charInput = new ThreadLocal<>();
 
     public static void init(Display display)
     {
@@ -25,18 +29,27 @@ public class InputBus
         scroll.set(new ScrollInputCallback());
         GLFW.glfwSetScrollCallback(display.getWindowPointer(), scroll.get());
 
+        charInput.set(new KeyboardCharInput());
+        GLFW.glfwSetCharCallback(display.getWindowPointer(), charInput.get());
+
     }
 
     public static void destroy()
     {
         scroll.get().free();
         scroll.remove();
+
         mouseButton.get().free();
         mouseButton.remove();
+
         keyboard.get().free();
         keyboard.remove();
+
         cursorPosition.get().free();
         cursorPosition.remove();
+
+        charInput.get().free();
+        charInput.remove();
     }
 
     public static KeyboardInputCallback keyboard()
@@ -65,6 +78,7 @@ public class InputBus
         mouseButton.get().reset();
         scroll.get().reset();
         cursorPosition.get().reset();
+        charInput.get().reset();
     }
 
     public static class Mouse
@@ -133,6 +147,11 @@ public class InputBus
         public static boolean isKeyDown(int key)
         {
             return keyboard.get().isKeyDown(key);
+        }
+
+        public static String getTypedText()
+        {
+            return charInput.get().getTypedText();
         }
     }
 }
