@@ -8,12 +8,12 @@ import java.lang.annotation.Target;
 
 import cz.tefek.pluto.eventsystem.EventData;
 
-@Retention(RUNTIME)
-@Target(ANNOTATION_TYPE)
 /**
  * @author 493msi
  *
  */
+@Retention(RUNTIME)
+@Target(ANNOTATION_TYPE)
 public @interface StaticPlutoEvent
 {
     /**

@@ -1,9 +1,6 @@
 package cz.tefek.pluto.eventsystem.staticmode;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.Map.Entry;
 
 import java.lang.annotation.Annotation;
@@ -28,8 +25,8 @@ import cz.tefek.pluto.io.logger.SmartSeverity;
  */
 public class StaticPlutoEventManager
 {
-    private static Map<Class<? extends Annotation>, List<Method>> eventRegistry = new HashMap<Class<? extends Annotation>, List<Method>>();
-    private static List<Method> orphans = new ArrayList<Method>();
+    private static Map<Class<? extends Annotation>, List<Method>> eventRegistry = new HashMap<>();
+    private static List<Method> orphans = new ArrayList<>();
 
     public static void registerEventHandler(Class<?> clazz)
     {
@@ -81,65 +78,63 @@ public class StaticPlutoEventManager
                 Logger.log(SmartSeverity.EVENT_ERROR, "Annotation " + annotation.getCanonicalName() + " is already registered!");
                 return;
             }
-            else
+
+            eventRegistry.put(annotation, new ArrayList<>());
+
+            Logger.log(SmartSeverity.EVENT_PLUS, "Event " + annotation.getCanonicalName() + " successfully registered!");
+
+            short retroactivelyFound = 0;
+
+            // Let's check all existing event Methods for this event.
+            for (Entry<Class<? extends Annotation>, List<Method>> entry : eventRegistry.entrySet())
             {
-                eventRegistry.put(annotation, new ArrayList<Method>());
-
-                Logger.log(SmartSeverity.EVENT_PLUS, "Event " + annotation.getCanonicalName() + " successfully registered!");
-
-                short retroactivelyFound = 0;
-
-                // Let's check all existing event Methods for this event.
-                for (Entry<Class<? extends Annotation>, List<Method>> entry : eventRegistry.entrySet())
+                // Checking the Method list for this event would make no
+                // sense.
+                if (annotation.equals(entry.getKey()))
                 {
-                    // Checking the Method list for this event would make no
-                    // sense.
-                    if (annotation.equals(entry.getKey()))
-                    {
-                        continue;
-                    }
-
-                    for (Method method : entry.getValue())
-                    {
-                        // Just in case.
-                        if (method.isAnnotationPresent(annotation))
-                        {
-                            eventRegistry.get(annotation).add(method);
-                            retroactivelyFound++;
-                        }
-                    }
+                    continue;
                 }
 
-                Logger.log(SmartSeverity.EVENT_PLUS, "Retroactive method checking found " + retroactivelyFound + " item(s).");
-
-                // Let's check the Method orphanage for some potential
-                // candidates.
-
-                short orphansFound = 0;
-
-                int orphansBefore = orphans.size();
-
-                List<Method> foundParents = new ArrayList<Method>();
-
-                for (Method method : orphans)
+                for (Method method : entry.getValue())
                 {
+                    // Just in case.
                     if (method.isAnnotationPresent(annotation))
                     {
-                        foundParents.add(method);
-
-                        // No duplicates.
-                        if (!eventRegistry.get(annotation).contains(method))
-                        {
-                            eventRegistry.get(annotation).add(method);
-                            orphansFound++;
-                        }
+                        eventRegistry.get(annotation).add(method);
+                        retroactivelyFound++;
                     }
                 }
-
-                orphans.removeAll(foundParents);
-
-                Logger.log(SmartSeverity.EVENT_PLUS, orphansFound + " orphan method(s) was/were bound and " + (orphansBefore - orphans.size()) + " removed from the storage!");
             }
+
+            Logger.log(SmartSeverity.EVENT_PLUS, "Retroactive method checking found " + retroactivelyFound + " item(s).");
+
+            // Let's check the Method orphanage for some potential
+            // candidates.
+
+            short orphansFound = 0;
+
+            int orphansBefore = orphans.size();
+
+            List<Method> foundParents = new ArrayList<>();
+
+            for (Method method : orphans)
+            {
+                if (method.isAnnotationPresent(annotation))
+                {
+                    foundParents.add(method);
+
+                    // No duplicates.
+                    if (!eventRegistry.get(annotation).contains(method))
+                    {
+                        eventRegistry.get(annotation).add(method);
+                        orphansFound++;
+                    }
+                }
+            }
+
+            orphans.removeAll(foundParents);
+
+            Logger.log(SmartSeverity.EVENT_PLUS, orphansFound + " orphan method(s) was/were bound and " + (orphansBefore - orphans.size()) + " removed from the storage!");
         }
         else
         {
@@ -171,28 +166,28 @@ public class StaticPlutoEventManager
                         Logger.log(SmartSeverity.EVENT_WARNING, "Method " + m.toGenericString() + " has no parameters, will not be invoked by event!");
                     }
 
-                    for (int i = 0; i < params.length; i++)
-                    {
+                    for (int i = 0; i < params.length; i++) {
                         Class<?> parameter = params[i];
 
-                        if (!EventData.class.isAssignableFrom(parameter))
-                        {
+                        if (!EventData.class.isAssignableFrom(parameter)) {
                             Logger.log(SmartSeverity.EVENT_ERROR, "Method " + m.toGenericString() + " contains invalid parameters. Only EventData instances are permitted.");
                             mostSuitableParam = null;
                             break;
                         }
 
-                        if (mostSuitableParam == null && parameter.isInstance(data))
+                        if (parameter.isInstance(data))
                         {
-                            mostSuitableParam = parameter;
-                            paramOut[i] = data;
-                        }
-
-                        if (parameter.isInstance(data) && mostSuitableParam.isAssignableFrom(parameter))
-                        {
-                            mostSuitableParam = parameter;
-                            paramOut = new EventData[params.length];
-                            paramOut[i] = data;
+                            if (mostSuitableParam == null)
+                            {
+                                mostSuitableParam = parameter;
+                                paramOut[i] = data;
+                            }
+                            else if (mostSuitableParam.isAssignableFrom(parameter))
+                            {
+                                mostSuitableParam = parameter;
+                                Arrays.fill(paramOut, 0, i, null);
+                                paramOut[i] = data;
+                            }
                         }
                     }
 
