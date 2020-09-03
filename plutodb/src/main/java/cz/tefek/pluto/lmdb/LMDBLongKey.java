@@ -3,9 +3,13 @@ package cz.tefek.pluto.lmdb;
 import org.lwjgl.system.MemoryStack;
 import org.lwjgl.util.lmdb.MDBVal;
 
+/**
+ * @deprecated Usage discouraged until tested well enough.
+ * */
+@Deprecated
 public class LMDBLongKey extends LMDBKey
 {
-    private long key;
+    private final long key;
 
     private LMDBLongKey(long key)
     {

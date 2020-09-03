@@ -3,9 +3,13 @@ package cz.tefek.pluto.lmdb;
 import org.lwjgl.system.MemoryStack;
 import org.lwjgl.util.lmdb.MDBVal;
 
+/**
+ * @deprecated Usage discouraged until tested well enough.
+ * */
+@Deprecated
 public class LMDBIntegerKey extends LMDBKey
 {
-    private int key;
+    private final int key;
 
     private LMDBIntegerKey(int key)
     {

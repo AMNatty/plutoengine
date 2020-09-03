@@ -4,20 +4,24 @@ import org.lwjgl.system.MemoryUtil;
 
 import java.nio.ByteBuffer;
 
+/**
+ * @deprecated Usage discouraged until tested well enough.
+ * */
+@Deprecated
 public interface ILMDBValueRecipe
 {
-    public int sizeOf();
+    int sizeOf();
 
-    public void serialize(ByteBuffer output);
+    void serialize(ByteBuffer output);
 
-    public void deserialize(ByteBuffer input);
+    void deserialize(ByteBuffer input);
 
-    public static int sizeOfUTF8(CharSequence string)
+    static int sizeOfUTF8(CharSequence string)
     {
         return Integer.BYTES + MemoryUtil.memLengthUTF8(string, false);
     }
 
-    public static void putUTF8(CharSequence string, ByteBuffer output)
+    static void putUTF8(CharSequence string, ByteBuffer output)
     {
         int strLen = MemoryUtil.memUTF8(string, false, output, output.position() + Integer.BYTES);
         output.putInt(strLen);
@@ -25,7 +29,7 @@ public interface ILMDBValueRecipe
         output.position(output.position() + strLen);
     }
 
-    public static String getUTF8(ByteBuffer input)
+    static String getUTF8(ByteBuffer input)
     {
         var strLen = input.getInt();
         var string = MemoryUtil.memUTF8(input, strLen);

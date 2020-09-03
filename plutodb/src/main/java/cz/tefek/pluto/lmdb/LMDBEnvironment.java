@@ -12,6 +12,10 @@ import java.io.IOException;
 
 import javax.annotation.concurrent.ThreadSafe;
 
+/**
+ * @deprecated Usage discouraged until tested well enough.
+ * */
+@Deprecated
 @ThreadSafe
 public class LMDBEnvironment implements AutoCloseable
 {

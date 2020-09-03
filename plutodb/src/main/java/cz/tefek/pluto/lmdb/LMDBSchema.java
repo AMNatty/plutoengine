@@ -1,5 +1,9 @@
 package cz.tefek.pluto.lmdb;
 
+/**
+ * @deprecated Usage discouraged until tested well enough.
+ * */
+@Deprecated
 public class LMDBSchema<K extends LMDBKey, E extends ILMDBValueRecipe>
 {
     private String name;

@@ -8,6 +8,10 @@ import java.lang.invoke.MethodHandle;
 import java.lang.invoke.MethodHandles;
 import java.lang.invoke.MethodType;
 
+/**
+ * @deprecated Usage discouraged until tested well enough.
+ * */
+@Deprecated
 public class LMDBDatabase<K extends LMDBKey, V extends ILMDBValueRecipe>
 {
     private LMDBTransaction transaction;
@@ -42,7 +46,12 @@ public class LMDBDatabase<K extends LMDBKey, V extends ILMDBValueRecipe>
 
             var valueStruct = MDBVal.mallocStack(stack).mv_data(data).mv_size(size);
 
-            assert LMDB.mdb_put(this.transaction.getAddress(), this.handle, keyStruct, valueStruct, 0) == LMDB.MDB_SUCCESS;
+            int retval = LMDB.mdb_put(this.transaction.getAddress(), this.handle, keyStruct, valueStruct, 0);
+
+            if (retval != LMDB.MDB_SUCCESS)
+            {
+                throw new RuntimeException(String.format("Error: mdb_put failed with the following error code: %d", retval));
+            }
         }
     }
 
@@ -68,7 +77,12 @@ public class LMDBDatabase<K extends LMDBKey, V extends ILMDBValueRecipe>
 
             var valueStruct = MDBVal.mallocStack(stack);
 
-            assert LMDB.mdb_get(this.transaction.getAddress(), this.handle, keyStruct, valueStruct) == LMDB.MDB_SUCCESS;
+            int retval = LMDB.mdb_get(this.transaction.getAddress(), this.handle, keyStruct, valueStruct);
+
+            if (retval != LMDB.MDB_SUCCESS)
+            {
+                throw new RuntimeException(String.format("Error: mdb_get failed with the following error code: %d", retval));
+            }
 
             valueToUpdate.deserialize(valueStruct.mv_data());
 
