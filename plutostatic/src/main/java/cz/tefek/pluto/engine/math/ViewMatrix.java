@@ -11,10 +11,10 @@ import org.joml.Matrix3x2f;
 public class ViewMatrix
 {
     /**
-     * Create a 2D
+     * Create a 2D view matrix.
      * 
-     * @param x    The X camera translation
-     * @param y    The Y camera translation
+     * @param x The X camera translation
+     * @param y The Y camera translation
      * @param zoom The zoom
      * 
      * @return the view matrix

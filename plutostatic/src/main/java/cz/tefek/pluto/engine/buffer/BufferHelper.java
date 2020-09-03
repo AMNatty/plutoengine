@@ -3,11 +3,15 @@ package cz.tefek.pluto.engine.buffer;
 import org.apache.commons.io.IOUtils;
 import org.lwjgl.BufferUtils;
 
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
+import java.nio.channels.FileChannel;
+import java.nio.file.Files;
+import java.nio.file.Path;
+
+import cz.tefek.pluto.io.asl.resource.ResourceAddress;
 
 /**
  * A utility class to handle primitive native buffers.
@@ -110,9 +114,83 @@ public final class BufferHelper
      */
     public static ByteBuffer readToFlippedByteBuffer(String path) throws IOException
     {
-        try (var fis = new FileInputStream(path))
+        try (var fc = FileChannel.open(Path.of(path)))
         {
-            var ba = IOUtils.toByteArray(fis);
+            var size = fc.size();
+
+            if (size > Integer.MAX_VALUE)
+            {
+                throw new IOException("File ' + pah + ' is too big to be read into a ByteBuffer!");
+            }
+
+            ByteBuffer buf = BufferUtils.createByteBuffer((int) size);
+            fc.read(buf);
+            buf.flip();
+            return buf;
+        }
+    }
+
+    /**
+     * Loads a file denoted by the specified {@link Path} and fills the input
+     * {@link ByteBuffer} with the read bytes.
+     * 
+     * <p>
+     * <em>Make sure the buffer can hold the entire file.</em>
+     * </p>
+     * 
+     * @param path The file's path.
+     * @param buf The input buffer to be filled with data.
+     * 
+     * @return The input {@link ByteBuffer}.
+     * @throws IOException Upon standard I/O errors.
+     * 
+     * @author 493msi
+     * @since 0.3
+     */
+    public static ByteBuffer readToByteBuffer(Path path, ByteBuffer buf) throws IOException
+    {
+        try (var fc = FileChannel.open(path))
+        {
+            fc.read(buf);
+            buf.flip();
+            return buf;
+        }
+    }
+
+    /**
+     * {@link ResourceAddress} version of
+     * {@link BufferHelper#readToByteBuffer(Path path, ByteBuffer buf)}.
+     * 
+     * @param addr The file's {@link ResourceAddress}.
+     * @param buf The input buffer to be filled with data.
+     * 
+     * @return The input {@link ByteBuffer}.
+     * @throws IOException Upon standard I/O errors.
+     * 
+     * @author 493msi
+     * @since 0.3
+     */
+    public static ByteBuffer readToByteBuffer(ResourceAddress addr, ByteBuffer buf) throws IOException
+    {
+        return readToByteBuffer(addr.toNIOPath(), buf);
+    }
+
+    /**
+     * Loads a file denoted by the specified {@link ResourceAddress} and returns
+     * a {@link ByteBuffer} containing the read bytes.
+     * 
+     * @param path The file's path.
+     * @return A {@link ByteBuffer} containing the file's contents.
+     * @throws IOException Upon standard I/O errors.
+     * 
+     * @author 493msi
+     * @since 0.3
+     */
+    public static ByteBuffer readToFlippedByteBuffer(ResourceAddress path) throws IOException
+    {
+        try (var is = Files.newInputStream(path.toNIOPath()))
+        {
+            var ba = IOUtils.toByteArray(is);
             return flippedByteBuffer(ba);
         }
     }

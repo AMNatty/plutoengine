@@ -27,6 +27,7 @@ public class Display
     int width;
     int height;
     boolean debugMode;
+    boolean coreProfile = true;
 
     private boolean wasResized;
 
@@ -190,7 +191,7 @@ public class Display
 
     public void createOpenGLCapabilities()
     {
-        var glCapabilities = GL.createCapabilities(true);
+        var glCapabilities = GL.createCapabilities(this.coreProfile);
 
         GLDebugInfo.printDebugInfo(glCapabilities);
 
