@@ -5,7 +5,7 @@ import org.lwjgl.util.lmdb.MDBVal;
 
 public class LMDBStringKey extends LMDBKey
 {
-    private String key;
+    private final String key;
 
     private LMDBStringKey(String key)
     {

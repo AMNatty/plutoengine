@@ -73,11 +73,7 @@ public class LMDBTransaction implements AutoCloseable
         {
             return new LMDBDatabase<K, V>(this, dbHandle, recipeClazz);
         }
-        catch (NoSuchMethodException e)
-        {
-            e.printStackTrace();
-        }
-        catch (IllegalAccessException e)
+        catch (NoSuchMethodException | IllegalAccessException e)
         {
             e.printStackTrace();
         }
@@ -87,7 +83,13 @@ public class LMDBTransaction implements AutoCloseable
 
     public void commit()
     {
-        LMDB.mdb_txn_commit(this.ptr);
+        int returnCode = LMDB.mdb_txn_commit(this.ptr);
+
+        if (returnCode != LMDB.MDB_SUCCESS)
+        {
+            throw new RuntimeException(String.format("Error: mdb_txn_commit failed with the following error code: %d", returnCode));
+        }
+
         this.uncommited = false;
     }
 

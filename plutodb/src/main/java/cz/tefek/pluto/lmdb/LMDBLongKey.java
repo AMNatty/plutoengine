@@ -5,7 +5,7 @@ import org.lwjgl.util.lmdb.MDBVal;
 
 public class LMDBLongKey extends LMDBKey
 {
-    private long key;
+    private final long key;
 
     private LMDBLongKey(long key)
     {
