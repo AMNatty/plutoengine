@@ -45,7 +45,7 @@ version numbers.*
  * Further engine restructure
  
 ### High priority
- * Rewriting PlutGUI
+ * Rewriting PlutoGUI
  * Finishing PlutoCommandParser
  * The stage system and automated asset loading
  
