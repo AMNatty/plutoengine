@@ -8,6 +8,7 @@ include 'plutolib',
         'plutoframebuffer',
         'plutospritesheet',
         'plutogui',
+        'plutoaudio',
         'plutocore'
 
 rootProject.name = 'plutoengine'

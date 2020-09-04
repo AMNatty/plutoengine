@@ -1,0 +1,10 @@
+apply plugin: 'java-library'
+
+description = "PlutoEngine's sound subsystem."
+
+dependencies {
+	api project(":plutostatic")
+
+	api "org.lwjgl:lwjgl-openal"
+	runtimeOnly "org.lwjgl:lwjgl-openal::$lwjglNatives"
+}

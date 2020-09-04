@@ -15,8 +15,8 @@ public final class CommandRegistry
 {
     private static CommandRegistry instance;
 
-    private Set<CommandBase> commands;
-    private Map<String, CommandBase> aliasTable;
+    private final Set<CommandBase> commands;
+    private final Map<String, CommandBase> aliasTable;
 
     static
     {

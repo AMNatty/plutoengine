@@ -166,7 +166,7 @@ public class CommandParser
 
     private boolean hasEmptyPrefix()
     {
-        return this.prefixes.stream().filter(Predicate.not(OfInt::hasNext)).findAny().isPresent();
+        return this.prefixes.stream().anyMatch(Predicate.not(OfInt::hasNext));
     }
 
     /**
@@ -241,7 +241,7 @@ public class CommandParser
 
         // At this point we are 100% sure the command was resolved and can validate the parameters  
 
-        /**
+        /*
          * 
          * TODO: Validate parameters here
          * 

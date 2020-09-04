@@ -6,6 +6,7 @@ import org.lwjgl.glfw.GLFW;
 import org.lwjgl.opengl.GL;
 import org.lwjgl.opengl.GL33;
 
+import cz.tefek.pluto.engine.audio.al.AudioEngine;
 import cz.tefek.pluto.engine.buffer.GLFWImageUtil;
 import cz.tefek.pluto.engine.display.Display;
 import cz.tefek.pluto.engine.display.DisplayBuilder;
@@ -17,34 +18,65 @@ import cz.tefek.pluto.modloader.ModLoaderCore;
 
 public abstract class PlutoApplication
 {
-    public static final boolean DEBUG_MODE = Boolean.valueOf(System.getProperty("cz.tefek.pluto.debug"));
-
     protected Display display;
 
     protected abstract Class<?> getMainModule();
 
     protected abstract void loop();
 
-    public final void run(String[] args)
+    protected static class StartupConfig
     {
+        public boolean coreProfile = true;
+        public int majorOpenGLVersion = 3;
+        public int minorOpenGLVersion = 3;
+        public String windowName = "Pluto Engine";
+        public int windowMSAA = 4;
+        public int windowInitialWidth = 1280;
+        public int windowInitialHeight = 720;
+        public int windowMinWidth = 1000;
+        public int windowMinHeight = 600;
+        public int vsync = 0;
+        public boolean windowResizable = true;
+
+        public StartupConfig()
+        {
+
+        }
+    }
+
+    public final void run(String[] args, StartupConfig config)
+    {
+        if (config == null)
+        {
+            config = new StartupConfig();
+        }
+
         Logger.setup();
 
-        Logger.log(SmartSeverity.INFO, "Debug mode: " + (DEBUG_MODE ? "enabled" : "disabled"));
+        Logger.log(SmartSeverity.INFO, "Debug mode: " + (Pluto.DEBUG_MODE ? "enabled" : "disabled"));
 
         PlutoL10n.init(Locale.UK);
 
         DisplayBuilder.initGLFW();
 
-        this.display = new DisplayBuilder().hintOpenGLVersion(3, 3).hintDebugContext(DEBUG_MODE).hintMSAA(4).hintVisible(true).hintResizeable(true).setInitialSize(1280, 720).export();
+        if (config.coreProfile)
+        {
+            this.display = new DisplayBuilder().hintOpenGLVersion(config.majorOpenGLVersion, config.minorOpenGLVersion).hintDebugContext(Pluto.DEBUG_MODE).hintMSAA(config.windowMSAA).hintVisible(true).hintResizeable(config.windowResizable).setInitialSize(config.windowInitialWidth, config.windowInitialHeight).export();
+        }
+        else
+        {
+            this.display = new DisplayBuilder().hintOpenGLVersionLegacy(config.majorOpenGLVersion, config.minorOpenGLVersion).hintDebugContext(Pluto.DEBUG_MODE).hintMSAA(config.windowMSAA).hintVisible(true).hintResizeable(config.windowResizable).setInitialSize(config.windowInitialWidth, config.windowInitialHeight).export();
+        }
 
-        this.display.create("Stardust Miner");
+        this.display.create(config.windowName);
 
-        this.display.setWindowSizeLimits(1000, 600, GLFW.GLFW_DONT_CARE, GLFW.GLFW_DONT_CARE);
+        this.display.setWindowSizeLimits(config.windowMinWidth, config.windowMinHeight, GLFW.GLFW_DONT_CARE, GLFW.GLFW_DONT_CARE);
 
-        this.display.lockSwapInterval(0);
+        this.display.lockSwapInterval(config.vsync);
 
         this.display.show();
 
+        // TODO Un-hardcode these
         var icons = GLFWImageUtil.loadIconSet("data/icon16.png", "data/icon32.png", "data/icon64.png", "data/icon128.png");
 
         this.display.setIcons(icons);
@@ -52,6 +84,8 @@ public abstract class PlutoApplication
         this.display.createOpenGLCapabilities();
 
         InputBus.init(this.display);
+
+        AudioEngine.initialize();
 
         ModLoaderCore.registerMod(this.getMainModule());
 
@@ -71,6 +105,8 @@ public abstract class PlutoApplication
 
             this.display.pollEvents();
         }
+
+        AudioEngine.exit();
 
         InputBus.destroy();
 

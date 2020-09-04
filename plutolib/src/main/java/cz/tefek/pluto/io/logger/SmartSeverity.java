@@ -16,7 +16,11 @@ public enum SmartSeverity implements ISeverity
     WARNING("[!] ", true),
     ERROR("[X] ", true),
 
-    AUDIO("[♪] ", false),
+    AUDIO("[i] [♪] ", false),
+    AUDIO_PLUS("[+] [♪] ", false),
+    AUDIO_MINUS("[-] [♪] ", false),
+    AUDIO_WARNING("[!] [♪] ", true),
+    AUDIO_ERROR("[X] [♪] ", true),
 
     MODULE("[i] [M] ", false),
     MODULE_PLUS("[+] [M] ", false),

@@ -7,12 +7,10 @@ dependencies {
 
 	api "org.lwjgl:lwjgl"
 	api "org.lwjgl:lwjgl-glfw"
-	api "org.lwjgl:lwjgl-openal"
 	api "org.lwjgl:lwjgl-opengl"
 	api "org.lwjgl:lwjgl-stb"
 	runtimeOnly "org.lwjgl:lwjgl::$lwjglNatives"
 	runtimeOnly "org.lwjgl:lwjgl-glfw::$lwjglNatives"
-	runtimeOnly "org.lwjgl:lwjgl-openal::$lwjglNatives"
 	runtimeOnly "org.lwjgl:lwjgl-opengl::$lwjglNatives"
 	runtimeOnly "org.lwjgl:lwjgl-stb::$lwjglNatives"
     
