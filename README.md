@@ -23,11 +23,11 @@ version numbers.*
 
 ### Safe submodules
  * **PlutoCore** - Stable
- * **PlutoFrameBuffer** - Stable
+ * **PlutoFramebuffer** - Stable
  * **PlutoGUI** - Stable, awaiting a rewrite
  * **PlutoMesher** - Stable
  * **PlutoShader** - Stable
- * **PlutoSpritesheet** - Stable, some features are unfinished
+ * **PlutoSpriteSheet** - Stable, some features are unfinished
  * **PlutoStatic** - Stable, collision API nowhere near completition
  
 ### Unstable submodules 
