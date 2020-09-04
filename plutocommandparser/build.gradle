@@ -1,9 +1,0 @@
-apply plugin: 'java-library'
-
-description = ""
-
-dependencies {
-    api project(":plutolib")
-
-    testImplementation("org.junit.jupiter:junit-jupiter:5.6.2")
-}
