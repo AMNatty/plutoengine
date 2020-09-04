@@ -1,5 +1,6 @@
 package cz.tefek.pluto.engine.graphics;
 
+import cz.tefek.pluto.Pluto;
 import cz.tefek.pluto.engine.ModLWJGL;
 import cz.tefek.pluto.engine.graphics.spritesheet.FramebufferTiledSpriteSheet;
 import cz.tefek.pluto.engine.shader.PlutoShaderMod;
@@ -14,7 +15,12 @@ import cz.tefek.pluto.modloader.event.ModPreLoadEvent;
 import cz.tefek.pluto.modloader.event.ModUnload;
 import cz.tefek.pluto.modloader.event.ModUnloadEvent;
 
-@ModEntry(modid = PlutoSpriteSheetMod.MOD_ID, version = "0.2", dependencies = { ModLWJGL.class, PlutoShaderMod.class }, author = "493msi", build = 1, displayName = "Pluto SpriteSheet", description = "A library to manage, store and draw sprites.")
+@ModEntry(modid = PlutoSpriteSheetMod.MOD_ID,
+        version = Pluto.VERSION,
+        dependencies = { ModLWJGL.class, PlutoShaderMod.class },
+        author = "493msi",
+        displayName = "Pluto SpriteSheet",
+        description = "A library to manage, store and draw sprites.")
 public class PlutoSpriteSheetMod
 {
     public static final String MOD_ID = "plutospritesheet";

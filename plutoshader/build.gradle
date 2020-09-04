@@ -1,6 +1,6 @@
 apply plugin: 'java-library'
 
-description = ""
+description = "Automated shader loader and manager."
 
 dependencies {
 	api project(":plutotexturing")

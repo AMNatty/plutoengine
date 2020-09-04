@@ -1,5 +1,6 @@
 package cz.tefek.pluto.engine.graphics;
 
+import cz.tefek.pluto.Pluto;
 import cz.tefek.pluto.engine.graphics.font.FontManager;
 import cz.tefek.pluto.engine.graphics.font.FontShader;
 import cz.tefek.pluto.engine.graphics.texture.MagFilter;
@@ -23,7 +24,12 @@ import cz.tefek.pluto.modloader.event.ModUnloadEvent;
  * @author 493msi
  *
  */
-@ModEntry(modid = PlutoGUIMod.MOD_ID, displayName = "Pluto Engine GUI Renderer", author = "Tefek", build = 2, dependencies = { PlutoSpriteSheetMod.class }, clientSupport = true, serverSupport = false, version = "0.2", description = "Everything GUI of PlutoEngine.")
+@ModEntry(modid = PlutoGUIMod.MOD_ID,
+        displayName = "Pluto Engine GUI Renderer",
+        author = "Tefek",
+        dependencies = { PlutoSpriteSheetMod.class },
+        version = Pluto.VERSION,
+        description = "Everything GUI of PlutoEngine.")
 public class PlutoGUIMod
 {
     public static final String MOD_ID = "plutogui";
