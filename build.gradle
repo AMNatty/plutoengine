@@ -8,7 +8,7 @@ allprojects {
     apply plugin: 'java'
 
     group = "cz.tefek"
-    version = "20.2.0.0-alpha.0"
+    version = "20.2.0.0-alpha.1"
 
     tasks.withType(JavaCompile) {
         options.encoding = "UTF-8"
