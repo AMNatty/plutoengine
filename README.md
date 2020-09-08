@@ -51,6 +51,7 @@ version numbers.*
  
 ### Normal priority
  * The collision system for PlutoStatic
+ * Improve image loading capabilities, possibly rewrite PlutoLib#TPL
  
 ### Low priority
  * Polishing PlutoLib

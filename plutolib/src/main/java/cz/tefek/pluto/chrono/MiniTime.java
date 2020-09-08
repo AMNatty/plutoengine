@@ -129,7 +129,7 @@ public class MiniTime
         for (int i = 1; i < nrs.length; i++)
         {
             var type = letters[i - 1];
-            int number = 0;
+            int number;
 
             try
             {
@@ -196,10 +196,12 @@ public class MiniTime
     /**
      * Converts a time span between two Unix-epoch millisecond time points to a
      * MiniTime string. <i>Note ALL time spans larger or equal than
-     * {@link Integer#MAX_VALUE} will be permanently converted to "forever".</i>
+     * {@link Integer#MAX_VALUE} weeks will be permanently converted to "forever".  
+     * Inputting {@link Long#MAX_VALUE} for the future time point has the same effect.</i>
      * 
      * @param before The first time point in Unix-time milliseconds
      * @param after  The first time point in Unix-time milliseconds
+     *
      * @return The resulting MiniTime string
      * 
      * @throws IllegalArgumentException on a negative time duration
@@ -220,10 +222,12 @@ public class MiniTime
     /**
      * Converts a time span between now and a future time point in Unix-epoch
      * milliseconds to a MiniTime string. <i>Note ALL time spans larger or equal
-     * than {@link Integer#MAX_VALUE} will be permanently converted to
-     * "forever".</i>
+     * than {@link Integer#MAX_VALUE} weeks will be permanently converted to
+     * "forever". Inputting {@link Long#MAX_VALUE} for the future time point
+     * has the same effect.</i>
      * 
-     * @param future The source time span in milliseconds
+     * @param future The future time point in Unix time milliseconds
+     *
      * @return The resulting MiniTime string
      * 
      * @throws IllegalArgumentException on a negative time duration
@@ -245,7 +249,7 @@ public class MiniTime
 
     /**
      * Converts a time span milliseconds to a MiniTime string. <i>Note ALL time
-     * spans larger or equal than {@link Integer#MAX_VALUE} will be permanently
+     * spans larger or equal than {@link Integer#MAX_VALUE} weeks will be permanently
      * converted to "forever".</i>
      * 
      * @param diff The source time span in milliseconds

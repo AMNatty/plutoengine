@@ -4,7 +4,10 @@ package cz.tefek.pluto.io.logger;
  * Message severity.
  *
  * @author 493msi
+ *
+ * @deprecated Use {@link SmartSeverity} instead.
  */
+@Deprecated
 public enum Severity implements ISeverity
 {
     INFO("[INFO] ", false),
@@ -19,6 +22,7 @@ public enum Severity implements ISeverity
     Severity(String name, boolean usesStdErr)
     {
         this.displayName = name;
+        this.usesStdErr = usesStdErr;
     }
 
     @Override

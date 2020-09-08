@@ -30,7 +30,7 @@ public class Logger
     private static OutputStream fileLog = null;
 
     /**
-     * Initializes up the logger and replaces the standard output and standard error output with the logger methods.
+     * Initializes the logger and replaces the standard output and standard error output with the logger methods.
      *
      * <p>
      * <em>

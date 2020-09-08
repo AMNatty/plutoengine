@@ -1,15 +1,14 @@
 package cz.tefek.pluto.io.asl.resource;
 
+import javax.annotation.Nullable;
+import java.nio.file.FileSystems;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
-import java.util.stream.Collectors;
-
-import java.nio.file.FileSystems;
-import java.nio.file.Path;
 
 import cz.tefek.pluto.io.logger.Logger;
-import cz.tefek.pluto.io.logger.Severity;
+import cz.tefek.pluto.io.logger.SmartSeverity;
 import cz.tefek.pluto.modloader.ModLoaderCore;
 
 /**
@@ -94,13 +93,11 @@ public class ResourceAddress
 
         if (as.length == 1)
         {
-            Logger.log(Severity.WARNING, "Please do not use tier 1 addresses, so it doesn't conflict with core assets.");
+            Logger.log(SmartSeverity.WARNING, "Please do not use tier 1 addresses, so it doesn't conflict with core assets.");
         }
 
-        for (int i = 0; i < as.length; i++)
+        for (String branch : as)
         {
-            var branch = as[i];
-
             if (branch.length() < 1 || branch.length() > MAX_BRANCH_STRING_LENGTH)
             {
                 throw new IllegalArgumentException("Length of branch must be higher than 0 and lower than 33, this is not an essay.");
@@ -151,9 +148,9 @@ public class ResourceAddress
         return raddress;
     }
 
-    public ResourceAddress fileExtension(String ext)
+    public ResourceAddress fileExtension(@Nullable String ext)
     {
-        if (ext == null || ext == "")
+        if (ext == null || "".equals(ext))
         {
             this.fileExtension = null;
             return this;
@@ -213,15 +210,7 @@ public class ResourceAddress
     @Override
     public String toString()
     {
-        StringBuilder sbPath = new StringBuilder(this.resSubscriber.getMod().getModID());
-
-        sbPath.append("$");
-
-        sbPath.append(this.subAddressToString());
-
-        String path = sbPath.toString();
-
-        return path;
+        return this.resSubscriber.getMod().getModID() + "$" + this.subAddressToString();
     }
 
     public ResourceAddress copy()
@@ -246,12 +235,10 @@ public class ResourceAddress
 
         if (this.hasFileExtension())
         {
-            sbPath.append("." + this.fileExtension);
+            sbPath.append(".").append(this.fileExtension);
         }
 
-        String path = sbPath.toString();
-
-        return path;
+        return sbPath.toString();
     }
 
     public String subAddressToString()
@@ -293,7 +280,7 @@ public class ResourceAddress
         var pathBuilder = new StringBuilder(this.resSubscriber.getRootPath());
         final var separator = FileSystems.getDefault().getSeparator();
         pathBuilder.append(separator);
-        pathBuilder.append(this.subAddress.stream().collect(Collectors.joining(separator)));
+        pathBuilder.append(String.join(separator, this.subAddress));
 
         if (this.hasFileExtension())
         {

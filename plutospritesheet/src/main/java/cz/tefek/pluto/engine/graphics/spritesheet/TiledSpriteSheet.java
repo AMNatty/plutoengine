@@ -6,7 +6,7 @@ import cz.tefek.pluto.engine.graphics.sprite.Sprite;
 import cz.tefek.pluto.engine.graphics.sprite.SpriteDisposable;
 import cz.tefek.pluto.engine.graphics.sprite.TileSprite;
 import cz.tefek.pluto.io.logger.Logger;
-import cz.tefek.pluto.io.logger.Severity;
+import cz.tefek.pluto.io.logger.SmartSeverity;
 
 public abstract class TiledSpriteSheet<T> extends SpriteSheet<T>
 {
@@ -65,7 +65,7 @@ public abstract class TiledSpriteSheet<T> extends SpriteSheet<T>
 
     protected void expand()
     {
-        Logger.logf(Severity.INFO, "Spritesheet #%d: Expanding from %dx%d to ", this.id, this.spriteSheetWidth, this.spriteSheetHeight);
+        Logger.logf(SmartSeverity.INFO, "Spritesheet #%d: Expanding from %dx%d to ", this.id, this.spriteSheetWidth, this.spriteSheetHeight);
 
         this.spriteSheetWidth *= 2;
         this.spriteSheetHeight *= 2;
@@ -79,7 +79,7 @@ public abstract class TiledSpriteSheet<T> extends SpriteSheet<T>
 
     protected void upscale(int factor)
     {
-        Logger.logf(Severity.INFO, "Spritesheet #%d: Upscaling from %dx%d to ", this.id, this.tileWidth, this.tileHeight);
+        Logger.logf(SmartSeverity.INFO, "Spritesheet #%d: Upscaling from %dx%d to ", this.id, this.tileWidth, this.tileHeight);
 
         this.tileWidth *= factor;
         this.tileHeight *= factor;

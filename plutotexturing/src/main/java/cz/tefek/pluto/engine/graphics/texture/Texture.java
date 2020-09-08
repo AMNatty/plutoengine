@@ -1,23 +1,21 @@
 package cz.tefek.pluto.engine.graphics.texture;
 
-import java.util.Arrays;
-
 import org.lwjgl.opengl.GL33;
 import org.lwjgl.system.MemoryUtil;
 
 import java.awt.image.BufferedImage;
 import java.nio.ByteBuffer;
+import java.util.Arrays;
 
 import cz.tefek.pluto.io.asl.resource.ResourceAddress;
 import cz.tefek.pluto.io.logger.Logger;
-import cz.tefek.pluto.io.logger.Severity;
 import cz.tefek.pluto.io.logger.SmartSeverity;
 import cz.tefek.pluto.tpl.TPL;
 import cz.tefek.pluto.tpl.TPNImage;
 
 public abstract class Texture
 {
-    protected int glID = 0;
+    protected int glID;
     protected final int type;
     protected final int dimensions;
 
@@ -138,7 +136,7 @@ public abstract class Texture
     {
         if (wrapOptions.length != this.dimensions)
         {
-            Logger.log(Severity.ERROR, "Error: WrapMode option count does not match texture's dimensions.");
+            Logger.log(SmartSeverity.ERROR, "Error: WrapMode option count does not match texture's dimensions.");
             return this;
         }
 
@@ -198,6 +196,7 @@ public abstract class Texture
         this.load(file.toPath(), magFilter, minFilter, wrap);
     }
 
+    @Deprecated
     public void load(String file, MagFilter magFilter, MinFilter minFilter, WrapMode... wrap)
     {
         TPNImage image = TPL.load(file);

@@ -48,8 +48,6 @@ public class CursorPositionCallback extends GLFWCursorPosCallback
 
     public boolean isInside(int x, int y, int x2, int y2)
     {
-        boolean inside = this.getX() > x && this.getX() < x2 && this.getY() > y && this.getY() < y2;
-
-        return inside;
+        return this.getX() > x && this.getX() < x2 && this.getY() > y && this.getY() < y2;
     }
 }

@@ -3,6 +3,8 @@ package cz.tefek.pluto.engine.buffer;
 import org.lwjgl.BufferUtils;
 import org.lwjgl.glfw.GLFWImage;
 
+import java.nio.file.Path;
+
 import cz.tefek.pluto.tpl.TPL;
 
 /**
@@ -28,23 +30,27 @@ public class GLFWImageUtil
     {
         var icon = GLFWImage.create(icons.length);
 
-        for (int iconIndex = 0; iconIndex < icons.length; iconIndex++)
+        for (String iconPath : icons)
         {
-            var img = TPL.loadPixels(icons[iconIndex]);
+            var img = TPL.loadSpecial(Path.of(iconPath), false);
             var imgData = img.getData();
-            var imgWidth = img.getWidth();
-            var imgHeight = img.getHeight();
+            int imgWidth = img.getWidth();
+            int imgHeight = img.getHeight();
 
-            var byteBuf = BufferUtils.createByteBuffer(imgWidth * imgHeight * 4);
+            int pixelCount = imgWidth * imgHeight;
+            int bytesPerPixel = 4;
+            var byteBuf = BufferUtils.createByteBuffer(pixelCount * bytesPerPixel);
 
-            for (int i = 0; i < imgHeight * imgWidth; i++)
+            byte[] px = new byte[bytesPerPixel];
+
+            for (int i = 0; i < pixelCount; i++)
             {
-                var data = imgData[i];
+                px[3] = imgData.get(); // A
+                px[2] = imgData.get(); // B
+                px[1] = imgData.get(); // G
+                px[0] = imgData.get(); // R
 
-                byteBuf.put((byte) ((data & 0x00ff0000) >> 16));
-                byteBuf.put((byte) ((data & 0x0000ff00) >> 8));
-                byteBuf.put((byte) (data & 0x000000ff));
-                byteBuf.put((byte) ((data & 0xff000000) >> 24));
+                byteBuf.put(px);
             }
 
             byteBuf.flip();

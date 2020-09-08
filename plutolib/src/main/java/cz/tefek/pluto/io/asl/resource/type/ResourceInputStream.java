@@ -1,13 +1,13 @@
 package cz.tefek.pluto.io.asl.resource.type;
 
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.file.Files;
 
 import cz.tefek.pluto.io.asl.resource.Resource;
 import cz.tefek.pluto.io.asl.resource.ResourceAddress;
 import cz.tefek.pluto.io.logger.Logger;
-import cz.tefek.pluto.io.logger.Severity;
+import cz.tefek.pluto.io.logger.SmartSeverity;
 
 /**
  * {@link ResourceAddress} in, {@link InputStream} out.
@@ -26,12 +26,12 @@ public class ResourceInputStream extends Resource<InputStream>
     {
         try
         {
-            return new FileInputStream(this.address.toPath());
+            return Files.newInputStream(this.address.toNIOPath());
         }
         catch (IOException e)
         {
-            Logger.log(Severity.EXCEPTION, "Failed to open " + this.address + "!");
-            Logger.log(Severity.EXCEPTION, e);
+            Logger.log(SmartSeverity.ERROR, "Failed to open " + this.address + "!");
+            Logger.log(e);
         }
 
         return null;

@@ -1,13 +1,13 @@
 package cz.tefek.pluto.engine.graphics.texture.texture2d;
 
-import java.util.Arrays;
-
 import org.lwjgl.opengl.GL33;
+
+import java.util.Arrays;
 
 import cz.tefek.pluto.engine.graphics.texture.Texture;
 import cz.tefek.pluto.engine.graphics.texture.WrapMode;
 import cz.tefek.pluto.io.logger.Logger;
-import cz.tefek.pluto.io.logger.Severity;
+import cz.tefek.pluto.io.logger.SmartSeverity;
 
 public class RectangleTexture extends Texture
 {
@@ -27,7 +27,7 @@ public class RectangleTexture extends Texture
     {
         if (Arrays.stream(wrapOptions).anyMatch(WrapMode.repeatModes::contains))
         {
-            Logger.log(Severity.ERROR, "Error: Rectangle textures do not support repeat wrap modes!");
+            Logger.log(SmartSeverity.ERROR, "Error: Rectangle textures do not support repeat wrap modes!");
 
             return this;
         }

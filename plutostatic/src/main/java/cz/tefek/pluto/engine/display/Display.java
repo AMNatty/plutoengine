@@ -1,10 +1,6 @@
 package cz.tefek.pluto.engine.display;
 
-import org.lwjgl.glfw.GLFW;
-import org.lwjgl.glfw.GLFWErrorCallback;
-import org.lwjgl.glfw.GLFWImage;
-import org.lwjgl.glfw.GLFWVidMode;
-import org.lwjgl.glfw.GLFWWindowSizeCallback;
+import org.lwjgl.glfw.*;
 import org.lwjgl.opengl.ARBDebugOutput;
 import org.lwjgl.opengl.GL;
 import org.lwjgl.opengl.GL33;
@@ -13,7 +9,6 @@ import org.lwjgl.system.MemoryUtil;
 
 import cz.tefek.pluto.engine.gl.GLDebugInfo;
 import cz.tefek.pluto.io.logger.Logger;
-import cz.tefek.pluto.io.logger.Severity;
 import cz.tefek.pluto.io.logger.SmartSeverity;
 
 /**
@@ -72,7 +67,7 @@ public class Display
                 {
                     if (Display.this.debugMode)
                     {
-                        Logger.logf(Severity.INFO, "Resized to %dx%d.\n", width, height);
+                        Logger.logf(SmartSeverity.INFO, "Resized to %dx%d.\n", width, height);
                     }
 
                     Display.this.width = width;
