@@ -18,7 +18,7 @@ public class TransformationMatrix
      * </p>
      * 
      * @param translation The translation vector
-     * @param rotation    The rotation angles
+     * @param yxzRotation The rotation angles
      * @param scale       The scale vector
      * 
      * @author 493msi
@@ -48,7 +48,7 @@ public class TransformationMatrix
      * @param roll   The roll rotation
      * @param scaleX The scale on the X axis
      * @param scaleY The scale on the Y axis
-     * @param scaleY The scale on the Z axis
+     * @param scaleZ The scale on the Z axis
      * 
      * @author 493msi
      * @since 0.3
