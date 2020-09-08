@@ -46,7 +46,7 @@ public class TPL
         catch (Exception e)
         {
             Logger.log(SmartSeverity.ERROR, "[TPL] Image could not be loaded: " + file);
-            Logger.logException(e);
+            Logger.log(e);
 
             return loadImage(null);
         }
@@ -139,7 +139,7 @@ public class TPL
         catch (Exception e)
         {
             Logger.log(SmartSeverity.ERROR, "[TPL] Image could not be loaded: " + file);
-            Logger.logException(e);
+            Logger.log(e);
 
             remake = true;
         }

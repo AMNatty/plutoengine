@@ -59,7 +59,7 @@ public class ModInstaller
                 catch (IOException e)
                 {
                     Logger.log(SmartSeverity.MODULE_ERROR, "Unpacking of " + file + " failed!");
-                    Logger.logException(e);
+                    Logger.log(e);
                 }
 
                 new File(ResourceHelper.GLOBAL_ROOT + "packages/" + file).delete();

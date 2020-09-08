@@ -39,7 +39,7 @@ public class ResourceImage extends Resource<BufferedImage>
         catch (IOException e)
         {
             Logger.log(Severity.ERROR, "Could not load BufferedImage: " + this.address.toString() + ", will load placeholder.");
-            Logger.logException(e);
+            Logger.log(e);
 
             try
             {
@@ -50,7 +50,7 @@ public class ResourceImage extends Resource<BufferedImage>
                 Logger.log(Severity.ERROR, "Placeholder BufferedImage not found: " + ResourceHelper.GLOBAL_ROOT + "data/assets/err/missingTex.png");
                 Logger.log("This is not good! :C");
 
-                Logger.logException(e1);
+                Logger.log(e1);
             }
 
             return null;

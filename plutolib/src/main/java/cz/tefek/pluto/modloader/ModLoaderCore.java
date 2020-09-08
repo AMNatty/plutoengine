@@ -211,7 +211,7 @@ public class ModLoaderCore
             Logger.log(SmartSeverity.MODULE_ERROR, "Problem encountered while pre-loading mods.");
             Logger.log(SmartSeverity.MODULE_ERROR, "Mod loading stopped.");
 
-            Logger.logException(e);
+            Logger.log(e);
 
             cancelLoading();
         }
@@ -232,7 +232,7 @@ public class ModLoaderCore
             Logger.log(SmartSeverity.MODULE_ERROR, "Problem encountered while loading mods.");
             Logger.log(SmartSeverity.MODULE_ERROR, "Mod loading stopped.");
 
-            Logger.logException(e);
+            Logger.log(e);
 
             cancelLoading();
         }
@@ -253,7 +253,7 @@ public class ModLoaderCore
             Logger.log(SmartSeverity.MODULE_ERROR, "Problem encountered while post-loading mods.");
             Logger.log(SmartSeverity.MODULE_ERROR, "Mod loading stopped.");
 
-            Logger.logException(e);
+            Logger.log(e);
 
             cancelLoading();
         }

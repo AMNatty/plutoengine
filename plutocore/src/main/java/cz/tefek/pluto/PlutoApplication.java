@@ -1,5 +1,6 @@
 package cz.tefek.pluto;
 
+import java.io.IOException;
 import java.util.Locale;
 
 import org.lwjgl.glfw.GLFW;
@@ -44,7 +45,7 @@ public abstract class PlutoApplication
         }
     }
 
-    public final void run(String[] args, StartupConfig config)
+    public final void run(String[] args, StartupConfig config) throws Exception
     {
         if (config == null)
         {
@@ -117,6 +118,8 @@ public abstract class PlutoApplication
         this.display.destroy();
 
         DisplayBuilder.destroyGLFW();
+
+        Logger.close();
     }
 
     public Display getDisplayInstance()

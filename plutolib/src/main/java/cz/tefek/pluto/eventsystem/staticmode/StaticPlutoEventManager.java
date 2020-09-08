@@ -199,7 +199,7 @@ public class StaticPlutoEventManager
                         }
                         catch (Exception e)
                         {
-                            Logger.logException(e);
+                            Logger.log(e);
                         }
                     }
                 }

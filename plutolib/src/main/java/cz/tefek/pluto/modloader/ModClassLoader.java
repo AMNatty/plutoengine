@@ -56,7 +56,7 @@ public class ModClassLoader
             }
             catch (Exception e)
             {
-                Logger.logException(e);
+                Logger.log(e);
             }
         }
     }

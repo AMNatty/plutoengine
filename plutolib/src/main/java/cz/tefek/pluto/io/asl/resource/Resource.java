@@ -9,7 +9,7 @@ package cz.tefek.pluto.io.asl.resource;
  *
  * @author 493msi
  *
- * @param R The type of the loaded <tt>Resource</tt>.
+ * @param <R> The type of the loaded <tt>Resource</tt>.
  */
 public abstract class Resource<R>
 {

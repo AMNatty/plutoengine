@@ -27,7 +27,7 @@ public class TextIn
         }
         catch (URISyntaxException e)
         {
-            Logger.logException(e);
+            Logger.log(e);
         }
 
         return null;
@@ -41,7 +41,7 @@ public class TextIn
         }
         catch (Exception e)
         {
-            Logger.logException(e);
+            Logger.log(e);
         }
 
         return null;
@@ -55,7 +55,7 @@ public class TextIn
         }
         catch (Exception e)
         {
-            Logger.logException(e);
+            Logger.log(e);
         }
 
         return null;

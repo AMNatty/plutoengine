@@ -4,6 +4,8 @@ package cz.tefek.pluto.io.logger;
  * A more visual way to denote what's actually happening.
  * 
  * @author 493msi
+ *
+ * @since pre-alpha
  */
 public enum SmartSeverity implements ISeverity
 {
@@ -34,8 +36,8 @@ public enum SmartSeverity implements ISeverity
     EVENT_WARNING("[!] [E] ", true),
     EVENT_ERROR("[X] [E] ", true);
 
-    private String displayName;
-    private boolean usesStdErr;
+    private final String displayName;
+    private final boolean usesStdErr;
 
     SmartSeverity(String name, boolean usesStdErr)
     {

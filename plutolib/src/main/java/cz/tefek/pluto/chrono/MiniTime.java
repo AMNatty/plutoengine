@@ -223,7 +223,7 @@ public class MiniTime
      * than {@link Integer#MAX_VALUE} will be permanently converted to
      * "forever".</i>
      * 
-     * @param input The source time span in milliseconds
+     * @param future The source time span in milliseconds
      * @return The resulting MiniTime string
      * 
      * @throws IllegalArgumentException on a negative time duration
