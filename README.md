@@ -42,6 +42,7 @@ version numbers.*
 
 ### Very high priority
  * Finishing PlutoAudio
+    * Depends on the stage system
  * Further engine restructure
  
 ### High priority

@@ -4,11 +4,23 @@ wrapper {
     distributionType = Wrapper.DistributionType.ALL
 }
 
+project.ext.versionYear = 20
+project.ext.versionMajor = 2
+project.ext.versionMinor = 0
+project.ext.versionPatch = 0
+
+project.ext.isPrerelease = true
+project.ext.prereleaseName = "alpha"
+project.ext.prerealeaseUpdate = 2
+
 allprojects {
     apply plugin: 'java'
 
     group = "cz.tefek"
-    version = "20.2.0.0-alpha.1"
+    version = isPrerelease ?
+            "${versionYear}.${versionMajor}.${versionMinor}.${versionPatch}-${prereleaseName}.${prerealeaseUpdate}"
+            :
+            "${versionYear}.${versionMajor}.${versionMinor}.${versionPatch}"
 
     tasks.withType(JavaCompile) {
         options.encoding = "UTF-8"
