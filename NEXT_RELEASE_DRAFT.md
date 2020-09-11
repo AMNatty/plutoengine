@@ -26,4 +26,7 @@
     * Let the stage system handle audio playback
     * This API should be as neutral as possible and avoid steering towards
     game-only use
+    * The stage manager should be relatively low-overhead and allow multiple
+    instances
+    * Allow stages to be inherited from, creating a stack-like structure
         

@@ -1,5 +1,7 @@
 ## 20.2.0.0-alpha.2
 * `build.gradle` Extracted the version numbers into separate variables
+* `[PlutoCore]` Made `PlutoApplication.StartupConfig` fields private, options
+can now only be modified only through public setters
 
 ## 20.2.0.0-alpha.1
 * `[PlutoLib#cz.tefek.pluto.io.logger]` Refactored the Logger subsystem

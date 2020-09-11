@@ -1,6 +1,5 @@
 package cz.tefek.pluto;
 
-import java.io.IOException;
 import java.util.Locale;
 
 import org.lwjgl.glfw.GLFW;
@@ -17,6 +16,13 @@ import cz.tefek.pluto.io.logger.SmartSeverity;
 import cz.tefek.pluto.l10n.PlutoL10n;
 import cz.tefek.pluto.modloader.ModLoaderCore;
 
+/**
+ * The main entry point for OpenGL applications built around the Pluto framework.
+ *
+ * @author 493msi
+ *
+ * @since pre-alpha 20.1.0
+ * */
 public abstract class PlutoApplication
 {
     protected Display display;
@@ -25,19 +31,137 @@ public abstract class PlutoApplication
 
     protected abstract void loop();
 
+    /**
+     * A set of values used to create a new {@link PlutoApplication}.
+     *
+     * @implNote The values are as follows:
+     * <table>
+     *     <tr><td><b>Option name</b></td><td><b>Default value</b></td><td><b>Explanation</b></td></tr>
+     *     <tr>
+     *         <td><code>coreProfile</code></td>
+     *         <td><code>true</code></td>
+     *         <td>Whether the OpenGL core profile should be enforced.</td>
+     *     </tr>
+     *     <tr>
+     *         <td><code>majorOpenGLVersion</code></td>
+     *         <td><code>3</code></td>
+     *         <td>The minimum major version of the OpenGL context</td>
+     *     </tr>
+     *     <tr>
+     *         <td><code>minorOpenGLVersion</code></td>
+     *         <td><code>3</code></td>
+     *         <td>The minimum minor version of the OpenGL context</td>
+     *     </tr>
+     *     <tr>
+     *         <td><code>windowName</code></td>
+     *         <td><code>Pluto&nbsp;Engine</code></td>
+     *         <td>The initial window title</td>
+     *     </tr>
+     *     <tr>
+     *         <td><code>windowMSAA</code></td>
+     *         <td><code>4</code></td>
+     *         <td>The initial MSAA</td>
+     *     </tr>
+     *     <tr>
+     *         <td><code>windowInitialWidth</code></td>
+     *         <td><code>1280</code></td>
+     *         <td>The initial window width</td>
+     *     </tr>
+     *     <tr>
+     *         <td><code>windowInitialHeight</code></td>
+     *         <td><code>720</code></td>
+     *         <td>The initial window height</td>
+     *     </tr>
+     *     <tr>
+     *         <td><code>windowMinWidth</code></td>
+     *         <td><code>1000</code></td>
+     *         <td>The minimum window width</td>
+     *     </tr>
+     *     <tr>
+     *         <td><code>windowMinHeight</code></td>
+     *         <td><code>1000</code></td>
+     *         <td>The minimum window height</td>
+     *     </tr>
+     *     <tr>
+     *         <td><code>vsync</code></td>
+     *         <td><code>0</code></td>
+     *         <td>The display buffer swap interval, 0 is disabled, 1 is vsync, 2 is vsync / 2, etc.</td>
+     *     </tr>
+     *     <tr>
+     *         <td><code>windowResizable</code></td>
+     *         <td><code>true</code></td>
+     *         <td>Whether the window should be resizable</td>
+     *     </tr>
+     * </table>
+     *
+     * @author 493msi
+     *
+     * @since 20.2.0.0-alpha.0
+     * */
     protected static class StartupConfig
     {
-        public boolean coreProfile = true;
-        public int majorOpenGLVersion = 3;
-        public int minorOpenGLVersion = 3;
-        public String windowName = "Pluto Engine";
-        public int windowMSAA = 4;
-        public int windowInitialWidth = 1280;
-        public int windowInitialHeight = 720;
-        public int windowMinWidth = 1000;
-        public int windowMinHeight = 600;
-        public int vsync = 0;
-        public boolean windowResizable = true;
+        private boolean coreProfile = true;
+        private int majorOpenGLVersion = 3;
+        private int minorOpenGLVersion = 3;
+        private String windowName = "Pluto Engine";
+        private int windowMSAA = 4;
+        private int windowInitialWidth = 1280;
+        private int windowInitialHeight = 720;
+        private int windowMinWidth = 1000;
+        private int windowMinHeight = 600;
+        private int vsync = 0;
+        private boolean windowResizable = true;
+
+        public StartupConfig coreProfile(boolean coreProfile)
+        {
+            this.coreProfile = coreProfile;
+            return this;
+        }
+
+        public StartupConfig openGLVersion(int major, int minor)
+        {
+            this.majorOpenGLVersion = major;
+            this.minorOpenGLVersion = minor;
+            return this;
+        }
+
+        public StartupConfig windowName(String windowName)
+        {
+            this.windowName = windowName;
+            return this;
+        }
+
+        public StartupConfig windowMSAA(int msaa)
+        {
+            this.windowMSAA = msaa;
+            return this;
+        }
+
+        public StartupConfig windowInitialDimensions(int windowInitialWidth, int windowInitialHeight)
+        {
+            this.windowInitialWidth = windowInitialWidth;
+            this.windowInitialHeight = windowInitialHeight;
+            return this;
+        }
+
+        public StartupConfig windowMinDimensions(int windowMinWidth, int windowMinHeight)
+        {
+            this.windowMinWidth = windowMinWidth;
+            this.windowMinHeight = windowMinHeight;
+            return this;
+        }
+
+        public StartupConfig vsync(int vsyncInterval)
+        {
+            this.vsync = vsyncInterval;
+            return this;
+        }
+
+        public StartupConfig windowResizable(boolean windowResizable)
+        {
+            this.windowResizable = windowResizable;
+            return this;
+        }
 
         public StartupConfig()
         {
