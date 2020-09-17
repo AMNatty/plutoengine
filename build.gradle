@@ -1,5 +1,15 @@
 import org.gradle.internal.os.OperatingSystem
 
+plugins {
+    id "me.filippov.gradle.jvm.wrapper" version "0.9.3"
+}
+
+jvmWrapper {
+    linuxJvmUrl = "https://corretto.aws/downloads/latest/amazon-corretto-11-x64-linux-jdk.tar.gz"
+    macJvmUrl = "https://corretto.aws/downloads/latest/amazon-corretto-11-x64-macos-jdk.tar.gz"
+    windowsJvmUrl = "https://corretto.aws/downloads/latest/amazon-corretto-11-x64-windows-jdk.zip"
+}
+
 wrapper {
     distributionType = Wrapper.DistributionType.ALL
 }
@@ -13,8 +23,15 @@ project.ext.isPrerelease = true
 project.ext.prereleaseName = "alpha"
 project.ext.prerealeaseUpdate = 2
 
-allprojects {
+subprojects {
     apply plugin: 'java'
+    apply plugin: 'maven-publish'
+
+    project.ext.lwjglVersion = "3.2.3"
+
+    project.ext.jomlVersion = "1.9.25"
+    project.ext.steamworks4jVersion = "1.8.0"
+    project.ext.steamworks4jServerVersion = "1.8.0"
 
     group = "cz.tefek"
     version = isPrerelease ?
@@ -30,16 +47,6 @@ allprojects {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
     }
-}
-
-subprojects {
-    apply plugin: 'maven-publish'
-
-    project.ext.lwjglVersion = "3.2.3"
-
-    project.ext.jomlVersion = "1.9.25"
-    project.ext.steamworks4jVersion = "1.8.0"
-    project.ext.steamworks4jServerVersion = "1.8.0"
 
     publishing {
         publications {
