@@ -9,5 +9,5 @@ package cz.tefek.pluto.engine.gl;
  */
 public interface IOpenGLEnum
 {
-    public int getGLID();
+    int getGLID();
 }

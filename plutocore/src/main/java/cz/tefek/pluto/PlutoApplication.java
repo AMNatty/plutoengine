@@ -36,7 +36,7 @@ public abstract class PlutoApplication
      *
      * @implNote The values are as follows:
      * <table>
-     *     <tr><td><b>Option name</b></td><td><b>Default value</b></td><td><b>Explanation</b></td></tr>
+     *     <tr><th><b>Option name</b></th><th><b>Default value</b></th><th><b>Explanation</b></th></tr>
      *     <tr>
      *         <td><code>coreProfile</code></td>
      *         <td><code>true</code></td>
