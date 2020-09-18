@@ -177,6 +177,10 @@ public abstract class Texture
         return WrapMode.REPEAT;
     }
 
+    /**
+     * @deprecated Loading assets via {@link String} filenames is discouraged.
+     * */
+    @Deprecated
     public void load(String file)
     {
         var wrap = new WrapMode[this.dimensions];
@@ -196,6 +200,9 @@ public abstract class Texture
         this.load(file.toPath(), magFilter, minFilter, wrap);
     }
 
+    /**
+     * @deprecated Loading assets via {@link String} filenames is discouraged.
+     * */
     @Deprecated
     public void load(String file, MagFilter magFilter, MinFilter minFilter, WrapMode... wrap)
     {
@@ -221,7 +228,8 @@ public abstract class Texture
 
         this.bind();
 
-        GL33.glTexParameteriv(this.type, GL33.GL_TEXTURE_SWIZZLE_RGBA, new int[] { GL33.GL_ALPHA, GL33.GL_BLUE, GL33.GL_GREEN, GL33.GL_RED }); // TODO: Temp solution until I find a smart way to swizzle BufferedImage data
+        // TODO: Temp solution until I find a smart way to swizzle BufferedImage data
+        GL33.glTexParameteriv(this.type, GL33.GL_TEXTURE_SWIZZLE_RGBA, new int[] { GL33.GL_ALPHA, GL33.GL_BLUE, GL33.GL_GREEN, GL33.GL_RED });
 
         this.setFilteringOptions(magFilter, minFilter);
         this.setWrapOptions(wrap);
