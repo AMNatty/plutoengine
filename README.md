@@ -25,14 +25,14 @@ version numbers.*
  * **PlutoCore** - Stable
  * **PlutoFramebuffer** - Stable
  * **PlutoGUI** - Stable, awaiting a rewrite
+ * **PlutoLib** - Mostly stable, the module API still has some quirks
  * **PlutoMesher** - Stable
  * **PlutoShader** - Stable
  * **PlutoSpriteSheet** - Stable, some features are unfinished
- * **PlutoStatic** - Stable, collision API nowhere near completition
+ * **PlutoStatic** - Stable, collision API nowhere near completion
  
 ### Unstable submodules 
  * **PlutoAudio** - Somewhat usable, unfinished
- * **PlutoLib** - Somewhat usable, requires further polish
  
 ### Broken submodules, do NOT use
  * **PlutoCommandParser** - Unfinished, broken, unusable
@@ -43,12 +43,12 @@ version numbers.*
 ### Very high priority
  * Finishing PlutoAudio
     * Depends on the stage system
- * Further engine restructure
+ * The stage system and automated asset loading
  
 ### High priority
+ * Further engine restructure
  * Rewriting PlutoGUI
  * Finishing PlutoCommandParser
- * The stage system and automated asset loading
  
 ### Normal priority
  * The collision system for PlutoStatic
