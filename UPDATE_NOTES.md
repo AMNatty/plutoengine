@@ -18,7 +18,6 @@ can now only be modified only through public setters
   * `[Logger#setup]` can now throw `IOException`
     * `[PlutoCore]` As a result, `[PlutoApplication#run]` can now throw `Exception`
 * `[PlutoLib]` Updated JavaDoc in `ResourceAddress`, `TPL`, `TPNImage`
-* `[PlutoLib]` Added `ResourceAddress#openRead` and `ResourceAddress#openWrite`
 * `[PlutoLib]` Code cleanup in `MiniTime`, `TPL`
   * `[PlutoLib]` Deprecated `TPL#load(String)` in favor of `TPL#load(ResourceAddress)`,
   `TPL#load(File)` and `TPL#load(Path)`
