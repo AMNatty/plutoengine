@@ -16,35 +16,35 @@ import cz.tefek.pluto.io.logger.SmartSeverity;
 
 public class VertexArray
 {
-    protected final List<Integer> usedAttribs;
-    protected final Vector<ArrayBuffer<?>> vertexAttribs;
+    protected final List<Integer> usedAttributes;
+    protected final Vector<ArrayBuffer<?>> vertexAttributes;
 
     protected IndexArrayBuffer indices;
 
     private int vertexCount;
-    protected int glID = 0;
+    protected int glID;
 
     public VertexArray()
     {
-        int maxAttribs = GL33.glGetInteger(GL33.GL_MAX_VERTEX_ATTRIBS);
+        int maxAttributes = GL33.glGetInteger(GL33.GL_MAX_VERTEX_ATTRIBS);
 
-        this.usedAttribs = new ArrayList<>(maxAttribs);
-        this.vertexAttribs = new Vector<ArrayBuffer<?>>(maxAttribs);
-        this.vertexAttribs.setSize(maxAttribs);
+        this.usedAttributes = new ArrayList<>(maxAttributes);
+        this.vertexAttributes = new Vector<>(maxAttributes);
+        this.vertexAttributes.setSize(maxAttributes);
 
         this.glID = GL33.glGenVertexArrays();
 
         Logger.logf(SmartSeverity.ADDED, "Vertex array ID %d created...\n", this.glID);
     }
 
-    public void createArrayAttrib(ArrayBuffer<?> buffer, int attribID)
+    public void createArrayAttribute(ArrayBuffer<?> buffer, int attribID)
     {
         this.bind();
         buffer.bind();
         GL33.glVertexAttribPointer(attribID, buffer.getVertexDimensions(), buffer.getType().getGLID(), false, 0, 0);
 
-        this.vertexAttribs.set(attribID, buffer);
-        this.usedAttribs.add(attribID);
+        this.vertexAttributes.set(attribID, buffer);
+        this.usedAttributes.add(attribID);
 
         if (!this.hasIndices())
         {
@@ -52,9 +52,9 @@ public class VertexArray
         }
     }
 
-    public List<ArrayBuffer<?>> getVertexAttribs()
+    public List<ArrayBuffer<?>> getVertexAttributes()
     {
-        return Collections.unmodifiableList(this.vertexAttribs);
+        return Collections.unmodifiableList(this.vertexAttributes);
     }
 
     public int getVertexCount()
@@ -64,7 +64,7 @@ public class VertexArray
 
     public void enableAllAttributes()
     {
-        this.usedAttribs.stream().forEach(GL33::glEnableVertexAttribArray);
+        this.usedAttributes.forEach(GL33::glEnableVertexAttribArray);
     }
 
     public void bindIndices(IndexArrayBuffer buffer)
@@ -121,9 +121,9 @@ public class VertexArray
 
     public void delete()
     {
-        this.usedAttribs.stream().map(this.vertexAttribs::get).forEach(ArrayBuffer::delete);
-        this.vertexAttribs.clear();
-        this.usedAttribs.clear();
+        this.usedAttributes.stream().map(this.vertexAttributes::get).forEach(ArrayBuffer::delete);
+        this.vertexAttributes.clear();
+        this.usedAttributes.clear();
 
         if (this.indices != null)
         {

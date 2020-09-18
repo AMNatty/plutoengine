@@ -1,5 +1,10 @@
 ## 20.2.0.0-alpha.2
 * `build.gradle` Extracted the version numbers into separate variables
+* `build.gradle` **[experimental]** `gradlew` should now automatically download JDK11 when needed 
+* `build.gradle` Updated the build scripts and added source Maven publication
+* `[PlutoMesher]` Renamed all occurrences of `attrib` to `attribute`
+    * Renamed `VertexArray#createArrayAttrib` to `VertexArray#createArrayAttribute`
+    * Renamed `VertexArray#getVertexAttribs` to `VertexArray#getVertexAttributes`
 * `[PlutoCore]` Made `PlutoApplication.StartupConfig` fields private, options
 can now only be modified only through public setters
 

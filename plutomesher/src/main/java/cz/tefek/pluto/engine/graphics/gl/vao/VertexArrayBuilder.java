@@ -16,14 +16,14 @@ public class VertexArrayBuilder
 
     public VertexArrayBuilder vertices(VecArray<float[]> vertices)
     {
-        this.va.createArrayAttrib(new FloatArrayBuffer(vertices), ReservedAttributes.POSITION);
+        this.va.createArrayAttribute(new FloatArrayBuffer(vertices), ReservedAttributes.POSITION);
 
         return this;
     }
 
     public VertexArrayBuilder uvs(VecArray<float[]> uvs)
     {
-        this.va.createArrayAttrib(new FloatArrayBuffer(uvs), ReservedAttributes.UV);
+        this.va.createArrayAttribute(new FloatArrayBuffer(uvs), ReservedAttributes.UV);
 
         return this;
     }
