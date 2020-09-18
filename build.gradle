@@ -48,10 +48,19 @@ subprojects {
         targetCompatibility = JavaVersion.VERSION_11
     }
 
+
+    task sourcesJar(type: Jar, dependsOn: classes) {
+        from sourceSets.main.allJava
+    }
+
     publishing {
         publications {
             maven(MavenPublication) {
                 from components.java
+
+                artifact sourcesJar {
+                    classifier "sources"
+                }
             }
         }
     }
