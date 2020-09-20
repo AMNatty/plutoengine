@@ -9,7 +9,7 @@ package cz.tefek.pluto;
  */
 public class Pluto
 {
-    public static final boolean DEBUG_MODE = Boolean.valueOf(System.getProperty("cz.tefek.pluto.debug"));
+    public static final boolean DEBUG_MODE = Boolean.parseBoolean(System.getProperty("cz.tefek.pluto.debug"));
 
     // TODO: Automate setting the version numbers with gradle
 
