@@ -14,7 +14,7 @@ import cz.tefek.pluto.command.registry.CommandRegistry;
 
 public class CommandParser
 {
-    private String text;
+    private final String text;
     private Set<OfInt> prefixes;
     private EnumParserState state;
 
@@ -196,7 +196,11 @@ public class CommandParser
             this.state = EnumParserState.READING_PREFIX;
         }
 
-        this.text.codePoints().takeWhile(this::readCodepoint);
+        var cps = this.text.codePoints();
+
+        for (var cpIt = cps.iterator(); cpIt.hasNext(); )
+            if (!this.readCodepoint(cpIt.next()))
+                break;
 
         // Update the state for EOF        
         switch (this.state)

@@ -4,7 +4,7 @@ import cz.tefek.pluto.command.CommandBase;
 
 public class CommandContextBuilder
 {
-    private CommandContext ctx;
+    private final CommandContext ctx;
 
     public CommandContextBuilder()
     {
