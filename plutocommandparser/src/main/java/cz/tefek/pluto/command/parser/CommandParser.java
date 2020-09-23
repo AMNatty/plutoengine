@@ -131,9 +131,6 @@ public class CommandParser
                 break;
 
             case END:
-                this.state = EnumParserState.UNEXPECTED_STATE_FALLBACK;
-                return false;
-
             default:
                 this.state = EnumParserState.UNEXPECTED_STATE_FALLBACK;
                 return false;
@@ -155,6 +152,8 @@ public class CommandParser
             this.state = EnumParserState.END_NO_COMMAND;
             return false;
         }
+
+        this.ctx.command(this.command);
 
         return true;
     }

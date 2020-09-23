@@ -91,6 +91,6 @@ public class CommandContextBuilder
         UNRESOLVED_PREFIX,
         UNRESOLVED_COMMAND_NAME,
         UNRESOLVED_PARAMETERS,
-        UNRESOLVED_UNEXPECTED_STATE;
+        UNRESOLVED_UNEXPECTED_STATE
     }
 }
