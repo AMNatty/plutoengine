@@ -29,4 +29,10 @@
     * The stage manager should be relatively low-overhead and allow multiple
     instances
     * Allow stages to be inherited from, creating a stack-like structure
+* The initial release of `[PlutoCommandParser]`
         
+
+## Features targeted for 20.2.0.0-alpha.3
+* `[PlutoLib]` Completely redo the ModLoader system
+    * The current implementation is a result of 5 years of feature creep 
+    * Large scale API changes

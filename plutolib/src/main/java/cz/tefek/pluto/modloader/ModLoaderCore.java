@@ -53,12 +53,9 @@ public class ModLoaderCore
 
         if (registeredMod.isPresent())
         {
-            if (modDataRoot != null)
-            {
-                var mod = registeredMod.get();
+            var mod = registeredMod.get();
 
-                mod.setRootDataFolder(modDataRoot);
-            }
+            mod.setRootDataFolder(modDataRoot);
 
             return;
         }
