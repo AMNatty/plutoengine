@@ -2,7 +2,7 @@ package cz.tefek.pluto.modloader.event;
 
 import java.util.List;
 
-import cz.tefek.pluto.eventsystem.EventData;
+import cz.tefek.pluto.event.EventData;
 import cz.tefek.pluto.modloader.Mod;
 import cz.tefek.pluto.modloader.ModEntry;
 

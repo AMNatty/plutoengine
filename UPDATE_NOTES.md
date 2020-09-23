@@ -2,6 +2,12 @@
 * `build.gradle` Extracted the version numbers into separate variables
 * `build.gradle` **[experimental]** `gradlew` should now automatically download JDK11 when needed 
 * `build.gradle` Updated the build scripts and added source Maven publication
+* `[PlutoLib]` Renamed the `cz.tefek.pluto.eventsystem` package to `cz.tefek.pluto.event`
+    * Moved all subpackages
+    * Updated all references
+* `[PlutoLib]` Minor code cleanup in `cz.tefek.pluto.modloader.event`
+* `[Pluto]` Moved `TPL` from `cz.tefek.pluto.tpl` to `cz.tefek.pluto.io.tpl`
+    * Updated all references
 * `[PlutoMesher]` Renamed all occurrences of `attrib` to `attribute`
     * Renamed `VertexArray#createArrayAttrib` to `VertexArray#createArrayAttribute`
     * Renamed `VertexArray#getVertexAttribs` to `VertexArray#getVertexAttributes`

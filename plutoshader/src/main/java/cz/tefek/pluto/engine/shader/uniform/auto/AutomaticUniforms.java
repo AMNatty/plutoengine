@@ -2,8 +2,8 @@ package cz.tefek.pluto.engine.shader.uniform.auto;
 
 import org.joml.Matrix4fc;
 
-import cz.tefek.pluto.eventsystem.lambda.LambdaEventFactory;
-import cz.tefek.pluto.eventsystem.lambda.LambdaEventFactory.LambdaEvent;
+import cz.tefek.pluto.event.lambda.LambdaEventFactory;
+import cz.tefek.pluto.event.lambda.LambdaEventFactory.LambdaEvent;
 
 public class AutomaticUniforms
 {

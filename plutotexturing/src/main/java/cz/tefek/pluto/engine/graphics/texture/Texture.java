@@ -10,8 +10,8 @@ import java.util.Arrays;
 import cz.tefek.pluto.io.asl.resource.ResourceAddress;
 import cz.tefek.pluto.io.logger.Logger;
 import cz.tefek.pluto.io.logger.SmartSeverity;
-import cz.tefek.pluto.tpl.TPL;
-import cz.tefek.pluto.tpl.TPNImage;
+import cz.tefek.pluto.io.tpl.TPL;
+import cz.tefek.pluto.io.tpl.TPNImage;
 
 public abstract class Texture
 {

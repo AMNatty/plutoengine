@@ -1,4 +1,4 @@
-package cz.tefek.pluto.eventsystem;
+package cz.tefek.pluto.event;
 
 /**
  * @author 493msi

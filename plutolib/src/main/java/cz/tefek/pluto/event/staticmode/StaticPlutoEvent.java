@@ -1,4 +1,4 @@
-package cz.tefek.pluto.eventsystem.staticmode;
+package cz.tefek.pluto.event.staticmode;
 
 import static java.lang.annotation.ElementType.ANNOTATION_TYPE;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
@@ -6,7 +6,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 
-import cz.tefek.pluto.eventsystem.EventData;
+import cz.tefek.pluto.event.EventData;
 
 /**
  * @author 493msi

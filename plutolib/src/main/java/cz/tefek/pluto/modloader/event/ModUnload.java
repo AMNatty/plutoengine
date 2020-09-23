@@ -6,7 +6,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 
-import cz.tefek.pluto.eventsystem.staticmode.StaticPlutoEvent;
+import cz.tefek.pluto.event.staticmode.StaticPlutoEvent;
 
 @Retention(RUNTIME)
 @Target(METHOD)

@@ -1,4 +1,4 @@
-package cz.tefek.pluto.tpl;
+package cz.tefek.pluto.io.tpl;
 
 import java.nio.ByteBuffer;
 

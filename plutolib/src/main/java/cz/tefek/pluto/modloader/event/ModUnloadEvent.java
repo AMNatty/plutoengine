@@ -1,6 +1,6 @@
 package cz.tefek.pluto.modloader.event;
 
-import cz.tefek.pluto.eventsystem.EventData;
+import cz.tefek.pluto.event.EventData;
 import cz.tefek.pluto.modloader.ModEntry;
 
 /**

@@ -1,4 +1,4 @@
-package cz.tefek.pluto.eventsystem.lambda;
+package cz.tefek.pluto.event.lambda;
 
 import java.util.ArrayList;
 import java.util.List;

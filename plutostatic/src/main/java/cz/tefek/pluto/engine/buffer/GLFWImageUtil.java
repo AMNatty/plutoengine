@@ -5,7 +5,7 @@ import org.lwjgl.glfw.GLFWImage;
 
 import java.nio.file.Path;
 
-import cz.tefek.pluto.tpl.TPL;
+import cz.tefek.pluto.io.tpl.TPL;
 
 /**
  * A utility class to load image files for use in GLFW.

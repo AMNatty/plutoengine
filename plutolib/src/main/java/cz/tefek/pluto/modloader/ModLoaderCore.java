@@ -6,7 +6,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 
-import cz.tefek.pluto.eventsystem.staticmode.StaticPlutoEventManager;
+import cz.tefek.pluto.event.staticmode.StaticPlutoEventManager;
 import cz.tefek.pluto.io.asl.resource.ResourceHelper;
 import cz.tefek.pluto.io.logger.Logger;
 import cz.tefek.pluto.io.logger.SmartSeverity;

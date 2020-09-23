@@ -1,4 +1,4 @@
-package cz.tefek.pluto.eventsystem.staticmode;
+package cz.tefek.pluto.event.staticmode;
 
 import java.util.*;
 import java.util.Map.Entry;
@@ -7,7 +7,7 @@ import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 
-import cz.tefek.pluto.eventsystem.EventData;
+import cz.tefek.pluto.event.EventData;
 import cz.tefek.pluto.io.logger.Logger;
 import cz.tefek.pluto.io.logger.SmartSeverity;
 
