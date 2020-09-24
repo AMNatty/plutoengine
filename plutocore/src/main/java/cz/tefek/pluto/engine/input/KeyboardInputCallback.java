@@ -1,16 +1,16 @@
 package cz.tefek.pluto.engine.input;
 
-import static org.lwjgl.glfw.GLFW.GLFW_PRESS;
-import static org.lwjgl.glfw.GLFW.GLFW_RELEASE;
+import org.lwjgl.glfw.GLFWKeyCallback;
 
 import java.util.HashSet;
 import java.util.Set;
 
-import org.lwjgl.glfw.GLFWKeyCallback;
+import static org.lwjgl.glfw.GLFW.GLFW_PRESS;
+import static org.lwjgl.glfw.GLFW.GLFW_RELEASE;
 
 public class KeyboardInputCallback extends GLFWKeyCallback
 {
-    private Set<Integer> keyPressed = new HashSet<>();
+    private final Set<Integer> keyPressed = new HashSet<>();
     private Set<Integer> keyDown = new HashSet<>();
     private Set<Integer> keyReleased = new HashSet<>();
 

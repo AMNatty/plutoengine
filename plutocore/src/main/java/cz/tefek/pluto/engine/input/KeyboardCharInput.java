@@ -4,7 +4,7 @@ import org.lwjgl.glfw.GLFWCharCallback;
 
 public class KeyboardCharInput extends GLFWCharCallback
 {
-    private StringBuilder typedText = new StringBuilder();
+    private final StringBuilder typedText = new StringBuilder();
 
     @Override
     public void invoke(long window, int codepoint)

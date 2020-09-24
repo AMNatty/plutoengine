@@ -29,18 +29,8 @@ public class ScrollInputCallback extends GLFWScrollCallback
         return yScroll;
     }
 
-    public void setYScroll(double yScroll)
-    {
-        this.yScroll = yScroll;
-    }
-
     public double getXScroll()
     {
         return xScroll;
-    }
-
-    public void setXScroll(double xScroll)
-    {
-        this.xScroll = xScroll;
     }
 }

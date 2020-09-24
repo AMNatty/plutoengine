@@ -3,6 +3,8 @@ package cz.tefek.pluto.engine.input;
 import org.lwjgl.glfw.GLFW;
 import org.lwjgl.glfw.GLFWMouseButtonCallback;
 
+import java.util.Arrays;
+
 public class MouseButtonCallback extends GLFWMouseButtonCallback
 {
     public boolean[] buttonClicked = new boolean[32];
@@ -19,15 +21,8 @@ public class MouseButtonCallback extends GLFWMouseButtonCallback
 
     public void reset()
     {
-        for (int i = 0; i < this.buttonClicked.length; i++)
-        {
-            this.buttonClicked[i] = false;
-        }
-
-        for (int i = 0; i < this.buttonClicked.length; i++)
-        {
-            this.buttonReleased[i] = false;
-        }
+        Arrays.fill(this.buttonClicked, false);
+        Arrays.fill(this.buttonReleased, false);
     }
 
 }

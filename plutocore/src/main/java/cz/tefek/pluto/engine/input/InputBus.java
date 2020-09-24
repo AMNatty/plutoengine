@@ -2,156 +2,157 @@ package cz.tefek.pluto.engine.input;
 
 import org.lwjgl.glfw.GLFW;
 
-import javax.annotation.concurrent.ThreadSafe;
-
+import cz.tefek.pluto.annotation.ThreadSensitive;
 import cz.tefek.pluto.engine.display.Display;
 
-@ThreadSafe
+@ThreadSensitive(localContexts = true)
 public class InputBus
 {
-    private static ThreadLocal<KeyboardInputCallback> keyboard = new ThreadLocal<>();
-    private static ThreadLocal<MouseButtonCallback> mouseButton = new ThreadLocal<>();
-    private static ThreadLocal<CursorPositionCallback> cursorPosition = new ThreadLocal<>();
-    private static ThreadLocal<ScrollInputCallback> scroll = new ThreadLocal<>();
-    private static ThreadLocal<KeyboardCharInput> charInput = new ThreadLocal<>();
+    private static final ThreadLocal<InputBus> INSTANCE = new ThreadLocal<>();
+
+    private final KeyboardInputCallback keyboard = new KeyboardInputCallback();
+    private final MouseButtonCallback mouseButton = new MouseButtonCallback();
+    private final CursorPositionCallback cursorPosition = new CursorPositionCallback();
+    private final ScrollInputCallback scroll = new ScrollInputCallback();
+    private final KeyboardCharInput charInput = new KeyboardCharInput();
+
+    private InputBus()
+    {
+    }
 
     public static void init(Display display)
     {
-        keyboard.set(new KeyboardInputCallback());
-        GLFW.glfwSetKeyCallback(display.getWindowPointer(), keyboard.get());
+        var instance = new InputBus();
 
-        mouseButton.set(new MouseButtonCallback());
-        GLFW.glfwSetMouseButtonCallback(display.getWindowPointer(), mouseButton.get());
-
-        cursorPosition.set(new CursorPositionCallback());
-        GLFW.glfwSetCursorPosCallback(display.getWindowPointer(), cursorPosition.get());
-
-        scroll.set(new ScrollInputCallback());
-        GLFW.glfwSetScrollCallback(display.getWindowPointer(), scroll.get());
-
-        charInput.set(new KeyboardCharInput());
-        GLFW.glfwSetCharCallback(display.getWindowPointer(), charInput.get());
-
+        GLFW.glfwSetKeyCallback(display.getWindowPointer(), instance.keyboard);
+        GLFW.glfwSetMouseButtonCallback(display.getWindowPointer(), instance.mouseButton);
+        GLFW.glfwSetCursorPosCallback(display.getWindowPointer(), instance.cursorPosition);
+        GLFW.glfwSetScrollCallback(display.getWindowPointer(), instance.scroll);
+        GLFW.glfwSetCharCallback(display.getWindowPointer(), instance.charInput);
     }
 
     public static void destroy()
     {
-        scroll.get().free();
-        scroll.remove();
+        var instance = INSTANCE.get();
 
-        mouseButton.get().free();
-        mouseButton.remove();
-
-        keyboard.get().free();
-        keyboard.remove();
-
-        cursorPosition.get().free();
-        cursorPosition.remove();
-
-        charInput.get().free();
-        charInput.remove();
+        instance.scroll.free();
+        instance.mouseButton.free();
+        instance.keyboard.free();
+        instance.cursorPosition.free();
+        instance.charInput.free();
     }
 
     public static KeyboardInputCallback keyboard()
     {
-        return keyboard.get();
+        return INSTANCE.get().keyboard;
     }
 
     public static MouseButtonCallback mouseButtons()
     {
-        return mouseButton.get();
+        return INSTANCE.get().mouseButton;
     }
 
     public static ScrollInputCallback scroll()
     {
-        return scroll.get();
+        return INSTANCE.get().scroll;
     }
 
     public static CursorPositionCallback cursorPosition()
     {
-        return cursorPosition.get();
+        return INSTANCE.get().cursorPosition;
+    }
+
+    public static KeyboardCharInput charInput()
+    {
+        return INSTANCE.get().charInput;
     }
 
     public static void resetStates()
     {
-        keyboard.get().resetPressed();
-        mouseButton.get().reset();
-        scroll.get().reset();
-        cursorPosition.get().reset();
-        charInput.get().reset();
+        var instance = INSTANCE.get();
+
+        instance.keyboard.resetPressed();
+        instance.mouseButton.reset();
+        instance.scroll.reset();
+        instance.cursorPosition.reset();
+        instance.charInput.reset();
     }
 
+    @ThreadSensitive(localContexts = true)
     public static class Mouse
     {
         public static boolean clicked(int button)
         {
-            var mb = mouseButton.get();
-            return mb.buttonClicked[button];
+            return INSTANCE.get().mouseButton.buttonClicked[button];
         }
 
         public static boolean released(int button)
         {
-            var mb = mouseButton.get();
-            return mb.buttonReleased[button];
+            return INSTANCE.get().mouseButton.buttonReleased[button];
         }
 
         public static boolean isButtonDown(int button)
         {
-            var mb = mouseButton.get();
-            return mb.buttonDown[button];
+            return INSTANCE.get().mouseButton.buttonDown[button];
         }
 
         public static double getX()
         {
-            return cursorPosition.get().getX();
+            return INSTANCE.get().cursorPosition.getX();
         }
 
         public static double getY()
         {
-            return cursorPosition.get().getY();
+            return INSTANCE.get().cursorPosition.getY();
+        }
+
+        public static boolean isInside(int x1, int y1, int x2, int y2)
+        {
+            return INSTANCE.get().cursorPosition.isInside(x1, y1, x2, y2);
         }
 
         public static double getDX()
         {
-            return cursorPosition.get().getDeltaX();
+            return INSTANCE.get().cursorPosition.getDeltaX();
         }
 
         public static double getDY()
         {
-            return cursorPosition.get().getDeltaY();
+            return INSTANCE.get().cursorPosition.getDeltaY();
         }
 
         public static double getScrollX()
         {
-            return scroll.get().getXScroll();
+            return INSTANCE.get().scroll.getXScroll();
         }
 
         public static double getScrollY()
         {
-            return scroll.get().getYScroll();
+            return INSTANCE.get().scroll.getYScroll();
         }
     }
 
+    @ThreadSensitive(localContexts = true)
     public static class Keyboard
     {
         public static boolean pressed(int key)
         {
-            return keyboard.get().hasBeenPressed(key);
+            return INSTANCE.get().keyboard.hasBeenPressed(key);
         }
 
         public static boolean released(int key)
         {
-            return keyboard.get().hasBeenReleased(key);
+            return INSTANCE.get().keyboard.hasBeenReleased(key);
         }
 
         public static boolean isKeyDown(int key)
         {
-            return keyboard.get().isKeyDown(key);
+            return INSTANCE.get().keyboard.isKeyDown(key);
         }
 
         public static String getTypedText()
         {
-            return charInput.get().getTypedText();
+            return INSTANCE.get().charInput.getTypedText();
         }
     }
 }
