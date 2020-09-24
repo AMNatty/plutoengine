@@ -7,6 +7,7 @@ import org.lwjgl.opengl.GL33;
 import org.lwjgl.opengl.GLDebugMessageARBCallback;
 import org.lwjgl.system.MemoryUtil;
 
+import cz.tefek.pluto.annotation.ThreadSensitive;
 import cz.tefek.pluto.engine.gl.GLDebugInfo;
 import cz.tefek.pluto.io.logger.Logger;
 import cz.tefek.pluto.io.logger.SmartSeverity;
@@ -17,6 +18,7 @@ import cz.tefek.pluto.io.logger.SmartSeverity;
  * @author 493msi
  * @since 0.2
  */
+@ThreadSensitive
 public class Display
 {
     int width;
@@ -30,7 +32,7 @@ public class Display
 
     private long windowPointer;
 
-    private GLFWErrorCallback glfwErrorCallback;
+    private final GLFWErrorCallback glfwErrorCallback;
 
     private GLFWWindowSizeCallback resizeCallback;
 
@@ -51,10 +53,17 @@ public class Display
         if (this.windowPointer == MemoryUtil.NULL)
         {
             this.destroy();
-            throw new IllegalStateException("Failed to create the GLFW window...");
+            throw new IllegalStateException("Failed to create a window...");
         }
 
         GLFWVidMode vidmode = GLFW.glfwGetVideoMode(GLFW.glfwGetPrimaryMonitor());
+
+        if (vidmode == null)
+        {
+            this.destroy();
+            throw new IllegalStateException("Failed to detect the primary monitor.");
+        }
+
         GLFW.glfwSetWindowPos(this.windowPointer, (vidmode.width() - this.width) / 2, (vidmode.height() - this.height) / 2);
 
         GLFW.glfwMakeContextCurrent(this.windowPointer);
@@ -194,10 +203,10 @@ public class Display
         {
             this.glDebugCallback = new GLDebugMessageARBCallback() {
                 @Override
-                public void invoke(int source, int type, int id, int severity, int length, long message, long userParam)
+                public void invoke(int source, int type, int id, int severity, int length, long messagePtr, long userParam)
                 {
-                    var mes = GLDebugMessageARBCallback.getMessage(length, message);
-                    Logger.log(SmartSeverity.WARNING, mes);
+                    var message = GLDebugMessageARBCallback.getMessage(length, messagePtr);
+                    Logger.log(SmartSeverity.WARNING, message);
                 }
             };
 

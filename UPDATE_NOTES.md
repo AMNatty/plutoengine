@@ -16,6 +16,7 @@ can now only be modified only through public setters
 * `[PlutoLib]` Added the `ThreadSensitive` annotation
 * `[PlutoCore]` Refactored `InputBus` and added several convenience methods
     * `[PlutoCore]` Refactored input callbacks
+* `[PlutoStatic]` Slight cleanup in the `Display` and `DisplayBuilder` classes
 
 ## 20.2.0.0-alpha.1
 * `[PlutoLib#cz.tefek.pluto.io.logger]` Refactored the Logger subsystem

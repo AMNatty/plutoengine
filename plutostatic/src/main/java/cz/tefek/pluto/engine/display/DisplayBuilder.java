@@ -4,7 +4,7 @@ import org.lwjgl.glfw.GLFW;
 
 public class DisplayBuilder
 {
-    private Display display;
+    private final Display display;
 
     public DisplayBuilder()
     {
