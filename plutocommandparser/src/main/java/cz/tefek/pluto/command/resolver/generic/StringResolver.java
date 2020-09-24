@@ -1,8 +1,4 @@
-package cz.tefek.pluto.command.resolver.primitive;
-
-import java.util.function.Function;
-
-import cz.tefek.pluto.command.resolver.GenericResolver;
+package cz.tefek.pluto.command.resolver.generic;
 
 public class StringResolver extends GenericResolver<String>
 {

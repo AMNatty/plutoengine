@@ -1,6 +1,8 @@
-package cz.tefek.pluto.command.resolver;
+package cz.tefek.pluto.command.resolver.generic;
 
 import java.util.function.Function;
+
+import cz.tefek.pluto.command.resolver.AbstractResolver;
 
 public abstract class GenericResolver<R> extends AbstractResolver
 {
