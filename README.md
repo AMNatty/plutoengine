@@ -41,19 +41,22 @@ version numbers.*
 ## Current priorities
 
 ### Very high priority
- * Finishing PlutoAudio
+ * Finish PlutoAudio
     * Depends on the stage system
  * The stage system and automated asset loading
+ * Rewrite the ModLoader
+ * Finish PlutoCommandParser
  
 ### High priority
- * Further engine restructure
- * Rewriting PlutoGUI
- * Finishing PlutoCommandParser
+ * Streamline PlutoLib, remove bad APIs and improve code quality
  
 ### Normal priority
+ * Rewrite PlutoGUI
  * The collision system for PlutoStatic
  * Improve image loading capabilities, possibly rewrite PlutoLib#TPL
  
 ### Low priority
- * Polishing PlutoLib
+ * Allow multiple running instances of Pluto
+    * Alternatively, if this deems too difficult to implement,
+    prohibit the creation of more than instance per VM to avoid issues
  * A networking API
