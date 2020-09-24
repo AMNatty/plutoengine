@@ -19,5 +19,5 @@ public abstract class GenericResolver<R> extends AbstractResolver
     }
 
     @Override
-    public abstract Class<R> getOutputType();
+    public abstract Class<? super R> getOutputType();
 }
