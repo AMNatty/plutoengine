@@ -21,7 +21,7 @@ project.ext.versionPatch = 0
 
 project.ext.isPrerelease = true
 project.ext.prereleaseName = "alpha"
-project.ext.prerealeaseUpdate = 2
+project.ext.prerealeaseUpdate = 3
 
 subprojects {
     apply plugin: 'java'
