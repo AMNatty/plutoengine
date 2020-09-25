@@ -4,7 +4,7 @@
     * The current implementation is a result of 5 years of feature creep 
     * Large scale API changes, however the general idea should stay the same
     * Rethink the class loader system.
-
+* `[PlutoLib]` Redo the resource system
 
 ## Features targeted for 20.2.0.0-alpha.3
 * The stage subsystem
