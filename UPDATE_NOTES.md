@@ -4,16 +4,15 @@
 * `build.gradle` Updated the build scripts and added source Maven publication
 * `[PlutoLib]` Renamed the `cz.tefek.pluto.eventsystem` package to `cz.tefek.pluto.event`
     * Moved all subpackages
-    * Updated all references
 * `[PlutoLib]` Minor code cleanup in `cz.tefek.pluto.modloader.event`
 * `[Pluto]` Moved `TPL` from `cz.tefek.pluto.tpl` to `cz.tefek.pluto.io.tpl`
-    * Updated all references
 * `[PlutoMesher]` Renamed all occurrences of `attrib` to `attribute`
     * Renamed `VertexArray#createArrayAttrib` to `VertexArray#createArrayAttribute`
     * Renamed `VertexArray#getVertexAttribs` to `VertexArray#getVertexAttributes`
 * `[PlutoCore]` Made `PlutoApplication.StartupConfig` fields private, options
 can now only be modified only through public setters
 * `[PlutoLib]` Added the `ThreadSensitive` annotation
+* `[PlutoLib]` Renamed `MiniTimeCouldNotBeParsedException` to `MiniTimeParseException`
 * `[PlutoCore]` Refactored `InputBus` and added several convenience methods
     * `[PlutoCore]` Refactored input callbacks
 * `[PlutoStatic]` Slight cleanup in the `Display` and `DisplayBuilder` classes

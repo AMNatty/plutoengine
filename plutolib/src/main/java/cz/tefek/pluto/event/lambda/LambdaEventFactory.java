@@ -25,7 +25,7 @@ public class LambdaEventFactory
      */
     public static class LambdaEvent<T>
     {
-        private List<Consumer<T>> consumers;
+        private final List<Consumer<T>> consumers;
 
         private LambdaEvent()
         {

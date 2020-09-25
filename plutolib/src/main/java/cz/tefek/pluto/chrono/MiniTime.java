@@ -43,14 +43,14 @@ import java.util.concurrent.TimeUnit;
  */
 public class MiniTime
 {
-    private static class MiniTimeCouldNotBeParsedException extends RuntimeException
+    private static class MiniTimeParseException extends RuntimeException
     {
         /**
          * 
          */
         private static final long serialVersionUID = -5403949842120041373L;
 
-        public MiniTimeCouldNotBeParsedException()
+        public MiniTimeParseException()
         {
             super("Time period could not be parsed. Correct format: \\_w\\_d\\_h\\_m\\_s **without spaces** between the units. You can skip a time unit. Example: 1h15m");
         }
@@ -84,7 +84,7 @@ public class MiniTime
         // Nothing to parse
         if (input.isEmpty())
         {
-            throw new MiniTimeCouldNotBeParsedException();
+            throw new MiniTimeParseException();
         }
 
         if (input.equalsIgnoreCase("forever"))
@@ -95,25 +95,25 @@ public class MiniTime
         // Follow the scheme
         if (!input.matches("[0-9]*[wW]?[0-9]*[dD]?[0-9]*[hH]?[0-9]*[mM]?[0-9]*[sS]?"))
         {
-            throw new MiniTimeCouldNotBeParsedException();
+            throw new MiniTimeParseException();
         }
 
         // 4584 of what? Potatoes?
         if (input.matches("[0-9]+"))
         {
-            throw new MiniTimeCouldNotBeParsedException();
+            throw new MiniTimeParseException();
         }
 
         // Where are the numbers?
         if (input.matches("[a-zA-Z]+"))
         {
-            throw new MiniTimeCouldNotBeParsedException();
+            throw new MiniTimeParseException();
         }
 
         // It shouldn't start with a letter
         if (input.matches("^[a-zA-Z].+"))
         {
-            throw new MiniTimeCouldNotBeParsedException();
+            throw new MiniTimeParseException();
         }
 
         var nrs = input.split("[a-zA-Z]");
@@ -121,7 +121,7 @@ public class MiniTime
 
         if (nrs.length != letters.length)
         {
-            throw new MiniTimeCouldNotBeParsedException();
+            throw new MiniTimeParseException();
         }
 
         long time = 0;
@@ -138,7 +138,7 @@ public class MiniTime
             }
             catch (NumberFormatException nfe)
             {
-                throw new MiniTimeCouldNotBeParsedException();
+                throw new MiniTimeParseException();
             }
 
             var allow = 0L;
@@ -184,7 +184,7 @@ public class MiniTime
 
             if (number > allow)
             {
-                throw new MiniTimeCouldNotBeParsedException();
+                throw new MiniTimeParseException();
             }
 
             time += multiplier * number;
