@@ -60,7 +60,7 @@ public class Pluto
      *
      * @since pre-alpha
      * */
-    public static final int PRERELEASE_PATCH = 2;
+    public static final int PRERELEASE_PATCH = 3;
 
     /**
      * The combined version string.
