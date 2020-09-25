@@ -70,6 +70,8 @@ public class MiniTime
      * 
      * @param input The source MiniTime non-null string
      * @return The resulting time span in milliseconds
+     *
+     * @throws MiniTimeParseException on malformed inputs
      * 
      * @author 493msi
      * @since 0.2
@@ -203,7 +205,7 @@ public class MiniTime
      * @param after  The first time point in Unix-time milliseconds
      *
      * @return The resulting MiniTime string
-     * 
+     *
      * @throws IllegalArgumentException on a negative time duration
      * 
      * @author 493msi
