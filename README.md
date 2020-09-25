@@ -41,14 +41,14 @@ version numbers.*
 ## Current priorities
 
 ### Very high priority
+ * Rewrite the ModLoader
+ * Finish PlutoCommandParser
+ * Streamline PlutoLib, remove bad APIs and improve code quality
+ 
+### High priority
  * Finish PlutoAudio
     * Depends on the stage system
  * The stage system and automated asset loading
- * Rewrite the ModLoader
- * Finish PlutoCommandParser
- 
-### High priority
- * Streamline PlutoLib, remove bad APIs and improve code quality
  
 ### Normal priority
  * Rewrite PlutoGUI
