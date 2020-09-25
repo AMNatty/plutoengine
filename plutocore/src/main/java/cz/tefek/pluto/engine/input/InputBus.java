@@ -29,6 +29,8 @@ public class InputBus
         GLFW.glfwSetCursorPosCallback(display.getWindowPointer(), instance.cursorPosition);
         GLFW.glfwSetScrollCallback(display.getWindowPointer(), instance.scroll);
         GLFW.glfwSetCharCallback(display.getWindowPointer(), instance.charInput);
+
+        INSTANCE.set(instance);
     }
 
     public static void destroy()
