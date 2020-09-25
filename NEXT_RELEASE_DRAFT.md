@@ -1,4 +1,4 @@
-## Features targeted for 20.2.0.0-alpha.2
+## Features targeted for 20.2.0.0-alpha.3
 * The initial minimal release of `[PlutoCommandParser]`
 * `[PlutoLib]` Completely redo the ModLoader system
     * The current implementation is a result of 5 years of feature creep 
@@ -6,7 +6,7 @@
     * Rethink the class loader system.
 * `[PlutoLib]` Redo the resource system
 
-## Features targeted for 20.2.0.0-alpha.3
+## Features targeted for 20.2.0.0-alpha.4
 * The stage subsystem
     * A "stage", in this context, is a set of assets bound together
     by programming logic, not necessarily a game level.
