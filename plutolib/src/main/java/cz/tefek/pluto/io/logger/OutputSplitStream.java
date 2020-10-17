@@ -1,5 +1,6 @@
 package cz.tefek.pluto.io.logger;
 
+import javax.annotation.Nonnull;
 import java.io.IOException;
 import java.io.OutputStream;
 
@@ -10,7 +11,7 @@ import java.io.OutputStream;
  * @author 493msi
  *
  */
-class OutputSplitStream extends OutputStream
+public class OutputSplitStream extends OutputStream
 {
     private final OutputStream outputStreamA;
     private final boolean shouldAClose;
@@ -36,14 +37,14 @@ class OutputSplitStream extends OutputStream
     }
 
     @Override
-    public void write(byte[] b) throws IOException
+    public void write(@Nonnull byte[] b) throws IOException
     {
         this.outputStreamA.write(b);
         this.outputStreamB.write(b);
     }
 
     @Override
-    public void write(byte[] b, int off, int len) throws IOException
+    public void write(@Nonnull byte[] b, int off, int len) throws IOException
     {
         this.outputStreamA.write(b, off, len);
         this.outputStreamB.write(b, off, len);

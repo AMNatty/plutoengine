@@ -23,12 +23,13 @@ public class InputBus
     public static void init(Display display)
     {
         var instance = new InputBus();
+        var windowPointer = display.getWindowPointer();
 
-        GLFW.glfwSetKeyCallback(display.getWindowPointer(), instance.keyboard);
-        GLFW.glfwSetMouseButtonCallback(display.getWindowPointer(), instance.mouseButton);
-        GLFW.glfwSetCursorPosCallback(display.getWindowPointer(), instance.cursorPosition);
-        GLFW.glfwSetScrollCallback(display.getWindowPointer(), instance.scroll);
-        GLFW.glfwSetCharCallback(display.getWindowPointer(), instance.charInput);
+        GLFW.glfwSetKeyCallback(windowPointer, instance.keyboard);
+        GLFW.glfwSetMouseButtonCallback(windowPointer, instance.mouseButton);
+        GLFW.glfwSetCursorPosCallback(windowPointer, instance.cursorPosition);
+        GLFW.glfwSetScrollCallback(windowPointer, instance.scroll);
+        GLFW.glfwSetCharCallback(windowPointer, instance.charInput);
 
         INSTANCE.set(instance);
     }

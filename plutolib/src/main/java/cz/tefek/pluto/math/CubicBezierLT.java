@@ -42,7 +42,7 @@ public class CubicBezierLT
     }
 
     /**
-     * Retrives the approximate value for the given x and the supplied
+     * Retrieves the approximate value for the given x and the supplied
      * parameters in the constructor.
      * 
      * @param xIn the input X position
