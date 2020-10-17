@@ -1,10 +1,8 @@
 package cz.tefek.pluto.io.asl.resource.raid;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import java.util.*;
 
 /**
  * Runtime Assigned ID (or Resource Address ID)
@@ -13,9 +11,9 @@ public class RAID<E extends IIdentifiable> implements Iterable<E>
 {
     private static final int INITIAL_SIZE = 512;
 
-    private List<E> raid;
+    private final List<E> raid;
 
-    private Map<String, Integer> reverseRaid;
+    private final Map<String, Integer> reverseRaid;
 
     public RAID()
     {
@@ -38,6 +36,7 @@ public class RAID<E extends IIdentifiable> implements Iterable<E>
         item.onRegister(pos);
     }
 
+    @Nullable
     public E getByIntID(int id)
     {
         if (id < 0 || id >= this.raid.size())
@@ -48,11 +47,16 @@ public class RAID<E extends IIdentifiable> implements Iterable<E>
         return this.raid.get(id);
     }
 
-    public int getIDOf(E item)
+    @Nonnull
+    public OptionalInt getIDOf(E item)
     {
-        return this.reverseRaid.get(item.getStringID());
+        return reverseRaid.containsKey(item.getStringID()) ?
+            OptionalInt.of(reverseRaid.get(item.getStringID()))
+                :
+            OptionalInt.empty();
     }
 
+    @Nonnull
     @Override
     public Iterator<E> iterator()
     {
