@@ -10,7 +10,7 @@ package cz.tefek.pluto.math;
 public class CubicBezier
 {
     private static final int iterations = 16;
-    private double a, b, c, d;
+    private final double a, b, c, d;
 
     /**
      * Creates a new {@code CubicBezier} from the given parameters.
@@ -62,23 +62,22 @@ public class CubicBezier
         double t = 0.5;
 
         double x;
-        double y = 3 * (1 - t) * (1 - t) * t * this.b + 3 * (1 - t) * t * t * this.d + t * t * t;
+
+        // Resulting Y value
+        double result = 3 * (1 - t) * (1 - t) * t * this.b + 3 * (1 - t) * t * t * this.d + t * t * t;
 
         double delta = 0.25;
-        boolean uh;
 
         for (int i = 0; i < iterations; i++)
         {
             x = 3 * (1 - t) * (1 - t) * t * this.a + 3 * (1 - t) * t * t * this.c + t * t * t;
-            y = 3 * (1 - t) * (1 - t) * t * this.b + 3 * (1 - t) * t * t * this.d + t * t * t;
+            result = 3 * (1 - t) * (1 - t) * t * this.b + 3 * (1 - t) * t * t * this.d + t * t * t;
 
-            uh = x > xIn;
-
-            t += uh ? -delta : delta;
+            t += x > xIn ? -delta : delta;
 
             delta /= 2;
         }
 
-        return y;
+        return result;
     }
 }
