@@ -5,8 +5,11 @@ description = ""
 dependencies {
     api platform("org.lwjgl:lwjgl-bom:$lwjglVersion")
 
-    api "commons-io:commons-io:2.6"
+    api "com.google.code.findbugs:jsr305:3.0.2"
     api "com.google.code.gson:gson:2.8.5"
     api "com.google.guava:guava:28.0-jre"
-    api "org.apache.commons:commons-lang3:3.9"
+
+    api "org.joml:joml:${jomlVersion}"
+    api "commons-io:commons-io:2.6"
+    api "org.apache.commons:commons-lang3:3.11"
 }

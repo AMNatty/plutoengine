@@ -13,8 +13,7 @@ dependencies {
 	runtimeOnly "org.lwjgl:lwjgl-glfw::$lwjglNatives"
 	runtimeOnly "org.lwjgl:lwjgl-opengl::$lwjglNatives"
 	runtimeOnly "org.lwjgl:lwjgl-stb::$lwjglNatives"
-    
-	api "org.joml:joml:${jomlVersion}"
+
 	api "com.code-disaster.steamworks4j:steamworks4j:${steamworks4jVersion}"
 	api "com.code-disaster.steamworks4j:steamworks4j-server:${steamworks4jServerVersion}"
 }
