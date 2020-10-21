@@ -186,11 +186,25 @@ public abstract class PlutoApplication
 
         if (config.coreProfile)
         {
-            this.display = new DisplayBuilder().hintOpenGLVersion(config.majorOpenGLVersion, config.minorOpenGLVersion).hintDebugContext(Pluto.DEBUG_MODE).hintMSAA(config.windowMSAA).hintVisible(true).hintResizeable(config.windowResizable).setInitialSize(config.windowInitialWidth, config.windowInitialHeight).export();
+            this.display = new DisplayBuilder()
+                    .hintOpenGLVersion(config.majorOpenGLVersion, config.minorOpenGLVersion)
+                    .hintDebugContext(Pluto.DEBUG_MODE)
+                    .hintMSAA(config.windowMSAA)
+                    .hintVisible(true)
+                    .hintResizeable(config.windowResizable)
+                    .setInitialSize(config.windowInitialWidth, config.windowInitialHeight)
+                    .export();
         }
         else
         {
-            this.display = new DisplayBuilder().hintOpenGLVersionLegacy(config.majorOpenGLVersion, config.minorOpenGLVersion).hintDebugContext(Pluto.DEBUG_MODE).hintMSAA(config.windowMSAA).hintVisible(true).hintResizeable(config.windowResizable).setInitialSize(config.windowInitialWidth, config.windowInitialHeight).export();
+            this.display = new DisplayBuilder()
+                    .hintOpenGLVersionLegacy(config.majorOpenGLVersion, config.minorOpenGLVersion)
+                    .hintDebugContext(Pluto.DEBUG_MODE)
+                    .hintMSAA(config.windowMSAA)
+                    .hintVisible(true)
+                    .hintResizeable(config.windowResizable)
+                    .setInitialSize(config.windowInitialWidth, config.windowInitialHeight)
+                    .export();
         }
 
         this.display.create(config.windowName);
