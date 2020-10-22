@@ -1,6 +1,6 @@
 ## 20.2.0.0-alpha.3
-* `[PlutoLib]` Removed `Severity`, use `SmartSeverity` instead
-* `[PlutoLib]` Removed `TextIn`, `TextOut`, `ResourceImage` and `ResourceInputStream`
+* `[PlutoLib]` *Removed* `Severity`, use `SmartSeverity` instead
+* `[PlutoLib]` *Removed* `TextIn`, `TextOut`, `ResourceImage` and `ResourceInputStream`
 * `[PlutoLib]` Made `OutputSplitStream` public as it is now reusable
 * `[PlutoLib]` Added the `@ConstantExpression` annotation
 * `[PlutoLib]` The `RAID#getIDOf` method now returns `OptionalInt` to avoid NPEs
