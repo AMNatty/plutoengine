@@ -45,18 +45,18 @@ See `NEXT_RELEASE_DRAFT.md` for details.
 ### Very high priority
 [ *Implemented in the current release.* ]
  * Rewrite the ModLoader
- * Finish PlutoCommandParser
  * Streamline PlutoLib, remove bad APIs and improve code quality
+ * The stage system and automated asset loading
  
 ### High priority
 [ *Implemented in the next release.* ]
+ * Rewrite PlutoGUI
  * Finish PlutoAudio
     * Depends on the stage system
- * The stage system and automated asset loading
+ * Finish PlutoCommandParser
  
 ### Normal priority
 [ *Planned for an upcoming release.* ]
- * Rewrite PlutoGUI
  * The collision system for PlutoStatic
  * Improve image loading capabilities, possibly rewrite PlutoLib#TPL
  
@@ -66,3 +66,7 @@ See `NEXT_RELEASE_DRAFT.md` for details.
     * Alternatively, if this deems too difficult to implement,
     prohibit the creation of more than instance per VM to avoid issues
  * A networking API
+ * Expand upon the Color API
+    * Color mixing and blending
+    * Color transformation
+    * High-performance serialization

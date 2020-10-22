@@ -5,6 +5,8 @@
     * Rethink the class loader system.
 * `[PlutoLib]` Redo the resource system
 * `[PlutoLib]` Create a new Color API and port renderer code to it
+    * `[PlutoGUI]` FontRenderer code will not receive these changes
+    as it is awaiting a rewrite anyway
 
 ## Features targeted for 20.2.0.0-alpha.4
 * The stage subsystem
@@ -38,6 +40,11 @@
     instances
     * Allow stages to be inherited from, creating a stack-like structure
 * `[PlutoAudio]` Integrate the Audio API with the Stage API
+* `[PlutoGUI]` Initial implementation of the new font renderer
+    * Full rewrite
+    * High quality font rendering
+        * Subpixel rendering support [?]
+    * Possibly a new system for bitmap fonts
 * Improve upon the support of thread-local Pluto instances
     * The long term goal is to allow an unlimited amount of Pluto applications at any given time
 

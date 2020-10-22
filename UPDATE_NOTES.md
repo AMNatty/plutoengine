@@ -5,11 +5,17 @@
 * `[PlutoLib]` Added the `@ConstantExpression` annotation
 * `[PlutoLib]` The `RAID#getIDOf` method now returns `OptionalInt` to avoid NPEs
 * `[PlutoLib]` The transitive dependency JOML is now provided by `PlutoLib` instead of `PlutoStatic`
-
+* `[PlutoLib]` Created a simple Color API
+    * `[PlutoShader]` Added the 8-bit RGBA `Color` class as a counterpart to AWT's `Color` class
+    * `[PlutoShader]` Added the `RGBA` and `RGB` single precision float color objects 
+    * `[PlutoShader]` Added the respective `IRGBA` and `IRGB` read-only interfaces
+    * `[PlutoShader]` Added the `HSBA` and `HSB` single precision float color objects 
+    * `[PlutoShader]` Added methods to convert between HSBA, RGBA, HSB and RGB
+    * `[PlutoShader]` Added the `UniformRGBA` and `UniformRGB` shader uniform types
+    
 Awaiting implementation:
 * `[PlutoLib]` Moved `cz.tefek.pluto.io.pluto.pp` to `cz.tefek.pluto.io.plutopackage`
 * `[PlutoLib]` Completely reworked the module system
-* `[PlutoLib]` Created a simple Color API
 
 ## 20.2.0.0-alpha.2
 * `build.gradle` Extracted the version numbers into separate variables
