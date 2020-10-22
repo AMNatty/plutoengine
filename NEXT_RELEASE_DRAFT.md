@@ -4,6 +4,7 @@
     * Large scale API changes, however the general idea should stay the same
     * Rethink the class loader system.
 * `[PlutoLib]` Redo the resource system
+* `[PlutoLib]` Create a new Color API and port renderer code to it
 
 ## Features targeted for 20.2.0.0-alpha.4
 * The stage subsystem

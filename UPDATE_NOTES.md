@@ -9,6 +9,7 @@
 Awaiting implementation:
 * `[PlutoLib]` Moved `cz.tefek.pluto.io.pluto.pp` to `cz.tefek.pluto.io.plutopackage`
 * `[PlutoLib]` Completely reworked the module system
+* `[PlutoLib]` Created a simple Color API
 
 ## 20.2.0.0-alpha.2
 * `build.gradle` Extracted the version numbers into separate variables
