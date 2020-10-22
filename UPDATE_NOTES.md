@@ -3,9 +3,12 @@
 * `[PlutoLib]` Removed `TextIn`, `TextOut`, `ResourceImage` and `ResourceInputStream`
 * `[PlutoLib]` Made `OutputSplitStream` public as it is now reusable
 * `[PlutoLib]` Added the `@ConstantExpression` annotation
-* `[PlutoLib]` Moved `cz.tefek.pluto.io.pluto.pp` to `cz.tefek.pluto.io.plutopackage`
 * `[PlutoLib]` The `RAID#getIDOf` method now returns `OptionalInt` to avoid NPEs
 * `[PlutoLib]` The transitive dependency JOML is now provided by `PlutoLib` instead of `PlutoStatic`
+
+Awaiting implementation:
+* `[PlutoLib]` Moved `cz.tefek.pluto.io.pluto.pp` to `cz.tefek.pluto.io.plutopackage`
+* `[PlutoLib]` Completely reworked the module system
 
 ## 20.2.0.0-alpha.2
 * `build.gradle` Extracted the version numbers into separate variables

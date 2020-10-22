@@ -21,7 +21,7 @@ public class RAID<E extends IIdentifiable> implements Iterable<E>
         this.reverseRaid = new HashMap<>();
     }
 
-    public void register(E item)
+    public void register(@Nonnull E item)
     {
         var address = item.getStringID();
 
@@ -48,7 +48,7 @@ public class RAID<E extends IIdentifiable> implements Iterable<E>
     }
 
     @Nonnull
-    public OptionalInt getIDOf(E item)
+    public OptionalInt getIDOf(@Nonnull E item)
     {
         return reverseRaid.containsKey(item.getStringID()) ?
             OptionalInt.of(reverseRaid.get(item.getStringID()))
