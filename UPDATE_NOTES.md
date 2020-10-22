@@ -1,3 +1,12 @@
+## 20.2.0.0-alpha.3
+* `[PlutoLib]` Removed `Severity`, use `SmartSeverity` instead
+* `[PlutoLib]` Removed `TextIn`, `TextOut`, `ResourceImage` and `ResourceInputStream`
+* `[PlutoLib]` Made `OutputSplitStream` public as it is now reusable
+* `[PlutoLib]` Added the `@ConstantExpression` annotation
+* `[PlutoLib]` Moved `cz.tefek.pluto.io.pluto.pp` to `cz.tefek.pluto.io.plutopackage`
+* `[PlutoLib]` The `RAID#getIDOf` method now returns `OptionalInt` to avoid NPEs
+* `[PlutoLib]` The transitive dependency JOML is now provided by `PlutoLib` instead of `PlutoStatic`
+
 ## 20.2.0.0-alpha.2
 * `build.gradle` Extracted the version numbers into separate variables
 * `build.gradle` **[experimental]** `gradlew` should now automatically download JDK11 when needed 

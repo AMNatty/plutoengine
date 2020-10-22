@@ -1,5 +1,4 @@
 ## Features targeted for 20.2.0.0-alpha.3
-* The initial minimal release of `[PlutoCommandParser]`
 * `[PlutoLib]` Completely redo the ModLoader system
     * The current implementation is a result of 5 years of feature creep 
     * Large scale API changes, however the general idea should stay the same
@@ -40,3 +39,6 @@
 * `[PlutoAudio]` Integrate the Audio API with the Stage API
 * Improve upon the support of thread-local Pluto instances
     * The long term goal is to allow an unlimited amount of Pluto applications at any given time
+
+## Features targeted for 20.2.0.0-alpha.5
+* The initial minimal release of `[PlutoCommandParser]`
