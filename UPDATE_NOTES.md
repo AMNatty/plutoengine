@@ -1,6 +1,8 @@
 ## 20.2.0.0-alpha.3
 * `[PlutoLib]` *Removed* `Severity`, use `SmartSeverity` instead
 * `[PlutoLib]` *Removed* `TextIn`, `TextOut`, `ResourceImage` and `ResourceInputStream`
+* `[PlutoLib]` *Removed* `StaticPlutoEventManager` as the implementation was too obscure
+    * The module system now uses its own event management
 * `[PlutoLib]` Made `OutputSplitStream` public as it is now reusable
 * `[PlutoLib]` Added the `@ConstantExpression` annotation
 * `[PlutoLib]` The `RAID#getIDOf` method now returns `OptionalInt` to avoid NPEs
@@ -61,4 +63,4 @@ can now only be modified only through public setters
 * `[PlutoCore]` `[PlutoApplication]` now properly closes the `Logger` on exit
 * `[PlutoLib]` Various typo fixes
 * `[Pluto*]` Deprecated `Severity` for `SmartSeverity` and replaced all usages
-* `[Pluto*]` Deprecated `CRLF` with `LF` in all Java source files
+* `[Pluto*]` Replaced `CRLF` with `LF` in all Java source files
