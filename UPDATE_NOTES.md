@@ -3,6 +3,7 @@
 * `[PlutoLib]` *Removed* `TextIn`, `TextOut`, `ResourceImage` and `ResourceInputStream`
 * `[PlutoLib]` *Removed* `StaticPlutoEventManager` as the implementation was too obscure
     * The module system now uses its own event management
+    * *Removed* the `EventData` class
 * `[PlutoLib]` Made `OutputSplitStream` public as it is now reusable
 * `[PlutoLib]` Added the `@ConstantExpression` annotation
 * `[PlutoLib]` The `RAID#getIDOf` method now returns `OptionalInt` to avoid NPEs
@@ -56,9 +57,9 @@ Awaiting implementation:
     * `[PlutoLib]` Deprecated `TPL#load(String)` in favor of `TPL#load(ResourceAddress)`, 
       `TPL#load(File)` and `TPL#load(Path)`
         * `[PlutoTexturing]` Deprecated the `String` variant of `Texture#load`
-        to reflect this change
+          to reflect this change
         * `[PlutoSpritesheet]` Removed the usage of this method
-        in `DisposablePlaceholderSprite`
+          in `DisposablePlaceholderSprite`
     * `[PlutoLib]` Added an option to flip loaded images with `TPL#loadImageSpecial`
       and added respective `TPL#loadSpecial` for every `TPL#load`
     * `[PlutoLib]` *Removed* `TPJImage`

@@ -45,11 +45,6 @@ public class MiniTime
 {
     private static class MiniTimeParseException extends RuntimeException
     {
-        /**
-         * 
-         */
-        private static final long serialVersionUID = -5403949842120041373L;
-
         public MiniTimeParseException()
         {
             super("Time period could not be parsed. Correct format: \\_w\\_d\\_h\\_m\\_s **without spaces** between the units. You can skip a time unit. Example: 1h15m");
@@ -189,7 +184,7 @@ public class MiniTime
                 throw new MiniTimeParseException();
             }
 
-            time += multiplier * number;
+            time += (long) multiplier * number;
         }
 
         return System.currentTimeMillis() + time;
