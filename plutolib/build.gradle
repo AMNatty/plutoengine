@@ -2,6 +2,35 @@ apply plugin: 'java-library'
 
 description = ""
 
+
+sourceSets {
+    config {
+        java {
+            srcDir "src/config/java"
+        }
+    }
+
+    main {
+        java {
+            compileClasspath += config.output
+        }
+    }
+}
+
+task generateConfigs(type: Copy) {
+    def projectVariables = [
+        plutoVersion: project.version,
+    ]
+
+    inputs.properties projectVariables
+    from 'src/config/java'
+    into "$buildDir/generated/java"
+
+    expand projectVariables
+}
+
+compileJava.dependsOn generateConfigs
+
 dependencies {
     api platform("org.lwjgl:lwjgl-bom:$lwjglVersion")
 
