@@ -186,31 +186,31 @@ public final class PlutoVersion implements IVersion<PlutoVersion>
         if (this == o)
             return true;
 
-        if (o == null || getClass() != o.getClass())
+        if (o == null || this.getClass() != o.getClass())
             return false;
 
         PlutoVersion that = (PlutoVersion) o;
 
-        if (prerelease)
-            return year == that.year &&
-                    major == that.major &&
-                    minor == that.minor &&
-                    patch == that.patch &&
-                    prereleaseNumber == that.prereleaseNumber &&
-                    Objects.equals(prereleaseName, that.prereleaseName);
+        if (this.prerelease)
+            return this.year == that.year &&
+                   this.major == that.major &&
+                   this.minor == that.minor &&
+                   this.patch == that.patch &&
+                   this.prereleaseNumber == that.prereleaseNumber &&
+                   Objects.equals(this.prereleaseName, that.prereleaseName);
         else
-            return year == that.year &&
-                    major == that.major &&
-                    minor == that.minor &&
-                    patch == that.patch;
+            return this.year == that.year &&
+                   this.major == that.major &&
+                   this.minor == that.minor &&
+                   this.patch == that.patch;
     }
 
     @Override
     public int hashCode()
     {
-        if (prerelease)
-            return Objects.hash(year, major, minor, patch);
+        if (this.prerelease)
+            return Objects.hash(this.year, this.major, this.minor, this.patch);
         else
-            return Objects.hash(year, major, minor, patch, prereleaseName, prereleaseNumber);
+            return Objects.hash(this.year, this.major, this.minor, this.patch, this.prereleaseName, this.prereleaseNumber);
     }
 }
