@@ -12,6 +12,7 @@ sourceSets {
 
     main {
         java {
+            srcDir "$buildDir/generated/java"
             compileClasspath += config.output
         }
     }
