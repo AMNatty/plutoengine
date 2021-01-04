@@ -47,11 +47,9 @@ public class MiniTime
     {
         public MiniTimeParseException()
         {
-            super("Time period could not be parsed. Correct format: \\_w\\_d\\_h\\_m\\_s **without spaces** between the units. You can skip a time unit. Example: 1h15m");
+
         }
     }
-
-    private static final TimeUnit miliseconds = TimeUnit.MILLISECONDS;
 
     private static final int DAYS_IN_WEEK = 7;
     private static final int HOURS_IN_DAY = 24;
@@ -264,17 +262,17 @@ public class MiniTime
             throw new IllegalArgumentException("Negative time span cannot be converted to MiniTime.");
         }
 
-        var xweeks = miliseconds.toDays(diff) / DAYS_IN_WEEK;
+        var xweeks = TimeUnit.MILLISECONDS.toDays(diff) / DAYS_IN_WEEK;
 
         if (xweeks > Integer.MAX_VALUE)
         {
             return "forever";
         }
 
-        var xdays = miliseconds.toDays(diff) % DAYS_IN_WEEK;
-        var xhours = miliseconds.toHours(diff) % HOURS_IN_DAY;
-        var xminutes = miliseconds.toMinutes(diff) % MINUTES_IN_HOUR;
-        var xseconds = miliseconds.toSeconds(diff) % SECONDS_IN_MINUTE;
+        var xdays = TimeUnit.MILLISECONDS.toDays(diff) % DAYS_IN_WEEK;
+        var xhours = TimeUnit.MILLISECONDS.toHours(diff) % HOURS_IN_DAY;
+        var xminutes = TimeUnit.MILLISECONDS.toMinutes(diff) % MINUTES_IN_HOUR;
+        var xseconds = TimeUnit.MILLISECONDS.toSeconds(diff) % SECONDS_IN_MINUTE;
 
         return formatTime(xweeks, xdays, xhours, xminutes, xseconds);
     }

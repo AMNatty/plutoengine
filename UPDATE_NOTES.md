@@ -20,6 +20,7 @@
     * Added support for version objects
     * As a result, all fields except the version string are no longer compile-time constants
 * `[PlutoCore]` Made `PlutoApplication`'s constructor private
+* `[PlutoLib]` `MiniTimeParseException` no longer contains a hardcoded String message
 
 Awaiting implementation:
 * `[PlutoLib]` Moved `cz.tefek.pluto.io.pluto.pp` to `cz.tefek.pluto.io.plutopackage`
