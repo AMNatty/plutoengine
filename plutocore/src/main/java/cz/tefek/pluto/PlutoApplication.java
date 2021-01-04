@@ -31,6 +31,11 @@ public abstract class PlutoApplication
 
     protected abstract void loop();
 
+    protected PlutoApplication()
+    {
+
+    }
+
     /**
      * A set of values used to create a new {@link PlutoApplication}.
      *
