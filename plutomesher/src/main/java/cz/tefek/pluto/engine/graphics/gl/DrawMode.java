@@ -26,9 +26,9 @@ public enum DrawMode implements IOpenGLEnum
     TRIANGLE_STRIP_ADJACENCY(GL33.GL_TRIANGLE_STRIP_ADJACENCY),
     PATCHES(GL40.GL_PATCHES);
 
-    private int glID;
+    private final int glID;
 
-    private DrawMode(int id)
+    DrawMode(int id)
     {
         this.glID = id;
     }

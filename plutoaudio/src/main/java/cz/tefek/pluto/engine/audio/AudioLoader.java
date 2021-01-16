@@ -108,7 +108,7 @@ public class AudioLoader
 
     public static class MemoryPCMTrack extends SeekableTrack
     {
-        private ShortBuffer pcmAudio = null;
+        private final ShortBuffer pcmAudio;
 
         private int sampleOffset = 0;
 

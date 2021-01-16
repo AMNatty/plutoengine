@@ -5,6 +5,7 @@ import java.nio.file.FileSystems;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.regex.Pattern;
 
 import cz.tefek.pluto.io.logger.Logger;
@@ -15,11 +16,15 @@ import cz.tefek.pluto.modloader.ModLoaderCore;
  * Resource address is a universal key for all resource and file loading. You
  * just need a {@link ResourceSubscriber} (which holds the root folder location)
  * and a {@link String} containing the address. The address itself works like a
- * Java package. For example <i>"sample.textures.test"</i> formats as
+ * Java package.
+ *
+ * <p>
+ * For example, <i>"sample.textures.test"</i> formats as
  * <code>[root_folder]/sample/textures/test</code> when converted using
  * <code>toPath()</code>. To define a file extension for your address, use the
  * <code>fileExtension(String)</code> method. To remove the file extension use
  * <code>fileExtension(null)</code>.
+ * </p>
  *
  * @author 493msi
  *
@@ -292,13 +297,23 @@ public class ResourceAddress
     }
 
     @Override
+    public boolean equals(Object o)
+    {
+        if (this == o)
+            return true;
+
+        if (o == null || this.getClass() != o.getClass())
+            return false;
+
+        ResourceAddress that = (ResourceAddress) o;
+        return this.subAddress.equals(that.subAddress) &&
+               this.resSubscriber.equals(that.resSubscriber) &&
+               Objects.equals(this.fileExtension, that.fileExtension);
+    }
+
+    @Override
     public int hashCode()
     {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + ((this.fileExtension == null) ? 0 : this.fileExtension.hashCode());
-        result = prime * result + this.resSubscriber.hashCode();
-        result = prime * result + this.subAddress.hashCode();
-        return result;
+        return Objects.hash(subAddress, resSubscriber, fileExtension);
     }
 }

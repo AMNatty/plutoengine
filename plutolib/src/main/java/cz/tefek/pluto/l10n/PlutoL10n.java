@@ -11,7 +11,7 @@ public class PlutoL10n
 {
     private static Locale defaultLocale;
 
-    private static Map<Locale, Map<String, String>> localizations = new HashMap<>();
+    private static final Map<Locale, Map<String, String>> localizations = new HashMap<>();
 
     public static void init(Locale locale)
     {
@@ -25,12 +25,7 @@ public class PlutoL10n
 
     public static void registerLocale(Locale locale)
     {
-        if (localizations.containsKey(locale))
-        {
-            return;
-        }
-
-        localizations.put(locale, new HashMap<>());
+        localizations.computeIfAbsent(locale, key -> new HashMap<>());
     }
 
     public static void setLocale(Locale locale)

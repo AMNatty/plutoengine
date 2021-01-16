@@ -3,7 +3,20 @@ package cz.tefek.pluto.util.color;
 import javax.annotation.Nonnull;
 
 /**
- * TODO
+ * A simple 8-bit RGBA color container.
+ *
+ * <p><em>
+ *  Some methods mutate the object to avoid new object creation.
+ *  These methods are prefixed with "store".
+ * </em></p>
+ *
+ * @implNote Each of the color components is stored separately as a 32-bit integer
+ * to avoid unnecessary type conversion at the cost of some memory.
+ *
+ * <p>
+ * This however should not be a problem as <em>this class is not designed
+ * for large-scale or performance-sensitive color operations</em>.
+ * </p>
  *
  * @since 20.2.0.0-alpha.3
  * @author 493msi
@@ -73,7 +86,7 @@ public final class Color
     public int alpha = 255;
 
     /**
-     * TODO
+     * Creates a new Color object from the supplied RGBA color components.
      *
      * @since 20.2.0.0-alpha.3
      * @author 493msi
@@ -87,7 +100,9 @@ public final class Color
     }
 
     /**
-     * TODO
+     * Creates a new Color object from the supplied RGBA color components.
+     *
+     * Alpha is set to 255 by default.
      *
      * @since 20.2.0.0-alpha.3
      * @author 493msi
@@ -100,7 +115,13 @@ public final class Color
     }
 
     /**
-     * TODO
+     * Converts the supplied float-based {@link IRGBA} color object to a new {@link Color} object and returns it.
+     *
+     * @return A new {@link Color} object
+     *
+     * @param colorComponents An {@link IRGBA} color object
+     *
+     * @implNote Color values are rounded to the nearest integer.
      *
      * @since 20.2.0.0-alpha.3
      * @author 493msi
@@ -151,6 +172,17 @@ public final class Color
             default:
                 throw new UnsupportedOperationException("Use the from(byte[], int, ColorFormat) for byte color formats!");
         }
+    }
+
+    /**
+     * TODO
+     *
+     * @since 20.2.0.0-alpha.3
+     * @author 493msi
+     */
+    public static Color fromAWT(@Nonnull java.awt.Color color)
+    {
+        return new Color(color.getRed(), color.getGreen(), color.getBlue(), color.getAlpha());
     }
 
     /**
@@ -442,5 +474,17 @@ public final class Color
         target.h = hsb.h;
         target.s = hsb.s;
         target.b = hsb.b;
+    }
+
+
+    /**
+     * TODO
+     *
+     * @since 20.2.0.0-alpha.3
+     * @author 493msi
+     */
+    public java.awt.Color toAWT()
+    {
+        return new java.awt.Color(this.red, this.green, this.blue, this.alpha);
     }
 }
