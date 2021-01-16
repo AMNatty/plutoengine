@@ -1,4 +1,6 @@
 ## 20.2.0.0-alpha.3
+* `[PlutoUSS2]` **Added USS2 as a new module**
+    * `[PlutoLib]` `PlutoLib` now depends on `PlutoUSS2`
 * `[PlutoLib]` *Removed* `Severity`, use `SmartSeverity` instead
 * `[PlutoLib]` *Removed* `TextIn`, `TextOut`, `ResourceImage` and `ResourceInputStream`
 * `[PlutoLib]` *Removed* `StaticPlutoEventManager` as the implementation was too obscure
@@ -18,7 +20,7 @@
 * `[PlutoLib]` Created the Version API
     * Added the `IVersion` interface
     * Added support for version objects
-    * As a result, all fields except the version string are no longer compile-time constants
+    * As a result, all fields in `Pluto` except the version string are no longer compile-time constants
 * `[PlutoCore]` Made `PlutoApplication`'s constructor private
 * `[PlutoLib]` `MiniTimeParseException` no longer contains a hardcoded String message
 
