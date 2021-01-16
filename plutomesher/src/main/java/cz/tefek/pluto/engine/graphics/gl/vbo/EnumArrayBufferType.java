@@ -10,9 +10,9 @@ public enum EnumArrayBufferType implements IOpenGLEnum
     INT(GL33.GL_INT),
     UNSIGNED_INT(GL33.GL_UNSIGNED_INT);
 
-    private int glID;
+    private final int glID;
 
-    private EnumArrayBufferType(int glEnum)
+    EnumArrayBufferType(int glEnum)
     {
         this.glID = glEnum;
     }
