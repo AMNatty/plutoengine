@@ -30,6 +30,7 @@ version numbers.*
  * **PlutoShader** - Stable
  * **PlutoSpriteSheet** - Stable, some features are unfinished
  * **PlutoStatic** - Stable, collision API nowhere near completion
+ * **PlutoUSS2** - Stable
  
 ### Unstable submodules 
  * **PlutoAudio** - Somewhat usable, unfinished
@@ -64,7 +65,7 @@ See `NEXT_RELEASE_DRAFT.md` for details.
 [ *Items not required immediately, planned to be implemented eventually.* ]
  * Allow multiple running instances of Pluto
     * Alternatively, if this deems too difficult to implement,
-    prohibit the creation of more than instance per VM to avoid issues
+    prohibit the creation of more than one instance per JVM to avoid issues
  * A networking API
  * Expand upon the Color API
     * Color mixing and blending
