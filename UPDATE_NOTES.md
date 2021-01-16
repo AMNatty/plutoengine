@@ -9,6 +9,8 @@
 * `[PlutoLib]` Made `OutputSplitStream` public as it is now reusable
 * `[PlutoLib]` Added the `@ConstantExpression` annotation
 * `[PlutoLib]` The `RAID#getIDOf` method now returns `OptionalInt` to avoid NPEs
+* `[PlutoLib]` Added an `equals` implementation to `ResourceAddress`
+* `[PlutoStatic]` Added the `ModGLFW` virtual module
 * `[PlutoLib]` The transitive dependency JOML is now provided by `PlutoLib` instead of `PlutoStatic`
 * `[PlutoLib]` Created a simple Color API
     * `[PlutoShader]` Added the 8-bit RGBA `Color` class as a counterpart to AWT's `Color` class
