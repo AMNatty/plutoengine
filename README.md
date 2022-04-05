@@ -25,19 +25,18 @@ version numbers.*
  * **PlutoCore** - Stable
  * **PlutoFramebuffer** - Stable
  * **PlutoGUI** - Stable, awaiting a rewrite
- * **PlutoLib** - Mostly stable, the module API still has some quirks
  * **PlutoMesher** - Stable
  * **PlutoShader** - Stable
+ * **PlutoTexture** - Stable
  * **PlutoSpriteSheet** - Stable, some features are unfinished
- * **PlutoStatic** - Stable, collision API nowhere near completion
+ * **PlutoDisplay** - Stable, collision API nowhere near completion
  * **PlutoUSS2** - Stable
+ * **PlutoLib** - Mostly stable
  
-### Unstable submodules 
+### Unstable submodules
+ * **PlutoRuntime** - Somewhat tentative, the module API has been rewritten and might contain bugs
  * **PlutoAudio** - Somewhat usable, unfinished
  
-### Broken submodules, do NOT use
- * **PlutoCommandParser** - Unfinished, broken, unusable
- * **PlutoDB** - Broken, unusable
  
 ## Current priorities
 
@@ -45,8 +44,8 @@ See `NEXT_RELEASE_DRAFT.md` for details.
 
 ### Very high priority
 [ *Implemented in the current release.* ]
- * Rewrite the ModLoader
  * Streamline PlutoLib, remove bad APIs and improve code quality
+   * Improve image loading capabilities, possibly rewrite PlutoLib#TPL
  * The stage system and automated asset loading
  
 ### High priority
@@ -54,12 +53,10 @@ See `NEXT_RELEASE_DRAFT.md` for details.
  * Rewrite PlutoGUI
  * Finish PlutoAudio
     * Depends on the stage system
- * Finish PlutoCommandParser
  
 ### Normal priority
 [ *Planned for an upcoming release.* ]
  * The collision system for PlutoStatic
- * Improve image loading capabilities, possibly rewrite PlutoLib#TPL
  
 ### Low priority
 [ *Items not required immediately, planned to be implemented eventually.* ]
@@ -67,6 +64,10 @@ See `NEXT_RELEASE_DRAFT.md` for details.
     * Alternatively, if this deems too difficult to implement,
     prohibit the creation of more than one instance per JVM to avoid issues
  * A networking API
+ * Re-add support for external mod jars to the ModLoader
+    * This feature requires a full rewrite and possibly a complete overhaul
+    * Mods should have limited execution levels, for example restricted file access
+      or disabled native library loading (this is probably not possible)
  * Expand upon the Color API
     * Color mixing and blending
     * Color transformation

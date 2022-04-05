@@ -1,11 +1,4 @@
-## Features targeted for 21.0.1.0-alpha.0
-* `[PlutoLib]` Completely redo the ModLoader system
-    * The current implementation is a result of 5 years of feature creep 
-    * Large scale API changes, however the general idea should stay the same
-    * Rethink the class loader system.
-* `[PlutoLib]` Redo the resource system
-
-## Features targeted for 21.0.1.0-alpha.1
+## Features targeted for 22.0.1.0-alpha.0
 * The stage subsystem
     * A "stage", in this context, is a set of assets bound together
     by programming logic, not necessarily a game level.
@@ -25,7 +18,7 @@
             3. Asynchronous switch
                 * Assets will be loaded in asynchronously, where applicable
                 * Falls back to deferred switching for synchronous loading, 
-                such as OpenGL texture upload              
+                such as OpenGL texture upload
     * Automated asset loading
         * All asset management will eventually be handled by `PlutoCore`
             * This includes audio clips, textures, sprites
@@ -45,5 +38,5 @@
 * Improve upon the support of thread-local Pluto instances
     * The long term goal is to allow an unlimited amount of Pluto applications at any given time
 
-## Features targeted for 21.0.1.0-alpha.4
-* The initial minimal release of `[PlutoCommandParser]`
+## Features targeted for 22.0.1.0-alpha.1
+* TBD

@@ -1,8 +1,0 @@
-apply plugin: 'java-library'
-
-description = "The foundation module for games and apps built on top of PlutoEngine."
-
-dependencies {
-	api project(":plutogui")
-	api project(":plutoaudio")
-}

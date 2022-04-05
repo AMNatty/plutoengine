@@ -1,34 +1,58 @@
 ## 20.2.0.0-alpha.3
+* `[SDK]` Restructured the repository
+  * All build scripts are now written in Kotlin
+  * **Added runnabled examples**
+  * **Upgraded to Java 17** to take advantage of new language features and a more efficient JVM
+  * **The repostiory now contains examples**
+  * **Moved all classes to the `org.plutoengine` package**
+* `[PlutoComponent]` **Added PlutoComponent as a new module**
+    * `[PlutoLib]` `PlutoLib` now depends on `PlutoComponent`
 * `[PlutoUSS2]` **Added USS2 as a new module**
     * `[PlutoLib]` `PlutoLib` now depends on `PlutoUSS2`
-* `[PlutoLib]` *Removed* `Severity`, use `SmartSeverity` instead
-* `[PlutoLib]` *Removed* `TextIn`, `TextOut`, `ResourceImage` and `ResourceInputStream`
-* `[PlutoLib]` *Removed* `StaticPlutoEventManager` as the implementation was too obscure
-    * The module system now uses its own event management
-    * *Removed* the `EventData` class
-* `[PlutoLib]` Made `OutputSplitStream` public as it is now reusable
+* `[PlutoLib]` **Greatly simplified the API and moved PlutoEngine specific classes to `PlutoRuntime`**
+  * ***Moved* the module system to `PlutoRuntime`**
+    * *Removed* `ResourceSubscriber`,
+  * *Removed* `cz.tefek.pluto.io.pluto.pp`
+  * *Removed* `RAID`
+  * *Moved* `Logger`, `OutputSplitStream` to `PlutoRuntime`
+  * *Removed* `Severity`, use `SmartSeverity` instead
+  * *Removed* `TextIn`, `TextOut`, `ResourceImage` and `ResourceInputStream`
+    * Use Java's NIO instead
+  * *Removed* `StaticPlutoEventManager` as the implementation was too obscure
+      * The module system now uses its own event management
+      * *Removed* the `EventData` class
+* `[PlutoRuntime]` **Added PlutoRuntime as a new module**
+    * **Completely rewrote the module system**
+      * *Removed* support for external mods as the feature needs a complete overhaul
+    * **Revamped resource system now based on NIO**
+    * *Moved* the logging system from `PlutoLib` to `PlutoRuntime`
+    * Made `OutputSplitStream` public as it is now reusable
+    * **Added the Version API**
+      * Added the `IVersion` interface
+        * Added support for version objects
+        * As a result, all fields in `Pluto` except the version string are no longer compile-time constants
+* `[PlutoDisplay]` **Renamed `PlutoStatic` to `PlutoDisplay`**
+  * Added the `ModGLFW` virtual module
+  * `DisplayErrorCallback` and simplified the callbacks in `Display`
+* `[PlutoCommandParser]` **Module discontinued as a part of PlutoEngine, it will still be developed seprately**
+* `[PlutoTexturing]` Renamed to `PlutoTexture`
+    * Removed `Texture#load(String)` and `Texture#load(String, MagFilter, MinFilter, WrapMode...)`
+
+
 * `[PlutoLib]` Added the `@ConstantExpression` annotation
-* `[PlutoLib]` The `RAID#getIDOf` method now returns `OptionalInt` to avoid NPEs
-* `[PlutoLib]` Added an `equals` implementation to `ResourceAddress`
-* `[PlutoStatic]` Added the `ModGLFW` virtual module
 * `[PlutoLib]` The transitive dependency JOML is now provided by `PlutoLib` instead of `PlutoStatic`
 * `[PlutoLib]` Created a simple Color API
-    * `[PlutoShader]` Added the 8-bit RGBA `Color` class as a counterpart to AWT's `Color` class
-    * `[PlutoShader]` Added the `RGBA` and `RGB` single precision float color objects
-    * `[PlutoShader]` Added the respective `IRGBA` and `IRGB` read-only interfaces
-    * `[PlutoShader]` Added the `HSBA` and `HSB` single precision float color objects
-    * `[PlutoShader]` Added methods to convert between HSBA, RGBA, HSB and RGB
+    * `[PlutoLib]` Added the 8-bit RGBA `Color` class as a counterpart to AWT's `Color` class
+    * `[PlutoLib]` Added the `RGBA` and `RGB` single precision float color objects
+    * `[PlutoLib]` Added the respective `IRGBA` and `IRGB` read-only interfaces
+    * `[PlutoLib]` Added the `HSBA` and `HSB` single precision float color objects
+    * `[PlutoLib]` Added methods to convert between HSBA, RGBA, HSB and RGB
     * `[PlutoShader]` Added the `UniformRGBA` and `UniformRGB` shader uniform types
-* `[PlutoLib]` Created the Version API
-    * Added the `IVersion` interface
-    * Added support for version objects
-    * As a result, all fields in `Pluto` except the version string are no longer compile-time constants
 * `[PlutoCore]` Made `PlutoApplication`'s constructor private
 * `[PlutoLib]` `MiniTimeParseException` no longer contains a hardcoded String message
-
-Awaiting implementation:
-* `[PlutoLib]` Moved `cz.tefek.pluto.io.pluto.pp` to `cz.tefek.pluto.io.plutopackage`
-* `[PlutoLib]` Completely reworked the module system
+* `build.gradle` *Removed* the prepackaged JVM wrapper introduced in the previous alpha
+  as it caused numerous issues
+    * In the future, JDKs will be packaged with the SDK
 
 ## 20.2.0.0-alpha.2
 * `build.gradle` Extracted the version numbers into separate variables

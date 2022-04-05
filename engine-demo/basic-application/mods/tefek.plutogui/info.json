@@ -1,0 +1,11 @@
+{
+  "displayName": "Pluto Engine GUI Renderer",
+  "description": "",
+  "author": "Tefek",
+  "resourceRoots": {
+    "default": {
+      "path": "default",
+      "type": "open"
+    }
+  }
+}
