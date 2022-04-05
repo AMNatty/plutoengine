@@ -1,0 +1,11 @@
+{
+  "displayName": "Basic App Demo",
+  "description": "Basic application demo for PlutoEngine.",
+  "author": "Tefek",
+  "resourceRoots": {
+    "icons": {
+      "path": "icons",
+      "type": "open"
+    }
+  }
+}

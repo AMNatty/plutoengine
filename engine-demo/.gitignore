@@ -1,0 +1,30 @@
+/*/.settings
+
+/.vscode
+
+# Ignore Eclipse project files
+/*/.project
+/*/.classpath
+/.project
+/.settings
+
+# Ignore IDEA project files
+/.idea
+/*/.idea
+.idea
+
+*.log
+
+/.gradle/
+
+# Ignore Gradle project-specific cache directory
+.gradle
+
+# Ignore Gradle build output directory
+/build
+/*/build
+
+/bin
+/*/bin
+
+/*/logs

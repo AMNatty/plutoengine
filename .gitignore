@@ -1,13 +1,17 @@
 /*/.settings
 
+/.vscode
+
 # Ignore Eclipse project files
 /*/.project
 /*/.classpath
 /.project
+/.settings
 
 # Ignore IDEA project files
 /.idea
 /*/.idea
+.idea
 
 *.log
 
@@ -19,3 +23,7 @@
 # Ignore Gradle build output directory
 /build
 /*/build
+
+/bin
+/*/bin
+/logs/

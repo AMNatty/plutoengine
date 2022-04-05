@@ -1,0 +1,8 @@
+{
+  "displayName": "GLFW",
+  "author": "The GLFW team",
+  "description": "The GLFW library, used for native window creation.",
+  "resourceRoots": {
+
+  }
+}

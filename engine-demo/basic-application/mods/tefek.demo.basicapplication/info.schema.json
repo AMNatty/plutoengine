@@ -1,0 +1,57 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://plutoengine.org/developer/mod.schema.json",
+
+  "title": "PlutoEngine mod schema",
+
+  "type": "object",
+
+  "$defs": {
+    "nonEmptyString": {
+      "type": "string",
+      "pattern": "^.+$"
+    },
+    "virtualAddress": {
+      "$ref": "#/$defs/nonEmptyString",
+      "pattern": "^([a-zA-Z0-9_-]+\\.)*[a-zA-Z0-9_-]+$"
+    }
+  },
+
+  "properties": {
+    "displayName": {
+      "description": "This name will be visible in applications when browsing the mod list. It does not necessarily need to be unique, however should be representative of the mod.",
+      "$ref": "#/$defs/nonEmptyString"
+    },
+    "author": {
+      "description": "Name(s) of the author(s) of this mod.",
+      "$ref": "#/$defs/nonEmptyString"
+    },
+    "description": {
+      "description": "Short description string.",
+      "type": "string"
+    },
+    "resourceRoots": {
+      "type": "object",
+      "properties": {
+
+      },
+      "propertyNames": {
+        "$ref": "#/$defs/virtualAddress"
+      },
+      "additionalProperties": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "enum": ["open", "zip"]
+          },
+          "path": {
+            "type": "string"
+          }
+        },
+        "required": ["type", "path"]
+      }
+    }
+  },
+
+  "required": ["displayName", "author", "resourceRoots"]
+}
