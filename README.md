@@ -47,10 +47,10 @@ See `NEXT_RELEASE_DRAFT.md` for details.
  * Streamline PlutoLib, remove bad APIs and improve code quality
    * Improve image loading capabilities, possibly rewrite PlutoLib#TPL
  * The stage system and automated asset loading
+ * Rewrite PlutoGUI
  
 ### High priority
 [ *Implemented in the next release.* ]
- * Rewrite PlutoGUI
  * Finish PlutoAudio
     * Depends on the stage system
  
