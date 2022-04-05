@@ -4,7 +4,7 @@ import org.gradle.internal.os.OperatingSystem
 import org.gradle.api.JavaVersion
 
 object Versions {
-    const val lwjglVersion = "3.3.0"
+    const val lwjglVersion = "3.3.1"
     val lwjglNatives = when (OperatingSystem.current()) {
         OperatingSystem.LINUX -> "natives-linux"
         OperatingSystem.WINDOWS -> "natives-windows"
