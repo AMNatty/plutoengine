@@ -1,3 +1,7 @@
+## 22.2.0.0-alpha.0
+* Version bumped to 2022
+* `[SDK]` Maven version is now properly set again
+
 ## 20.2.0.0-alpha.3
 * `[SDK]` Restructured the repository
   * All build scripts are now written in Kotlin

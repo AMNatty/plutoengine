@@ -1,4 +1,4 @@
-## Features targeted for 22.0.1.0-alpha.0
+## Features targeted for 22.0.0.0-alpha.1
 * `[PlutoGUI]` Initial implementation of the new font renderer
     * Full rewrite
     * High quality font rendering
@@ -7,7 +7,7 @@
 * Improve upon the support of thread-local Pluto instances
     * The long term goal is to allow an unlimited amount of Pluto applications at any given time
 
-## Features targeted for 22.0.1.0-alpha.1
+## Features targeted for 22.0.0.0-alpha.2
 * The stage subsystem
     * A "stage", in this context, is a set of assets bound together
       by programming logic, not necessarily a game level.
