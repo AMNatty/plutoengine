@@ -25,13 +25,11 @@ jobs:
     - name: Set up Gradle
       uses: gradle/gradle-build-action@v2
 
-    - name: Execute Gradle build
+    - name: Build and publish to Vega
       run: |
         chmod +x ./gradlew
-        ./gradlew build --stacktrace --info -x test 
-
-    - name: Publish to Vega
-      run: ./gradlew :plutoengine:publish --stacktrace --info -x test
+        ./gradlew :plutoengine:publish --stacktrace --info -x test
+        ./gradlew :plutoengine-ext:publish --stacktrace --info -x test
       env:
         ORG_GRADLE_PROJECT_signingKey: ${{ secrets.GPG_PRIVATE_KEY }}
         ORG_GRADLE_PROJECT_signingPassword: ${{ secrets.GPG_PASSWORD }}

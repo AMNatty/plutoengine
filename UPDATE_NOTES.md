@@ -1,9 +1,12 @@
+## 22.0.0.0-alpha.3
+* `[SDK]` **Extensions are now published via GitHub actions**
+  
 ## 22.0.0.0-alpha.2
 * `[SDK]` **Created a new extension project category**
 * `[PlutoUSS2]` **Now an extension**
   * `PlutoLib` no longer depends on `PlutoUSS2`
 * `[PlutoGameObject]` **Reimplemented `RAID` as a Pluto extension**
-  
+
 ## 22.0.0.0-alpha.1
 * `[SDK]` Jar sources and JavaDoc are now published 
 * `[PlutoRuntime]` `Mod` objects now properly contain the version number
