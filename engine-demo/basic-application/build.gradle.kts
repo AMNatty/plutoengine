@@ -43,7 +43,7 @@ tasks {
 }
 
 application {
-    mainClass.set("cz.tefek.plutodemo.Main")
+    mainClass.set("org.plutoengine.demo.Main")
 }
 
 
