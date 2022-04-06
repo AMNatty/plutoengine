@@ -28,10 +28,10 @@ jobs:
     - name: Execute Gradle build
       run: |
         chmod +x ./gradlew
-        ./gradlew :engine-core:build --stacktrace --info -x test 
+        ./gradlew build --stacktrace --info -x test 
 
     - name: Publish to Vega
-      run: ./gradlew :engine-core:publish --stacktrace --info -x test
+      run: ./gradlew :plutoengine:publish --stacktrace --info -x test
       env:
         ORG_GRADLE_PROJECT_signingKey: ${{ secrets.GPG_PRIVATE_KEY }}
         ORG_GRADLE_PROJECT_signingPassword: ${{ secrets.GPG_PASSWORD }}
