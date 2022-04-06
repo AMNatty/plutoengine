@@ -8,8 +8,6 @@ plugins {
 description = "Multi-purpose utility library that can be used in basically any project."
 
 dependencies {
-    api(project(":plutoengine:plutouss2"))
-
     api("org.jetbrains", "annotations", "23.0.0")
 
     api("org.yaml", "snakeyaml", "1.28")

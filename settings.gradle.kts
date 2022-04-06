@@ -1,23 +1,30 @@
 rootProject.name = "plutoengine-sdk"
 
 include("plutoengine",
+        "plutoengine-ext",
         "plutoengine-demos")
 
 project(":plutoengine").projectDir = file("./engine-core")
+project(":plutoengine-ext").projectDir = file("./engine-ext")
 project(":plutoengine-demos").projectDir = file("./engine-demo")
 
-include ("plutoengine:plutouss2",
-         "plutoengine:plutolib",
-         "plutoengine:plutocomponent",
-         "plutoengine:plutoruntime",
-         "plutoengine:plutodisplay",
-         "plutoengine:plutotexture",
-         "plutoengine:plutomesher",
-         "plutoengine:plutoshader",
-         "plutoengine:plutoframebuffer",
-         "plutoengine:plutospritesheet",
-         "plutoengine:plutogui",
-         "plutoengine:plutoaudio",
-         "plutoengine:plutocore")
+file("engine-core").listFiles().forEach {
+    if (!it.isDirectory)
+        return@forEach
 
-include("plutoengine-demos:basic-application")
+    include("plutoengine:${it.name}")
+}
+
+file("engine-ext").listFiles().forEach {
+    if (!it.isDirectory)
+        return@forEach
+
+    include("plutoengine-ext:${it.name}")
+}
+
+file("engine-demo").listFiles().forEach {
+    if (!it.isDirectory)
+        return@forEach
+
+    include("plutoengine-demos:${it.name}")
+}

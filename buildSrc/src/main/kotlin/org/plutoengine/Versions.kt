@@ -22,7 +22,7 @@ object Versions {
 
     const val isPrerelease = true
     const val prereleaseName = "alpha"
-    const val prerealeaseUpdate = 1
+    const val prerealeaseUpdate = 2
 
     val versionFull =
         if (isPrerelease)

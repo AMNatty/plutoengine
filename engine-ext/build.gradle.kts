@@ -5,9 +5,10 @@ task("publish") {
         if (!it.isDirectory)
             return@forEach
 
-        dependsOn(":plutoengine:${it.name}:publish")
+        dependsOn(":plutoengine-ext:${it.name}:publish")
     }
 }
+
 
 subprojects {
     apply(plugin = "java")
