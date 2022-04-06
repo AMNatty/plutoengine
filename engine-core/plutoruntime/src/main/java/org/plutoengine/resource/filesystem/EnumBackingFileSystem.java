@@ -20,10 +20,9 @@ import java.util.function.BiFunction;
 @JsonDeserialize(converter = EnumBackingFileSystem.Deserializer.class)
 public enum EnumBackingFileSystem
 {
-
     FS_DIRECTORY("open",
         uri -> FileSystems.getDefault(),
-        (uri, fileSystem) -> fileSystem.getPath(uri.getPath()),
+        (uri, fileSystem) -> fileSystem.provider().getPath(uri),
         (fs, address, ext) -> {
             var sep = fs.getSeparator();
             var rootOffs = address.getRootOffset();

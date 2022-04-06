@@ -3,14 +3,13 @@ package org.plutoengine.audio.al;
 import org.joml.Vector3f;
 import org.lwjgl.openal.*;
 import org.lwjgl.system.MemoryUtil;
+import org.plutoengine.Pluto;
+import org.plutoengine.logger.Logger;
+import org.plutoengine.logger.SmartSeverity;
 
 import javax.annotation.concurrent.ThreadSafe;
 import java.nio.ByteBuffer;
 import java.nio.IntBuffer;
-
-import org.plutoengine.Pluto;
-import org.plutoengine.logger.Logger;
-import org.plutoengine.logger.SmartSeverity;
 
 /**
  * @author 493msi

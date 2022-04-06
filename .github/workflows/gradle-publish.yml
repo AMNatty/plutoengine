@@ -1,0 +1,39 @@
+name: Gradle Package
+
+on:
+  release:
+    types: [created]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Set up JDK 17
+      uses: actions/setup-java@v2
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+        server-id: github
+        settings-path: ${{ github.workspace }}
+
+    - name: Set up Gradle
+      uses: gradle/gradle-build-action@v2
+
+    - name: Execute Gradle build
+      run: |
+        chmod +x ./gradlew
+        ./gradlew :engine-core:build --stacktrace --info -x test 
+
+    - name: Publish to Vega
+      run: ./gradlew :engine-core:publish --stacktrace --info -x test
+      env:
+        ORG_GRADLE_PROJECT_signingKey: ${{ secrets.GPG_PRIVATE_KEY }}
+        ORG_GRADLE_PROJECT_signingPassword: ${{ secrets.GPG_PASSWORD }}
+        ORG_GRADLE_PROJECT_vegaUsername: ${{ secrets.VEGA_USERNAME }}
+        ORG_GRADLE_PROJECT_vegaPassword: ${{ secrets.VEGA_PASSWORD }}
