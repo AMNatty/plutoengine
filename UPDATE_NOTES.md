@@ -1,3 +1,6 @@
+## 22.0.0.0-alpha.4
+* `[PlutoRuntime]` Implemented optional `ResourceFileSystem` features
+
 ## 22.0.0.0-alpha.3
 * `[SDK]` **Extensions are now published via GitHub actions**
   

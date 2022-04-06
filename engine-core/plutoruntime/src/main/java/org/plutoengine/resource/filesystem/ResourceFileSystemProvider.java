@@ -8,6 +8,8 @@ import org.plutoengine.mod.ModLoader;
 
 import java.io.IOException;
 import java.net.URI;
+import java.nio.channels.AsynchronousFileChannel;
+import java.nio.channels.FileChannel;
 import java.nio.channels.SeekableByteChannel;
 import java.nio.file.*;
 import java.nio.file.attribute.BasicFileAttributes;
@@ -17,6 +19,7 @@ import java.nio.file.spi.FileSystemProvider;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.ExecutorService;
 
 public class ResourceFileSystemProvider extends FileSystemProvider
 {
@@ -135,6 +138,69 @@ public class ResourceFileSystemProvider extends FileSystemProvider
         var backingProvider = backingFileSystem.provider();
 
         return backingProvider.newByteChannel(backingPath, options, attrs);
+    }
+
+    @Override
+    public FileChannel newFileChannel(Path path, Set<? extends OpenOption> options, FileAttribute<?>... attrs) throws IOException
+    {
+        if (!(path instanceof ResourcePath rp))
+            throw new IllegalArgumentException("Expected a path of type %s!".formatted(ResourcePath.class));
+
+        var backingPath = rp.getBackingPath();
+        var backingFileSystem = backingPath.getFileSystem();
+        var backingProvider = backingFileSystem.provider();
+
+        return backingProvider.newFileChannel(backingPath, options, attrs);
+    }
+
+    @Override
+    public AsynchronousFileChannel newAsynchronousFileChannel(Path path, Set<? extends OpenOption> options, ExecutorService executor, FileAttribute<?>... attrs) throws IOException
+    {
+        return super.newAsynchronousFileChannel(path, options, executor, attrs);
+    }
+
+    @Override
+    public Path readSymbolicLink(Path link) throws IOException
+    {
+        if (!(link instanceof ResourcePath rp))
+            throw new IllegalArgumentException("Expected a path of type %s!".formatted(ResourcePath.class));
+
+        var backingPath = rp.getBackingPath();
+        var backingFileSystem = backingPath.getFileSystem();
+        var backingProvider = backingFileSystem.provider();
+
+        return backingProvider.readSymbolicLink(backingPath);
+    }
+
+    @Override
+    public void createSymbolicLink(Path link, Path target, FileAttribute<?>... attrs) throws IOException
+    {
+        if (!(link instanceof ResourcePath rpLink))
+            throw new IllegalArgumentException("Expected a path of type %s!".formatted(ResourcePath.class));
+
+        if (!(target instanceof ResourcePath rpTarget))
+            throw new IllegalArgumentException("Expected a path of type %s!".formatted(ResourcePath.class));
+
+        var linkBackingPath = rpLink.getBackingPath();
+        var linkBackingFileSystem = linkBackingPath.getFileSystem();
+        var linkBackingProvider = linkBackingFileSystem.provider();
+
+        var targetBackingPath = rpTarget.getBackingPath();
+
+        linkBackingProvider.createSymbolicLink(linkBackingPath, targetBackingPath, attrs);
+    }
+
+    @Override
+    public FileSystem newFileSystem(Path path, Map<String, ?> env) throws IOException
+    {
+        if (!(path instanceof ResourcePath rp))
+            throw new IllegalArgumentException("Expected a path of type %s!".formatted(ResourcePath.class));
+
+        var backingPath = rp.getBackingPath();
+        var backingFileSystem = backingPath.getFileSystem();
+        var backingProvider = backingFileSystem.provider();
+
+        return backingProvider.newFileSystem(path, env);
     }
 
     @Override
