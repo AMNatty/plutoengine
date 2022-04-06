@@ -156,7 +156,14 @@ public class ResourceFileSystemProvider extends FileSystemProvider
     @Override
     public AsynchronousFileChannel newAsynchronousFileChannel(Path path, Set<? extends OpenOption> options, ExecutorService executor, FileAttribute<?>... attrs) throws IOException
     {
-        return super.newAsynchronousFileChannel(path, options, executor, attrs);
+        if (!(path instanceof ResourcePath rp))
+            throw new IllegalArgumentException("Expected a path of type %s!".formatted(ResourcePath.class));
+
+        var backingPath = rp.getBackingPath();
+        var backingFileSystem = backingPath.getFileSystem();
+        var backingProvider = backingFileSystem.provider();
+
+        return backingProvider.newAsynchronousFileChannel(backingPath, options, executor, attrs);
     }
 
     @Override

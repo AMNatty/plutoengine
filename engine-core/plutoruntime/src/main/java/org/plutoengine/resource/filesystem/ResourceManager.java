@@ -6,6 +6,7 @@ import org.plutoengine.mod.Mod;
 import javax.annotation.concurrent.ThreadSafe;
 import java.io.Closeable;
 import java.io.IOException;
+import java.nio.file.FileSystems;
 import java.nio.file.Path;
 import java.nio.file.ProviderNotFoundException;
 import java.nio.file.spi.FileSystemProvider;
@@ -30,9 +31,7 @@ public class ResourceManager implements Closeable
         {
             try
             {
-                var loader = ServiceLoader.load(FileSystemProvider.class, ResourceFileSystemProvider.class.getClassLoader());
-
-                for (FileSystemProvider provider : loader)
+                for (FileSystemProvider provider : FileSystemProvider.installedProviders())
                 {
                     if (provider.getScheme().equals(URI_SCHEME))
                     {
