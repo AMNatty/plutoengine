@@ -5,6 +5,9 @@
   * **Upgraded to Java 17** to take advantage of new language features and a more efficient JVM
   * **The repostiory now contains examples**
   * **Moved all classes to the `org.plutoengine` package**
+  * *Removed* the prepackaged JVM wrapper introduced in the previous alpha
+      as it caused numerous issues
+    * In the future, JDKs will be packaged with the SDK
 * `[PlutoComponent]` **Added PlutoComponent as a new module**
     * `[PlutoLib]` `PlutoLib` now depends on `PlutoComponent`
 * `[PlutoUSS2]` **Added USS2 as a new module**
@@ -31,15 +34,13 @@
       * Added the `IVersion` interface
         * Added support for version objects
         * As a result, all fields in `Pluto` except the version string are no longer compile-time constants
+    * Added the `@ConstantExpression` annotation 
 * `[PlutoDisplay]` **Renamed `PlutoStatic` to `PlutoDisplay`**
   * Added the `ModGLFW` virtual module
   * `DisplayErrorCallback` and simplified the callbacks in `Display`
 * `[PlutoCommandParser]` **Module discontinued as a part of PlutoEngine, it will still be developed seprately**
 * `[PlutoTexturing]` Renamed to `PlutoTexture`
     * Removed `Texture#load(String)` and `Texture#load(String, MagFilter, MinFilter, WrapMode...)`
-
-
-* `[PlutoLib]` Added the `@ConstantExpression` annotation
 * `[PlutoLib]` The transitive dependency JOML is now provided by `PlutoLib` instead of `PlutoStatic`
 * `[PlutoLib]` Created a simple Color API
     * `[PlutoLib]` Added the 8-bit RGBA `Color` class as a counterpart to AWT's `Color` class
@@ -48,11 +49,8 @@
     * `[PlutoLib]` Added the `HSBA` and `HSB` single precision float color objects
     * `[PlutoLib]` Added methods to convert between HSBA, RGBA, HSB and RGB
     * `[PlutoShader]` Added the `UniformRGBA` and `UniformRGB` shader uniform types
-* `[PlutoCore]` Made `PlutoApplication`'s constructor private
+* `[PlutoCore]` Made `PlutoApplication`'s constructor protected
 * `[PlutoLib]` `MiniTimeParseException` no longer contains a hardcoded String message
-* `build.gradle` *Removed* the prepackaged JVM wrapper introduced in the previous alpha
-  as it caused numerous issues
-    * In the future, JDKs will be packaged with the SDK
 
 ## 20.2.0.0-alpha.2
 * `build.gradle` Extracted the version numbers into separate variables
