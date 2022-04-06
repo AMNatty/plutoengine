@@ -24,7 +24,7 @@
 ## 20.2.0.0-alpha.3
 * `[SDK]` Restructured the repository
   * All build scripts are now written in Kotlin
-  * **Added runnabled examples**
+  * **Added runnable examples**
   * **Upgraded to Java 17** to take advantage of new language features and a more efficient JVM
   * **The repostiory now contains examples**
   * **Moved all classes to the `org.plutoengine` package**
