@@ -1,3 +1,6 @@
+## 22.0.0.0-alpha.6
+* `[PlutoSpritesheet]` Added a constructor to `PartialTextureSprite` that initializes the spritesheet to `null`
+
 ## 22.0.0.0-alpha.5
 * `[PlutoRuntime]` Fixed module load ordering
 

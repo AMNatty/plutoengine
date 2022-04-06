@@ -21,6 +21,11 @@ public class PartialTextureSprite implements Sprite<RectangleTexture>
         this.height = height;
     }
 
+    public PartialTextureSprite(int x, int y, int width, int height)
+    {
+        this(null, x, y, width, height);
+    }
+
     @Override
     public int getX()
     {
