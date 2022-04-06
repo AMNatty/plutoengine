@@ -102,7 +102,7 @@ public final class ModLoader extends PlutoLocalComponent
             return;
         }
 
-        var mod = Mod.from(modID, modInterface.dependencies(), modClass);
+        var mod = Mod.from(modID, modInterface.dependencies(), modInterface.version(), modClass);
 
         this.modNameLookup.put(modID, mod);
         this.modLookup.put(modClass, mod);

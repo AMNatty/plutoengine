@@ -32,25 +32,26 @@ import java.util.Objects;
 public class Mod implements Comparable<Mod>
 {
     private final VirtualAddress id;
+    private final String version;
+    private final Class<?>[] dependencies;
 
     private Class<?> mainClass;
-
-    private Class<?>[] dependencies;
 
     private ModManifest manifest;
 
     private ResourceManager resourceManager;
 
-    private Mod(VirtualAddress id)
+    public Mod(VirtualAddress id, String version, Class<?>[] dependencies)
     {
         this.id = id;
+        this.version = version;
+        this.dependencies = dependencies;
     }
 
-    static Mod from(VirtualAddress modID, Class<?>[] dependencies, Class<?> mainClass)
+    static Mod from(VirtualAddress modID, Class<?>[] dependencies, String version, Class<?> mainClass)
     {
-        var mod = new Mod(modID);
+        var mod = new Mod(modID, version, dependencies);
         mod.mainClass = mainClass;
-        mod.dependencies = dependencies;
 
         var modIDStr = mod.id.toString();
 
@@ -107,6 +108,11 @@ public class Mod implements Comparable<Mod>
     public Class<?> getMainClass()
     {
         return this.mainClass;
+    }
+
+    public String getVersion()
+    {
+        return this.version;
     }
 
     public Class<?>[] getDependencies()

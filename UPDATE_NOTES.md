@@ -1,3 +1,7 @@
+## 22.2.0.0-alpha.1
+* `[SDK]` Jar sources and JavaDoc are now published 
+* `[PlutoRuntime]` `Mod` objects now properly contain the version number
+
 ## 22.2.0.0-alpha.0
 * Version bumped to 2022
 * `[SDK]` Maven version is now properly set again

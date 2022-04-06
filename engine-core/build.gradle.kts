@@ -30,6 +30,9 @@ subprojects {
     configure<JavaPluginExtension> {
         sourceCompatibility = Versions.javaTargetVersion
         targetCompatibility = Versions.javaTargetVersion
+
+        withJavadocJar()
+        withSourcesJar()
     }
 
     configure<SourceSetContainer> {
