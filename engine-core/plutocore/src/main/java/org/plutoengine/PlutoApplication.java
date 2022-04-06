@@ -40,8 +40,8 @@ public abstract class PlutoApplication
     /**
      * A set of values used to create a new {@link PlutoApplication}.
      *
-     * @implNote The values are as follows:
      * <table>
+     *     <caption>Configurable options</caption>
      *     <tr><th><b>Option name</b></th><th><b>Default value</b></th><th><b>Explanation</b></th></tr>
      *     <tr>
      *         <td><code>coreProfile</code></td>

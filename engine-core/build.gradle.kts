@@ -65,6 +65,10 @@ subprojects {
         }
     }
 
+    tasks.withType<Jar> {
+        duplicatesStrategy = DuplicatesStrategy.INCLUDE
+    }
+
     configure<SigningExtension> {
         val signingKey: String? by project
         val signingPassword: String? by project

@@ -12,7 +12,7 @@ import java.lang.annotation.Target;
  * </p>
  *
  * <p>
- * Types can opt in to set the {@link ThreadSensitive#localContexts} field to <tt>true</tt>,
+ * Types can opt in to set the {@link ThreadSensitive#localContexts} field to <code>true</code>,
  * committing to support per-thread local contexts.
  * </p>
  *
@@ -25,7 +25,7 @@ import java.lang.annotation.Target;
 public @interface ThreadSensitive
 {
     /**
-     * When <tt>true</tt>, the annotated type commits to support thread-local contexts.
+     * When <code>true</code>, the annotated type commits to support thread-local contexts.
      *
      * @since 20.2.0.0-alpha.2
      * */

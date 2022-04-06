@@ -10,7 +10,7 @@ import javax.annotation.Nonnull;
  *  These methods are prefixed with "store".
  * </em></p>
  *
- * @implNote Each of the color components is stored separately as a 32-bit integer
+ * Each of the color components is stored separately as a 32-bit integer
  * to avoid unnecessary type conversion at the cost of some memory.
  *
  * <p>
@@ -117,11 +117,11 @@ public final class Color
     /**
      * Converts the supplied float-based {@link IRGBA} color object to a new {@link Color} object and returns it.
      *
+     * Color values are rounded to the nearest integer.
+     *
      * @return A new {@link Color} object
      *
      * @param colorComponents An {@link IRGBA} color object
-     *
-     * @implNote Color values are rounded to the nearest integer.
      *
      * @since 20.2.0.0-alpha.3
      * @author 493msi

@@ -7,7 +7,7 @@ import java.nio.ByteBuffer;
  * A wrapper around a native color buffer for easier handling
  * by various APIs, such as OpenGL and GLFW.
  *
- * @implNote TPNImage is <em>always</em> assumed to be ABGR due to image format
+ * TPNImage is <em>always</em> assumed to be ABGR due to image format
  * limitations of {@link BufferedImage}.
  *
  * @author 493msi

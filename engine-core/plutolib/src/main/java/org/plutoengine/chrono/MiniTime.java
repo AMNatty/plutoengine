@@ -7,7 +7,7 @@ import java.util.concurrent.TimeUnit;
  * time span {@link String} format and vice versa. Note this action is fully
  * reversible at the cost of losing millisecond precision.
  * 
- * <h3>MiniTime format specification:</h3>
+ * <h2>MiniTime format specification:</h2>
  * 
  * <pre>
  * [Nw][Nd][Nh][Nm][Ns]
