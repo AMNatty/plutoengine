@@ -104,9 +104,6 @@ public final class ModLoader extends PlutoLocalComponent
 
         var mod = Mod.from(modID, modInterface.dependencies(), modInterface.version(), modClass);
 
-        this.modNameLookup.put(modID, mod);
-        this.modLookup.put(modClass, mod);
-        this.loadList.add(mod);
 
         var dependencies = mod.getDependencies();
 
@@ -119,10 +116,14 @@ public final class ModLoader extends PlutoLocalComponent
 
             this.registerMod(dependency);
         }
+
+        this.modNameLookup.put(modID, mod);
+        this.modLookup.put(modClass, mod);
+        this.loadList.add(mod);
     }
 
     /**
-     * Returns all loaded mods in no particular order.
+     * Returns all loaded mods in their load order order.
      *
      * @return A collection of all loaded mods
      *
@@ -205,7 +206,7 @@ public final class ModLoader extends PlutoLocalComponent
                     }
                 }
 
-                this.loadedModStack.push(mod);
+                this.loadedModStack.addLast(mod);
             }
         }
         catch (Exception e)
@@ -244,7 +245,7 @@ public final class ModLoader extends PlutoLocalComponent
         {
             i++;
 
-            var mod = this.loadedModStack.pop();
+            var mod = this.loadedModStack.removeLast();
 
             Logger.logf(SmartSeverity.MODULE, "[%d / %d] Deinitializing '%s'...%n", i, modCount, mod.getID());
 

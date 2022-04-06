@@ -4,11 +4,13 @@ import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL33;
 
 import org.plutoengine.PlutoApplication;
+import org.plutoengine.PlutoLocal;
 import org.plutoengine.display.Display;
 import org.plutoengine.display.Framerate;
 import org.plutoengine.gui.font.FontHelper;
 import org.plutoengine.gui.font.FontRenderer;
 import org.plutoengine.math.ProjectionMatrix;
+import org.plutoengine.mod.ModLoader;
 import org.plutoengine.shader.uniform.auto.AutomaticUniforms;
 
 public class Main extends PlutoApplication
@@ -41,6 +43,20 @@ public class Main extends PlutoApplication
         var fpsStr = String.format("%d FPS", Framerate.getInterpolatedFPS());
         FontRenderer.drawString(3, 3, fpsStr, 0, 0, 0, 1, 0.75f, true);
         FontRenderer.drawString(2, 2, fpsStr, 0.13f, 0.75f, 0.62f, 1, 0.75f, false);
+
+        var mods = PlutoLocal.components().getComponent(ModLoader.class).getAllMods();
+        int modNr = 0;
+
+        for (var mod : mods)
+        {
+            var modManifest = mod.getManifest();
+            var modStr = String.format("%s &c[0xff999999]&i1%s", modManifest.displayName(), mod.getVersion());
+
+            FontRenderer.drawString(8, 50 + modNr * 18, modStr, 0, 0, 0, 0, 0.7f, "default", true);
+            FontRenderer.drawString(7, 49 + modNr * 18, modStr, 1, 1, 1, 1, 0.7f, "default", false);
+
+            modNr++;
+        }
     }
 
     public static Display getDisplay()

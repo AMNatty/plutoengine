@@ -1,3 +1,6 @@
+## 22.0.0.0-alpha.5
+* `[PlutoRuntime]` Fixed module load ordering
+
 ## 22.0.0.0-alpha.4
 * `[PlutoRuntime]` Implemented optional `ResourceFileSystem` features
 
