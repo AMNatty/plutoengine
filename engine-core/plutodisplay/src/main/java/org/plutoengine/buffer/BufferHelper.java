@@ -28,7 +28,7 @@ public final class BufferHelper
      * @author 493msi
      * @since 0.1
      */
-    public static IntBuffer flippedIntBuffer(int[] data)
+    public static IntBuffer intBuffer(int[] data)
     {
         IntBuffer buffer = BufferUtils.createIntBuffer(data.length);
         buffer.put(data);
@@ -46,7 +46,7 @@ public final class BufferHelper
      * @author 493msi
      * @since 0.1
      */
-    public static FloatBuffer flippedFloatBuffer(float[] data)
+    public static FloatBuffer floatBuffer(float[] data)
     {
         FloatBuffer buffer = BufferUtils.createFloatBuffer(data.length);
         buffer.put(data);
@@ -64,7 +64,7 @@ public final class BufferHelper
      * @author 493msi
      * @since 0.1
      */
-    public static ByteBuffer flippedByteBuffer(byte[] data)
+    public static ByteBuffer byteBuffer(byte[] data)
     {
         ByteBuffer buffer = BufferUtils.createByteBuffer(data.length);
         buffer.put(data);
@@ -136,8 +136,8 @@ public final class BufferHelper
      * @author 493msi
      * @since 0.3
      */
-    public static ByteBuffer readToFlippedByteBuffer(Path path) throws IOException
+    public static ByteBuffer readToByteBuffer(Path path) throws IOException
     {
-        return flippedByteBuffer(Files.readAllBytes(path));
+        return byteBuffer(Files.readAllBytes(path));
     }
 }

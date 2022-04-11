@@ -53,9 +53,9 @@ public class PlutoSpriteSheetMod implements IModEntryPoint
     {
         FramebufferTiledSpriteSheet.setSpriteShader(null);
 
-        spriteSheetShader.dispose();
-        shaderRectangle2D.dispose();
-        shader2D.dispose();
+        spriteSheetShader.close();
+        shaderRectangle2D.close();
+        shader2D.close();
 
         RectangleRenderer2D.unload();
         Renderer2D.unload();

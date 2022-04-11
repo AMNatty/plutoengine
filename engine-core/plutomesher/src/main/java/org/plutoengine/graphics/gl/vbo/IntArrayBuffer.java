@@ -5,11 +5,11 @@ import org.lwjgl.system.MemoryUtil;
 
 import java.nio.IntBuffer;
 
-public final class IndexArrayBuffer extends ArrayBuffer<IntBuffer>
+public non-sealed class IntArrayBuffer extends ArrayBuffer<IntBuffer>
 {
-    private IndexArrayBuffer(int size)
+    private IntArrayBuffer(int size)
     {
-        super(GL33.GL_ELEMENT_ARRAY_BUFFER, size);
+        super(GL33.GL_ARRAY_BUFFER, size);
     }
 
     @Override
@@ -21,10 +21,10 @@ public final class IndexArrayBuffer extends ArrayBuffer<IntBuffer>
     @Override
     public EnumArrayBufferType getDataType()
     {
-        return EnumArrayBufferType.UNSIGNED_INT;
+        return EnumArrayBufferType.INT;
     }
 
-    public static IndexArrayBuffer from(IntBuffer data)
+    public static IntArrayBuffer from(IntBuffer data)
     {
         if (!data.isDirect())
         {
@@ -36,23 +36,23 @@ public final class IndexArrayBuffer extends ArrayBuffer<IntBuffer>
             return iab;
         }
 
-        var iab = new IndexArrayBuffer(data.remaining());
+        var iab = new IntArrayBuffer(data.remaining());
         iab.bind();
         GL33.glBufferData(iab.type, data, GL33.GL_STATIC_DRAW);
         return iab;
     }
 
-    public static IndexArrayBuffer from(int[] data)
+    public static IntArrayBuffer from(int[] data)
     {
-        var iab = new IndexArrayBuffer(data.length);
+        var iab = new IntArrayBuffer(data.length);
         iab.bind();
         GL33.glBufferData(iab.type, data, GL33.GL_STATIC_DRAW);
         return iab;
     }
 
-    public static IndexArrayBuffer empty(int size)
+    public static IntArrayBuffer empty(int size)
     {
-        var iab = new IndexArrayBuffer(size);
+        var iab = new IntArrayBuffer(size);
         iab.bind();
         GL33.glBufferData(iab.type, size, GL33.GL_DYNAMIC_DRAW);
         return iab;

@@ -51,12 +51,12 @@ public class Renderer2D
     {
         if (standardQuad != null)
         {
-            standardQuad.delete();
+            standardQuad.close();
         }
 
         if (centeredQuad != null)
         {
-            centeredQuad.delete();
+            centeredQuad.close();
         }
     }
 

@@ -1,0 +1,3 @@
+[submodule "libra"]
+	path = libra
+	url = git@github.com:493msi/libra.git

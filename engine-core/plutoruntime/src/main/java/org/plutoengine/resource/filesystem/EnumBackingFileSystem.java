@@ -35,7 +35,10 @@ public enum EnumBackingFileSystem
             return fs.getPath(path);
         }),
     FS_ZIP("zip",
-        uri -> FileSystems.newFileSystem(uri, Map.of()),
+        uri -> {
+            var provider = FileSystems.getDefault().provider();
+            return FileSystems.newFileSystem(provider.getPath(uri), Map.of(), null);
+        },
         (uri, fileSystem) -> fileSystem.getPath("/"),
         (fs, address, ext) -> {
             var sep = fs.getSeparator();

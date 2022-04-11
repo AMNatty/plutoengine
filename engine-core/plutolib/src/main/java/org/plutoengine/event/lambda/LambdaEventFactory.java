@@ -2,7 +2,7 @@ package org.plutoengine.event.lambda;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Consumer;
+import java.util.function.Predicate;
 
 /**
  * A simple functional interface based event factory for objects basically
@@ -25,7 +25,7 @@ public class LambdaEventFactory
      */
     public static class LambdaEvent<T>
     {
-        private final List<Consumer<T>> consumers;
+        private final List<Predicate<T>> consumers;
 
         private LambdaEvent()
         {
@@ -42,7 +42,7 @@ public class LambdaEventFactory
          * 
          * @author 493msi
          */
-        public void addListener(Consumer<T> callback)
+        public void addListener(Predicate<T> callback)
         {
             this.consumers.add(callback);
         }
@@ -57,7 +57,7 @@ public class LambdaEventFactory
          * 
          * @author 493msi
          */
-        public void removeListener(Consumer<T> callback)
+        public void removeListener(Predicate<T> callback)
         {
             this.consumers.remove(callback);
         }
@@ -74,7 +74,7 @@ public class LambdaEventFactory
          */
         public void fire(T value)
         {
-            this.consumers.forEach(c -> c.accept(value));
+            this.consumers.removeIf(c -> !c.test(value));
         }
     }
 

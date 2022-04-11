@@ -13,7 +13,7 @@ import org.plutoengine.logger.SmartSeverity;
 import org.plutoengine.tpl.ImageABGR;
 import org.plutoengine.tpl.ImageLoader;
 
-public abstract class Texture
+public abstract class Texture implements AutoCloseable
 {
     protected int glID;
     protected final int type;
@@ -49,7 +49,7 @@ public abstract class Texture
         GL33.glBindTexture(this.type, 0);
     }
 
-    public void delete()
+    public void close()
     {
         Logger.logf(SmartSeverity.REMOVED, "Texture with ID %d of type '%s' deleted...\n", this.glID, this.getClass().getSimpleName());
 

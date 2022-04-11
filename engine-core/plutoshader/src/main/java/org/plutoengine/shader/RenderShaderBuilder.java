@@ -127,8 +127,8 @@ public class RenderShaderBuilder
 
                 if (this.tempShaders)
                 {
-                    this.vertexShader.dispose();
-                    this.fragmentShader.dispose();
+                    this.vertexShader.close();
+                    this.fragmentShader.close();
                 }
 
                 return null;
@@ -146,8 +146,8 @@ public class RenderShaderBuilder
 
                 if (this.tempShaders)
                 {
-                    this.vertexShader.dispose();
-                    this.fragmentShader.dispose();
+                    this.vertexShader.close();
+                    this.fragmentShader.close();
                 }
 
                 return null;
@@ -158,8 +158,8 @@ public class RenderShaderBuilder
 
             if (this.tempShaders)
             {
-                this.vertexShader.dispose();
-                this.fragmentShader.dispose();
+                this.vertexShader.close();
+                this.fragmentShader.close();
             }
 
             for (var field : fields)
@@ -214,8 +214,13 @@ public class RenderShaderBuilder
                         {
                             AutomaticUniforms.VIEWPORT_PROJECTION.addListener(mat4 ->
                             {
+                                if (program.getID() == 0)
+                                    return false;
+
                                 program.start();
                                 umat4.load(mat4);
+
+                                return true;
                             });
                             Logger.logf(SmartSeverity.ADDED, "Uniform '%s' ID %d in '%s' ID %d now listens to AutomaticUniforms.VIEWPORT_PROJECTION.\n", uniformName, location, shaderClass.getCanonicalName(), programID);
                         }

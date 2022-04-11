@@ -6,6 +6,10 @@
     "icons": {
       "path": "icons",
       "type": "open"
+    },
+    "fonts": {
+      "path": "fonts.zip",
+      "type": "zip"
     }
   }
 }

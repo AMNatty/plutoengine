@@ -4,24 +4,21 @@ import java.awt.image.BufferedImage;
 import java.nio.ByteBuffer;
 
 /**
- * A wrapper around a native ABGR buffer for easier handling
+ * A wrapper around a native Y buffer for easier handling
  * by various APIs, such as OpenGL and GLFW.
- *
- * TPNImage is <em>always</em> assumed to be ABGR due to image format
- * limitations of {@link BufferedImage}.
  *
  * @author 493msi
  *
- * @since pre-alpha
+ * @since 22.1.0.0-alpha.0
  */
-public class ImageABGR
+public class ImageY
 {
     private final ByteBuffer data;
     private final int width;
     private final int height;
 
     /**
-     * Creates a new {@link ImageABGR} from the specified buffer, width and height.
+     * Creates a new {@link ImageY} from the specified buffer, width and height.
      *
      * @param bfr The input {@link ByteBuffer}
      * @param width This image's width
@@ -29,7 +26,7 @@ public class ImageABGR
      *
      * @since pre-alpha
      * */
-    public ImageABGR(ByteBuffer bfr, int width, int height)
+    public ImageY(ByteBuffer bfr, int width, int height)
     {
         this.data = bfr;
         this.width = width;
@@ -39,7 +36,7 @@ public class ImageABGR
     /**
      * Returns the width of the color buffer.
      *
-     * @return The width of this {@link ImageABGR}
+     * @return The width of this {@link ImageY}
      *
      * @since pre-alpha
      * */
@@ -51,7 +48,7 @@ public class ImageABGR
     /**
      * Returns the height of the color buffer.
      *
-     * @return The height of this {@link ImageABGR}
+     * @return The height of this {@link ImageY}
      *
      * @since pre-alpha
      * */

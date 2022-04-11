@@ -1,43 +1,45 @@
 package org.plutoengine.graphics.gl.vbo;
 
-import org.plutoengine.graphics.gl.vao.attrib.data.VecArray;
+import org.lwjgl.opengl.GL33;
 
-import static org.lwjgl.opengl.GL15.*;
+import java.nio.Buffer;
 
-public abstract class ArrayBuffer<T extends VecArray<?>>
+public sealed abstract class ArrayBuffer<T extends Buffer> implements AutoCloseable permits FloatArrayBuffer, IndexArrayBuffer, IntArrayBuffer
 {
     protected int glID;
 
-    private final int vertexDimensions;
-    private final int vertexCount;
+    protected final int type;
+    private final int size;
 
-    public ArrayBuffer(T data)
+    protected ArrayBuffer(int type, int size)
     {
-        this.glID = glGenBuffers();
-        this.bind();
-        this.bindData(data);
-
-        this.vertexDimensions = data.getVecDimensions();
-        this.vertexCount = data.getVertexCount();
+        this.glID = GL33.glGenBuffers();
+        this.type = type;
+        this.size = size;
     }
 
-    public abstract EnumArrayBufferType getType();
+    public abstract EnumArrayBufferType getDataType();
 
-    protected abstract void bindData(T data);
+    public abstract void writePartialData(T data, long offset);
+
+    public int getSize()
+    {
+        return this.size;
+    }
 
     public void bind()
     {
-        glBindBuffer(GL_ARRAY_BUFFER, this.glID);
+        GL33.glBindBuffer(this.type, this.glID);
     }
 
     public void unbind()
     {
-        glBindBuffer(GL_ARRAY_BUFFER, 0);
+        GL33.glBindBuffer(this.type, 0);
     }
 
-    public void delete()
+    public void close()
     {
-        glDeleteBuffers(this.glID);
+        GL33.glDeleteBuffers(this.glID);
 
         this.glID = 0;
     }
@@ -45,15 +47,5 @@ public abstract class ArrayBuffer<T extends VecArray<?>>
     public int getID()
     {
         return this.glID;
-    }
-
-    public int getVertexDimensions()
-    {
-        return this.vertexDimensions;
-    }
-
-    public int getVertexCount()
-    {
-        return this.vertexCount;
     }
 }

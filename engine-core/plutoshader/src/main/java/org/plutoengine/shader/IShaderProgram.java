@@ -3,7 +3,7 @@ package org.plutoengine.shader;
 import org.lwjgl.opengl.GL33;
 import org.plutoengine.shader.type.IShader;
 
-public interface IShaderProgram
+public interface IShaderProgram extends AutoCloseable
 {
     int getID();
 
@@ -27,5 +27,9 @@ public interface IShaderProgram
         GL33.glUseProgram(0);
     }
 
-    void dispose();
+    default void close()
+    {
+        this.stop();
+        GL33.glDeleteProgram(this.getID());
+    }
 }

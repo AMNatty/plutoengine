@@ -3,7 +3,7 @@ package org.plutoengine.audio.al;
 import org.joml.Vector3fc;
 import org.lwjgl.openal.AL10;
 
-public abstract class AudioSource
+public abstract class AudioSource implements AutoCloseable
 {
     protected final int source;
 

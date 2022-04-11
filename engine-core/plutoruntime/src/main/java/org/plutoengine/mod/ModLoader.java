@@ -208,6 +208,8 @@ public final class ModLoader extends PlutoLocalComponent
 
                 this.loadedModStack.addLast(mod);
             }
+
+            this.loadingPhase = EnumModLoadingPhase.DONE;
         }
         catch (Exception e)
         {

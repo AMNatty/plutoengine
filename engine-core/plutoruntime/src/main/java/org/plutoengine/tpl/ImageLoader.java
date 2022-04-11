@@ -9,16 +9,18 @@ import java.nio.ByteOrder;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
+import org.lwjgl.BufferUtils;
 import org.plutoengine.logger.Logger;
 import org.plutoengine.logger.SmartSeverity;
 
 /**
- * Quick ABGR (8-bit per channel, 32 bits per pixel) image loader for OpenGL textures.
+ * Quick ABGR (8-bit per channel, 32 bits per pixel) and grayscale image loader for OpenGL textures.
  * Color component swizzling may be needed.
  *
  * @author 493msi
  *
  * @see ImageABGR
+ * @see ImageY
  *
  * @since pre-alpha
  */
@@ -34,8 +36,6 @@ public class ImageLoader
     static
     {
         placeholder = new BufferedImage(PLACEHOLDER_SIZE, PLACEHOLDER_SIZE, BufferedImage.TYPE_INT_ARGB);
-        var data = placeholder.getData();
-        var dataBuffer = (DataBufferInt) data.getDataBuffer();
 
         for (int i = 0; i < PLACEHOLDER_SIZE * PLACEHOLDER_SIZE; i++)
         {
@@ -43,7 +43,7 @@ public class ImageLoader
             int y = i / PLACEHOLDER_SIZE;
             boolean checker = x / PLACEHOLDER_CHECKEDBOARD_SQUARE_SIZE % 2 == y / PLACEHOLDER_CHECKEDBOARD_SQUARE_SIZE % 2;
 
-            dataBuffer.setElem(i, checker ? 0xFFFF0000 : 0xFF000000);
+            placeholder.setRGB(x, y, checker ? 0xFFFF0000 : 0xFF000000);
         }
     }
 
@@ -105,7 +105,7 @@ public class ImageLoader
     /**
      * Writes a {@link BufferedImage} into a {@link ImageABGR} buffer.
      *
-     * If the input {@link Path} is null, a placeholder will be generated.
+     * If the input {@link BufferedImage} is null, a placeholder will be generated.
      *
      * @param image The source {@link BufferedImage}
      * @param flipY Whether the image should be flipped vertically (for OpenGL uses)
@@ -147,7 +147,7 @@ public class ImageLoader
         DataBuffer dataBuffer = data.getDataBuffer();
         DataBufferByte byteBuffer = (DataBufferByte) dataBuffer;
         byte[] byteData = byteBuffer.getData();
-        ByteBuffer buffer = ByteBuffer.allocateDirect(width * height * 4).order(ByteOrder.nativeOrder());
+        ByteBuffer buffer = BufferUtils.createByteBuffer(width * height * 4);
         buffer.put(byteData);
         buffer.flip();
 
@@ -156,9 +156,9 @@ public class ImageLoader
 
 
     /**
-     * Writes a {@link BufferedImage} into a {@link ImageABGR} buffer.
+     * Writes a {@link BufferedImage} into an {@link ImageABGR} buffer.
      *
-     * If the input {@link Path} is null, a placeholder will be generated.
+     * If the input {@link BufferedImage} is null, a placeholder will be generated.
      *
      * @param image The source {@link BufferedImage}
      *
@@ -172,4 +172,75 @@ public class ImageLoader
     {
         return loadImageSpecial(image, true);
     }
+
+    /**
+     * Writes a {@link BufferedImage} into an {@link ImageY} buffer.
+     *
+     * If the input {@link Path} is null, a placeholder will be generated.
+     *
+     * @param image The source {@link BufferedImage}
+     * @param flipY Whether the image should be flipped vertically (for OpenGL uses)
+     *
+     * @return The output {@link ImageY}, never null
+     *
+     * @see ImageY
+     *
+     * @since 22.1.0.0-alpha.1
+     * */
+    public static ImageY loadImageGrayscaleSpecial(@Nullable BufferedImage image, boolean flipY)
+    {
+        if (image == null)
+        {
+            Logger.log(SmartSeverity.WARNING, "[TPL] Null BufferedImage supplied, generating a placeholder.");
+
+            return loadImageGrayscaleSpecial(placeholder, flipY);
+        }
+
+        int width = image.getWidth();
+        int height = image.getHeight();
+
+        if (width > 16384 || height > 16384 || width < 1 || height < 1)
+        {
+            Logger.log(SmartSeverity.ERROR, "[TPL] BufferedImage size is invalid (< 1 or > 16384), generating a placeholder.");
+
+            return loadImageGrayscaleSpecial(placeholder, flipY);
+        }
+
+        BufferedImage copy = new BufferedImage(image.getWidth(), image.getHeight(), BufferedImage.TYPE_BYTE_GRAY);
+        Graphics2D imgGraphics = copy.createGraphics();
+        imgGraphics.drawImage(image,
+            0, flipY ? copy.getHeight() : 0, copy.getWidth(), flipY ? 0 : copy.getHeight(),
+            0, 0, image.getWidth(), image.getHeight(),
+            null); // I wonder if this is pixel-perfect
+        imgGraphics.dispose();
+
+        Raster data = copy.getRaster();
+        DataBuffer dataBuffer = data.getDataBuffer();
+        DataBufferByte byteBuffer = (DataBufferByte) dataBuffer;
+        byte[] byteData = byteBuffer.getData();
+        ByteBuffer buffer = BufferUtils.createByteBuffer(width * height);
+        buffer.put(byteData);
+        buffer.flip();
+
+        return new ImageY(buffer, width, height);
+    }
+
+    /**
+     * Writes a {@link BufferedImage} into an {@link ImageY} buffer.
+     *
+     * If the input {@link BufferedImage} is null, a placeholder will be generated.
+     *
+     * @param image The source {@link BufferedImage}
+     *
+     * @return The output {@link ImageABGR}, never null
+     *
+     * @see ImageY
+     *
+     * @since 22.1.0.0-alpha.1
+     * */
+    public static ImageY loadImageGrayscale(@Nullable BufferedImage image)
+    {
+        return loadImageGrayscaleSpecial(image, true);
+    }
+
 }

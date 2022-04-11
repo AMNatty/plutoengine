@@ -15,12 +15,13 @@ public abstract class ShaderBase implements IShaderProgram
     }
 
     @Override
-    public void dispose()
+    public void close()
     {
         Logger.logf(SmartSeverity.REMOVED, "Disposing of shader ID %d of type %s...\n", this.getID(), this.getClass().getCanonicalName());
 
-        this.stop();
-        GL33.glDeleteProgram(this.programID);
+        IShaderProgram.super.close();
+
+        this.programID = 0;
     }
 
     protected void bindAttribute(int attribute, String name)

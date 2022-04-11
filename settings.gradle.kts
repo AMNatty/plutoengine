@@ -2,7 +2,8 @@ rootProject.name = "plutoengine-sdk"
 
 include("plutoengine",
         "plutoengine-ext",
-        "plutoengine-demos")
+        "plutoengine-demos",
+        "libra")
 
 project(":plutoengine").projectDir = file("./engine-core")
 project(":plutoengine-ext").projectDir = file("./engine-ext")

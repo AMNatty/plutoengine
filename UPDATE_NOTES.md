@@ -1,3 +1,10 @@
+## 22.1.0.0-alpha.0
+* `[PlutoGUI]` **Complete rewrite of the GUI library**
+* `[Pluto*]` **Unified the cleanup methods of all OpenGL object classes to `close`**
+* `[PlutoLib]` New dependency: `joml-primitives`
+* `[PlutoDisplay]` Removed the `flipped` word from all buffer functions
+* `[PlutoRuntime]` Fixed opening .zip filesystems
+
 ## 22.0.0.0-alpha.7
 * `[PlutoRuntime]` Fixed several resource filesystem bugs
 

@@ -2,11 +2,11 @@ package org.plutoengine.shader.type;
 
 import org.lwjgl.opengl.GL33;
 
-public interface IShader
+public interface IShader extends AutoCloseable
 {
     int getID();
 
-    default void dispose()
+    default void close()
     {
         GL33.glDeleteShader(this.getID());
     }

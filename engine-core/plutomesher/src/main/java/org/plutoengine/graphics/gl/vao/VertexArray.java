@@ -3,18 +3,16 @@ package org.plutoengine.graphics.gl.vao;
 import org.lwjgl.opengl.GL33;
 import org.lwjgl.system.MemoryUtil;
 import org.plutoengine.graphics.gl.DrawMode;
+import org.plutoengine.graphics.gl.vao.attrib.AttributeInfo;
 import org.plutoengine.graphics.gl.vbo.ArrayBuffer;
 import org.plutoengine.graphics.gl.vbo.IndexArrayBuffer;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Vector;
+import java.util.*;
 
 import org.plutoengine.logger.Logger;
 import org.plutoengine.logger.SmartSeverity;
 
-public class VertexArray
+public class VertexArray implements AutoCloseable
 {
     protected final List<Integer> usedAttributes;
     protected final Vector<ArrayBuffer<?>> vertexAttributes;
@@ -34,22 +32,29 @@ public class VertexArray
 
         this.glID = GL33.glGenVertexArrays();
 
-        Logger.logf(SmartSeverity.ADDED, "Vertex array ID %d created...\n", this.glID);
+        Logger.logf(SmartSeverity.ADDED, "Vertex array ID %d created...%n", this.glID);
     }
 
-    public void createArrayAttribute(ArrayBuffer<?> buffer, int attribID)
+    public void createArrayAttribute(AttributeInfo info, ArrayBuffer<?> buffer)
     {
+        var attribID = info.position();
+        var dimensions = info.dimensions();
+        var type = buffer.getDataType();
+
         this.bind();
         buffer.bind();
-        GL33.glVertexAttribPointer(attribID, buffer.getVertexDimensions(), buffer.getType().getGLID(), false, 0, 0);
+        GL33.glVertexAttribPointer(attribID, dimensions, type.getGLID(), false, 0, 0);
 
         this.vertexAttributes.set(attribID, buffer);
         this.usedAttributes.add(attribID);
 
         if (!this.hasIndices())
-        {
-            this.vertexCount = buffer.getVertexCount();
-        }
+            this.vertexCount = buffer.getSize() / dimensions;
+    }
+
+    public Set<Integer> getUsedAttributes()
+    {
+        return Set.copyOf(this.usedAttributes);
     }
 
     public List<ArrayBuffer<?>> getVertexAttributes()
@@ -64,7 +69,7 @@ public class VertexArray
 
     public void enableAllAttributes()
     {
-        this.usedAttributes.forEach(GL33::glEnableVertexAttribArray);
+        this.usedAttributes.forEach(VertexArray::enableAttribute);
     }
 
     public void bindIndices(IndexArrayBuffer buffer)
@@ -72,7 +77,7 @@ public class VertexArray
         this.bind();
         buffer.bind();
         this.indices = buffer;
-        this.vertexCount = buffer.getVertexCount();
+        this.vertexCount = buffer.getSize();
     }
 
     public void bind()
@@ -89,7 +94,7 @@ public class VertexArray
     {
         if (this.hasIndices())
         {
-            GL33.glDrawElements(mode.getGLID(), this.vertexCount, this.indices.getType().getGLID(), MemoryUtil.NULL);
+            GL33.glDrawElements(mode.getGLID(), this.vertexCount, this.indices.getDataType().getGLID(), MemoryUtil.NULL);
         }
         else
         {
@@ -101,7 +106,7 @@ public class VertexArray
     {
         if (this.hasIndices())
         {
-            GL33.glDrawElementsInstanced(mode.getGLID(), this.vertexCount, this.indices.getType().getGLID(), MemoryUtil.NULL, count);
+            GL33.glDrawElementsInstanced(mode.getGLID(), this.vertexCount, this.indices.getDataType().getGLID(), MemoryUtil.NULL, count);
         }
         else
         {
@@ -119,15 +124,17 @@ public class VertexArray
         return this.indices != null;
     }
 
-    public void delete()
+    public void close()
     {
-        this.usedAttributes.stream().map(this.vertexAttributes::get).forEach(ArrayBuffer::delete);
+        this.usedAttributes.stream()
+                           .map(this.vertexAttributes::get)
+                           .forEach(ArrayBuffer::close);
         this.vertexAttributes.clear();
         this.usedAttributes.clear();
 
         if (this.indices != null)
         {
-            this.indices.delete();
+            this.indices.close();
             this.indices = null;
         }
 
@@ -141,5 +148,15 @@ public class VertexArray
     public int getID()
     {
         return this.glID;
+    }
+
+    public static void enableAttribute(int attribute)
+    {
+        GL33.glEnableVertexAttribArray(attribute);
+    }
+
+    public static void disableAttribute(int attribute)
+    {
+        GL33.glDisableVertexAttribArray(attribute);
     }
 }
