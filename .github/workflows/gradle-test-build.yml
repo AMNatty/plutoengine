@@ -14,7 +14,10 @@ jobs:
       contents: read
 
     steps:
-      - uses: actions/checkout@v2
+      - name: Check out the repository and all submodules
+        uses: actions/checkout@v2
+        with:
+          submodules: recursive
 
       - name: Set up JDK 17
         uses: actions/setup-java@v2
