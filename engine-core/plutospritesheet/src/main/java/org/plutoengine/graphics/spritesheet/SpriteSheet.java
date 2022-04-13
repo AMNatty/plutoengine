@@ -1,6 +1,6 @@
 package org.plutoengine.graphics.spritesheet;
 
-public abstract class SpriteSheet<T>
+public abstract class SpriteSheet<T> implements AutoCloseable
 {
     protected T spriteSheet;
 
@@ -28,5 +28,6 @@ public abstract class SpriteSheet<T>
 
     public abstract int getHeightInPixels();
 
-    public abstract void delete();
+    @Override
+    public abstract void close();
 }

@@ -31,8 +31,6 @@ public class VertexArray implements AutoCloseable
         this.vertexAttributes.setSize(maxAttributes);
 
         this.glID = GL33.glGenVertexArrays();
-
-        Logger.logf(SmartSeverity.ADDED, "Vertex array ID %d created...%n", this.glID);
     }
 
     public void createArrayAttribute(AttributeInfo info, ArrayBuffer<?> buffer)

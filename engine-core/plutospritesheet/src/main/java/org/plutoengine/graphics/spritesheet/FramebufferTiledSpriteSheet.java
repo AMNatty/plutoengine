@@ -79,7 +79,7 @@ public class FramebufferTiledSpriteSheet extends TiledSpriteSheet<RectangleTextu
     }
 
     @Override
-    public void delete()
+    public void close()
     {
         this.spriteFBO.unbind();
         this.spriteFBO.delete();
@@ -90,10 +90,7 @@ public class FramebufferTiledSpriteSheet extends TiledSpriteSheet<RectangleTextu
 
         this.spriteSheet.close();
 
-        // this.spriteSheet = null;
-        // Done by parent
-
-        super.delete();
+        super.close();
     }
 
     public Sampler2D getSampler()

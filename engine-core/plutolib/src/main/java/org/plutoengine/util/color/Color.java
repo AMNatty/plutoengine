@@ -1,6 +1,7 @@
 package org.plutoengine.util.color;
 
-import javax.annotation.Nonnull;
+
+import org.jetbrains.annotations.NotNull;
 
 /**
  * A simple 8-bit RGBA color container.
@@ -126,7 +127,7 @@ public final class Color
      * @since 20.2.0.0-alpha.3
      * @author 493msi
      */
-    public static Color from(@Nonnull IRGBA colorComponents)
+    public static Color from(@NotNull IRGBA colorComponents)
     {
         return new Color(Math.round(colorComponents.red() * 255),
                 Math.round(colorComponents.green() * 255),
@@ -140,7 +141,7 @@ public final class Color
      * @since 20.2.0.0-alpha.3
      * @author 493msi
      */
-    public static Color from(@Nonnull IRGB colorComponents)
+    public static Color from(@NotNull IRGB colorComponents)
     {
         return new Color(Math.round(colorComponents.red() * 255),
                 Math.round(colorComponents.green() * 255),
@@ -153,7 +154,7 @@ public final class Color
      * @since 20.2.0.0-alpha.3
      * @author 493msi
      */
-    public static Color from(int color, @Nonnull EnumColorFormat colorFormat)
+    public static Color from(int color, @NotNull EnumColorFormat colorFormat)
     {
         return switch (colorFormat)
         {
@@ -173,7 +174,7 @@ public final class Color
      * @since 20.2.0.0-alpha.3
      * @author 493msi
      */
-    public static Color fromAWT(@Nonnull java.awt.Color color)
+    public static Color fromAWT(@NotNull java.awt.Color color)
     {
         return new Color(color.getRed(), color.getGreen(), color.getBlue(), color.getAlpha());
     }
@@ -184,7 +185,7 @@ public final class Color
      * @since 20.2.0.0-alpha.3
      * @author 493msi
      */
-    public static Color from(@Nonnull byte[] color, @Nonnull EnumColorFormat colorFormat)
+    public static Color from(byte @NotNull [] color, @NotNull EnumColorFormat colorFormat)
     {
         return from(color, 0, colorFormat);
     }
@@ -195,7 +196,7 @@ public final class Color
      * @since 20.2.0.0-alpha.3
      * @author 493msi
      */
-    public static Color from(@Nonnull byte[] color, int offset, @Nonnull EnumColorFormat colorFormat)
+    public static Color from(byte @NotNull [] color, int offset, @NotNull EnumColorFormat colorFormat)
     {
         return switch (colorFormat)
         {
@@ -237,7 +238,7 @@ public final class Color
      * @since 20.2.0.0-alpha.3
      * @author 493msi
      */
-    public int get(@Nonnull EnumColorFormat colorFormat)
+    public int get(@NotNull EnumColorFormat colorFormat)
     {
         return switch (colorFormat)
         {
@@ -257,7 +258,7 @@ public final class Color
      * @since 20.2.0.0-alpha.3
      * @author 493msi
      */
-    public void get(@Nonnull EnumColorFormat colorFormat, @Nonnull byte[] dataOut)
+    public void get(@NotNull EnumColorFormat colorFormat, byte @NotNull [] dataOut)
     {
         get(colorFormat, dataOut, 0);
     }
@@ -268,7 +269,7 @@ public final class Color
      * @since 20.2.0.0-alpha.3
      * @author 493msi
      */
-    public void get(@Nonnull EnumColorFormat colorFormat, @Nonnull byte[] dataOut, int offset)
+    public void get(@NotNull EnumColorFormat colorFormat, byte @NotNull [] dataOut, int offset)
     {
         switch (colorFormat)
         {
@@ -404,7 +405,7 @@ public final class Color
      * @since 20.2.0.0-alpha.3
      * @author 493msi
      */
-    public void storeFloatComponentsRGBA(@Nonnull RGBA target)
+    public void storeFloatComponentsRGBA(@NotNull RGBA target)
     {
         storeFloatComponentsRGB(target);
         target.a = this.alpha / 255.0f;
@@ -416,7 +417,7 @@ public final class Color
      * @since 20.2.0.0-alpha.3
      * @author 493msi
      */
-    public void storeFloatComponentsRGB(@Nonnull RGB target)
+    public void storeFloatComponentsRGB(@NotNull RGB target)
     {
         target.r = this.red / 255.0f;
         target.g = this.green / 255.0f;
@@ -429,7 +430,7 @@ public final class Color
      * @since 20.2.0.0-alpha.3
      * @author 493msi
      */
-    public void storeFloatComponentsHSBA(@Nonnull HSBA target)
+    public void storeFloatComponentsHSBA(@NotNull HSBA target)
     {
         var hsb = this.getFloatComponentsHSBA();
 
@@ -445,7 +446,7 @@ public final class Color
      * @since 20.2.0.0-alpha.3
      * @author 493msi
      */
-    public void storeFloatComponentsHSB(@Nonnull HSB target)
+    public void storeFloatComponentsHSB(@NotNull HSB target)
     {
         var hsb = this.getFloatComponentsHSB();
 

@@ -1,6 +1,7 @@
 package org.plutoengine.graphics.sprite;
 
-public interface SpriteDisposable<T> extends Sprite<T>
+public interface SpriteDisposable<T> extends Sprite<T>, AutoCloseable
 {
-    void delete();
+    @Override
+    void close();
 }

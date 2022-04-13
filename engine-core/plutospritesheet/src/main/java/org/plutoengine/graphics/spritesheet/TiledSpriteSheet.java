@@ -1,5 +1,6 @@
 package org.plutoengine.graphics.spritesheet;
 
+import org.jetbrains.annotations.MustBeInvokedByOverriders;
 import org.plutoengine.graphics.sprite.Sprite;
 import org.plutoengine.graphics.sprite.SpriteDisposable;
 import org.plutoengine.graphics.sprite.TileSprite;
@@ -89,7 +90,8 @@ public abstract class TiledSpriteSheet<T> extends SpriteSheet<T>
     }
 
     @Override
-    public void delete()
+    @MustBeInvokedByOverriders
+    public void close()
     {
         this.sprites.clear();
         this.sprites = null;
@@ -132,7 +134,7 @@ public abstract class TiledSpriteSheet<T> extends SpriteSheet<T>
         this.drawSprite(sprite, newX, newY, newWidth, newHeight);
 
         if (sprite instanceof SpriteDisposable<?> disposableSprite)
-            disposableSprite.delete();
+            disposableSprite.close();
 
         var copySprite = new TileSprite<TiledSpriteSheet<T>>(newX, newY, newWidth, newHeight);
         copySprite.setSpriteSheet(this);

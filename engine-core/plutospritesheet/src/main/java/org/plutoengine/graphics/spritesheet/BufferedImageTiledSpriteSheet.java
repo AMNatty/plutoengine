@@ -78,12 +78,12 @@ public class BufferedImageTiledSpriteSheet extends TiledSpriteSheet<BufferedImag
     }
 
     @Override
-    public void delete()
+    public void close()
     {
         this.drawGraphics.dispose();
         this.drawGraphics = null;
 
-        super.delete();
+        super.close();
     }
 
     @Override

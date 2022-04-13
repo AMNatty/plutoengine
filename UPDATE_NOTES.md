@@ -1,9 +1,17 @@
 ## 22.1.0.0-alpha.0
+* `[PlutoMesher]` **Partial rewrite**
+  * *Removed* `VecArray`
+  * Reduced pointless abstraction
+  * Creation and destruction no longer logged
 * `[PlutoGUI]` **Complete rewrite of the GUI library**
 * `[Pluto*]` **Unified the cleanup methods of all OpenGL object classes to `close`**
 * `[PlutoLib]` New dependency: `joml-primitives`
+* `[PlutoLib]` Now has a `module-info.java`
+* `[PlutoLib]` Now uses JetBrains annotations instead of JSR 305
 * `[PlutoDisplay]` Removed the `flipped` word from all buffer functions
 * `[PlutoRuntime]` Fixed opening .zip filesystems
+* `[PlutoShader]` Added `UniformArrayFloat`, `UniformArrayRGBA`,
+                  `UniformArrayVec2`, `UniformArrayVec3`, `UniformArrayVec4`
 
 ## 22.0.0.0-alpha.7
 * `[PlutoRuntime]` Fixed several resource filesystem bugs

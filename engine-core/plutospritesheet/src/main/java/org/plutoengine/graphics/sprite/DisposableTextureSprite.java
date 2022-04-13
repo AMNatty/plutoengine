@@ -10,7 +10,7 @@ public class DisposableTextureSprite extends PartialTextureSprite implements Spr
     }
 
     @Override
-    public void delete()
+    public void close()
     {
         this.spriteTexture.close();
         this.spriteTexture = null;
