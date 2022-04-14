@@ -23,22 +23,38 @@ vec4 solidColor(void)
     return paintColor;
 }
 
+vec4 gammaMix(vec4 lCol, vec4 rCol, float ratio)
+{
+    float gamma = 2.2;
+    float one_over_gamma = 1 / gamma;
+
+    vec4 ilCol = vec4(pow(lCol.r, gamma), pow(lCol.g, gamma), pow(lCol.b, gamma), lCol.a);
+    vec4 irCol = vec4(pow(rCol.r, gamma), pow(rCol.g, gamma), pow(rCol.b, gamma), rCol.a);
+
+    vec4 fCol = mix(ilCol, irCol, ratio);
+
+    return vec4(pow(fCol.r, one_over_gamma), pow(fCol.g, one_over_gamma), pow(fCol.b, one_over_gamma), fCol.a);
+}
+
 vec4 gradientColor(void)
 {
-    float par = smoothstep(paintGradientEnds[0].x, paintGradientEnds[1].x, paintUVCoordinates.x) * (paintGradientStopCount - 1);
+    float angle = atan(-paintGradientEnds[1].y + paintGradientEnds[0].y, paintGradientEnds[1].x - paintGradientEnds[0].x);
+    float rotatedStartX = paintGradientEnds[0].x * cos(angle) - paintGradientEnds[0].y * sin(angle);
+    float rotatedEndX = paintGradientEnds[1].x * cos(angle) - paintGradientEnds[1].y * sin(angle);
+    float d = rotatedEndX - rotatedStartX;
 
-    float nPar = clamp(par, 0, float(paintGradientStopCount - 1)) + paintGradientPositions[0] * 0.000001;
-    vec4 lCol = paintGradientColors[int(floor(nPar))];
-    vec4 rCol = paintGradientColors[int(ceil(nPar))];
+    float pX = paintUVCoordinates.x * cos(angle) - paintUVCoordinates.y * sin(angle);
 
-    float gamma = 0.45;
+    float mr = smoothstep(rotatedStartX + paintGradientPositions[0] * d, rotatedStartX + paintGradientPositions[1] * d, pX);
+    vec4 col = gammaMix(paintGradientColors[0], paintGradientColors[1], mr);
 
-    vec4 ilCol = vec4(pow(lCol.r, 1 / gamma), pow(lCol.g, 1 / gamma), pow(lCol.b, 1 / gamma), lCol.a);
-    vec4 irCol = vec4(pow(rCol.r, 1 / gamma), pow(rCol.g, 1 / gamma), pow(rCol.b, 1 / gamma), rCol.a);
+    for (int i = 1; i < paintGradientStopCount - 1; i++)
+    {
+        mr = smoothstep(rotatedStartX + paintGradientPositions[i] * d, rotatedStartX + paintGradientPositions[i + 1] * d, pX);
+        col = gammaMix(col, paintGradientColors[i + 1], mr);
+    }
 
-    vec4 fCol = mix(ilCol, irCol, fract(nPar));
-
-    return vec4(pow(fCol.r, gamma), pow(fCol.g, gamma), pow(fCol.b, gamma), fCol.a);
+    return col;
 }
 
 void main(void)

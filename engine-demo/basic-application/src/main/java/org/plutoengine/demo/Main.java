@@ -65,7 +65,7 @@ public class Main extends PlutoApplication
         var watermarkStyle = new TextStyleOptions(20.0f);
         watermarkStyle.setHorizontalAlign(TextStyleOptions.TextAlign.CENTER);
         watermarkStyle.setPaint(LiPaint.solidColor(Color.from(0x4f000000, EnumColorFormat.CF_INT_ARGB)));
-        ImmediateFontRenderer.drawString(this.display.getWidth() / 2.0f, 5, "PlutoEngine demo build licensed the MIT license...", BasicApplicationDemoMod.font, watermarkStyle);
+        ImmediateFontRenderer.drawString(this.display.getWidth() / 2.0f, 5, "PlutoEngine demo build licensed under the MIT license", BasicApplicationDemoMod.font, watermarkStyle);
 
         RectangleRenderer2D.draw()
                            .at(this.display.getWidth() / 2.0f - 150, this.display.getHeight() / 2.0f - 246, 300, 300)

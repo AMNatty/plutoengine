@@ -1,3 +1,6 @@
+## 22.1.0.0-alpha.1
+* `plutoengine-demos/basic-application` Made the gradient in the fragment font shader rotatable
+
 ## 22.1.0.0-alpha.0
 * `[PlutoMesher]` **Partial rewrite**
   * *Removed* `VecArray`
