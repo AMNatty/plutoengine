@@ -83,9 +83,8 @@ public class Main extends PlutoApplication
             .setFitBox(new Rectanglef(50.0f, 50.0f, this.display.getWidth() - 50.0f, this.display.getHeight() - 50.0f))
             .setPaint(LiPaint.solidColor(Color.VERY_DARK_GRAY));
         ImmediateFontRenderer.drawString(0, 102, "Welcome to PlutoEngine v. %s!".formatted(Pluto.VERSION), BasicApplicationDemoMod.font, welcomeStyle);
-        float gPos = (System.currentTimeMillis() % 7200) / 20.0f;
-        ImmediateFontRenderer.drawString(500, 50, "Hue: %f".formatted(gPos), BasicApplicationDemoMod.font, style);
 
+        float gPos = (System.currentTimeMillis() % 7200) / 20.0f;
         var stops = new LiGradientPaint.Stop[16];
         for (int i = 0; i < stops.length; i++)
             stops[i] = new LiGradientPaint.Stop(i / (float) stops.length, Color.from(new HSB(gPos + i * 10, 1.0f, 1.0f).toRGBA()));
