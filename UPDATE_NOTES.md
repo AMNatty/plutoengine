@@ -12,6 +12,7 @@
 * `[PlutoRuntime]` Fixed opening .zip filesystems
 * `[PlutoShader]` Added `UniformArrayFloat`, `UniformArrayRGBA`,
                   `UniformArrayVec2`, `UniformArrayVec3`, `UniformArrayVec4`
+* `[PlutoRuntime]` `SmartSeverity.MODULE_CHECK` now correctly uses the standard output instead of `stderr`.
 
 ## 22.0.0.0-alpha.7
 * `[PlutoRuntime]` Fixed several resource filesystem bugs

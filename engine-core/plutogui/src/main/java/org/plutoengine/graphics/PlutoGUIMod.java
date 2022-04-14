@@ -1,6 +1,5 @@
 package org.plutoengine.graphics;
 
-import org.joml.Matrix3f;
 import org.plutoengine.Pluto;
 import org.plutoengine.graphics.gui.FontShader;
 import org.plutoengine.graphics.texture.MagFilter;
@@ -34,10 +33,6 @@ public class PlutoGUIMod implements IModEntryPoint
         instance = mod;
 
         fontShader = new RenderShaderBuilder(mod.getResource("shaders.VertexFontShader#glsl"), mod.getResource("shaders.FragmentFontShader#glsl")).build(FontShader.class, false);
-        fontShader.start();
-        fontShader.recolor.load(1, 1, 1, 1);
-        fontShader.transformationMatrix.load(new Matrix3f());
-
 
         uiElementsAtlas = new RectangleTexture();
         uiElementsAtlas.load(mod.getResource("gui.elements#png"), MagFilter.NEAREST, MinFilter.NEAREST, WrapMode.CLAMP_TO_EDGE, WrapMode.CLAMP_TO_EDGE);

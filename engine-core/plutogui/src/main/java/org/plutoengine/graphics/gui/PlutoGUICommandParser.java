@@ -4,12 +4,15 @@ import org.plutoengine.graphics.gl.DrawMode;
 import org.plutoengine.graphics.gl.vao.VertexArray;
 import org.plutoengine.graphics.gl.vao.VertexArrayBuilder;
 import org.plutoengine.graphics.gui.command.PlutoCommandDrawMesh;
+import org.plutoengine.graphics.gui.command.PlutoCommandDrawMeshDirectBuffer;
 import org.plutoengine.graphics.gui.command.PlutoCommandSwitchShader;
 import org.plutoengine.graphics.gui.command.PlutoCommandSwitchTexture;
 import org.plutoengine.libra.command.AbstractGUICommandParser;
 import org.plutoengine.libra.command.IGUIRenderer;
 import org.plutoengine.libra.command.LiCommandBuffer;
+import org.plutoengine.libra.command.impl.LiCommandSetPaint;
 import org.plutoengine.libra.command.impl.LiCommandSetTransform;
+import org.plutoengine.libra.command.impl.LiCommandSpecial;
 import org.plutoengine.shader.ShaderBase;
 
 import java.util.ArrayDeque;
@@ -52,6 +55,9 @@ public class PlutoGUICommandParser extends AbstractGUICommandParser
                     attribsToEnable.removeAll(alreadyEnabledAttribs);
                     alreadyEnabledAttribs.addAll(attribsToEnable);
 
+                    if (drawCmd instanceof PlutoCommandDrawMeshDirectBuffer dBuf)
+                        dBuf.close();
+
                     drawCalls.add(() -> {
                         vao.bind();
                         attribsToEnable.forEach(VertexArray::enableAttribute);
@@ -70,6 +76,17 @@ public class PlutoGUICommandParser extends AbstractGUICommandParser
                     assert shaderCapture != null;
 
                     drawCalls.add(() -> shaderCapture.setTransform(transformCmd.getTransform()));
+                }
+
+                case SET_PAINT -> {
+                    if (!(cmd instanceof LiCommandSetPaint paintCmd))
+                        throw new IllegalStateException();
+
+                    var shaderCapture = currentShader;
+
+                    assert shaderCapture != null;
+
+                    drawCalls.add(() -> shaderCapture.setPaint(paintCmd.getPaint()));
                 }
 
                 case SWITCH_SHADER -> {
@@ -92,6 +109,14 @@ public class PlutoGUICommandParser extends AbstractGUICommandParser
                     assert textureCapture != null;
 
                     drawCalls.add(textureCapture::bind);
+                }
+
+                case SPECIAL -> {
+                    if (!(cmd instanceof LiCommandSpecial cSp))
+                        throw new IllegalStateException();
+
+                    var af = cSp.getAction();
+                    drawCalls.add(() -> af.accept(mergedBuffer));
                 }
             }
         }

@@ -24,7 +24,6 @@ version numbers.*
 ### Safe submodules
  * **PlutoCore** - Stable
  * **PlutoFramebuffer** - Stable
- * **PlutoGUI** - Stable, awaiting a rewrite
  * **PlutoMesher** - Stable
  * **PlutoShader** - Stable
  * **PlutoTexture** - Stable
@@ -34,6 +33,7 @@ version numbers.*
  * **PlutoLib** - Mostly stable
  
 ### Unstable submodules
+ * **PlutoGUI** - Recently rewritten, the API is highly unstable
  * **PlutoRuntime** - Somewhat tentative, the module API has been rewritten and might contain bugs
  * **PlutoAudio** - Somewhat usable, unfinished
  
@@ -42,17 +42,25 @@ version numbers.*
 
 See `NEXT_RELEASE_DRAFT.md` for details.
 
+### To be fixed
+[ *Features or bugs that should be fixed **ASAP*** ]
+ * Implement gradient variation support for Libra fills
+ * Finish gradient rendering in FragmentFontShader.glsl
+ * Improve code quality in PlutoGUI
+
 ### Very high priority
 [ *Implemented in the current release.* ]
- * Streamline PlutoLib, remove bad APIs and improve code quality
-   * Improve image loading capabilities, possibly rewrite PlutoLib#TPL
+ * Improve image loading capabilities, possibly rewrite PlutoLib#TPL
  * The stage system and automated asset loading
- * Rewrite PlutoGUI
  
 ### High priority
 [ *Implemented in the next release.* ]
  * Finish PlutoAudio
     * Depends on the stage system
+ * Expand upon the Color API
+    * Color mixing and blending
+    * Color transformation
+    * High-performance serialization
  
 ### Normal priority
 [ *Planned for an upcoming release.* ]
@@ -68,7 +76,3 @@ See `NEXT_RELEASE_DRAFT.md` for details.
     * This feature requires a full rewrite and possibly a complete overhaul
     * Mods should have limited execution levels, for example restricted file access
       or disabled native library loading (this is probably not possible)
- * Expand upon the Color API
-    * Color mixing and blending
-    * Color transformation
-    * High-performance serialization

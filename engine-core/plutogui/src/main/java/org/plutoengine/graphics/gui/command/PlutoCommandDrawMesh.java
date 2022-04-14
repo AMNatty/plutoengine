@@ -1,20 +1,21 @@
 package org.plutoengine.graphics.gui.command;
 
 import org.plutoengine.graphics.gl.vao.attrib.AttributeInfo;
-import org.plutoengine.graphics.gl.vbo.EnumArrayBufferType;
 import org.plutoengine.libra.command.impl.LiCommand;
 import org.plutoengine.libra.command.impl.LiCommandDrawMesh;
 
 import java.nio.Buffer;
 import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
-import java.util.*;
+import java.util.Collections;
+import java.util.Map;
+import java.util.TreeMap;
 
-public class PlutoCommandDrawMesh extends LiCommandDrawMesh
+public abstract sealed class PlutoCommandDrawMesh extends LiCommandDrawMesh permits PlutoCommandDrawMeshDirectBuffer, PlutoCommandDrawMeshHeap
 {
-    private final Map<Integer, AttributeInfo> attributeInfo;
-    private final Map<Integer, Buffer> data;
-    private IntBuffer indices;
+    protected final Map<Integer, AttributeInfo> attributeInfo;
+    protected final Map<Integer, Buffer> data;
+    protected IntBuffer indices;
 
     public PlutoCommandDrawMesh()
     {
@@ -48,19 +49,7 @@ public class PlutoCommandDrawMesh extends LiCommandDrawMesh
         this.addIndices(IntBuffer.wrap(data));
     }
 
-    public void addIndices(IntBuffer data)
-    {
-        if (data == null)
-            return;
-
-        if (this.indices == null)
-            this.indices = IntBuffer.allocate(data.remaining());
-
-        if (this.indices.remaining() < data.remaining())
-            this.indices = IntBuffer.allocate(Math.max(this.indices.capacity() << 1, this.indices.capacity() + data.remaining())).put(this.indices.flip());
-
-        this.indices.put(data);
-    }
+    public abstract void addIndices(IntBuffer data);
 
     public void addAttribute(int attrib, float[] data, int dimensions)
     {
@@ -70,30 +59,7 @@ public class PlutoCommandDrawMesh extends LiCommandDrawMesh
         this.addAttribute(attrib, FloatBuffer.wrap(data), dimensions);
     }
 
-    public void addAttribute(int attrib, FloatBuffer data, int dimensions)
-    {
-        if (data == null)
-            return;
-
-        var meta = this.attributeInfo.computeIfAbsent(attrib, k -> new AttributeInfo(EnumArrayBufferType.FLOAT, attrib, dimensions));
-
-        if (meta.dimensions() != dimensions)
-            throw new IllegalArgumentException("Attribute dimensions mismatch!");
-
-        this.data.compute(attrib, (k, v) -> {
-            if (v == null)
-                return FloatBuffer.allocate(data.remaining()).put(data);
-
-            if (!(v instanceof FloatBuffer fab))
-                throw new IllegalArgumentException();
-
-            if (data.remaining() <= fab.remaining())
-                return fab.put(data);
-
-            var newBuf = FloatBuffer.allocate(Math.max(v.capacity() << 1, v.capacity() + data.remaining()));
-            return newBuf.put(fab.flip()).put(data);
-        });
-    }
+    public abstract void addAttribute(int attrib, FloatBuffer data, int dimensions);
 
     public void addAttribute(int attrib, int[] data, int dimensions)
     {
@@ -103,30 +69,7 @@ public class PlutoCommandDrawMesh extends LiCommandDrawMesh
         this.addAttribute(attrib, IntBuffer.wrap(data), dimensions);
     }
 
-    public void addAttribute(int attrib, IntBuffer data, int dimensions)
-    {
-        if (data == null)
-            return;
-
-        var meta = this.attributeInfo.computeIfAbsent(attrib, k -> new AttributeInfo(EnumArrayBufferType.INT, attrib, dimensions));
-
-        if (meta.dimensions() != dimensions)
-            throw new IllegalArgumentException("Attribute dimensions mismatch!");
-
-        this.data.compute(attrib, (k, v) -> {
-            if (v == null)
-                return IntBuffer.allocate(data.remaining()).put(data);
-
-            if (!(v instanceof IntBuffer fab))
-                throw new IllegalArgumentException();
-
-            if (data.remaining() <= fab.remaining())
-                return fab.put(data);
-
-            var newBuf = IntBuffer.allocate(Math.max(v.capacity() << 1, v.capacity() + data.remaining()));
-            return newBuf.put(fab.flip()).put(data);
-        });
-    }
+    public abstract void addAttribute(int attrib, IntBuffer data, int dimensions);
 
     @Override
     public boolean supportsMerge(LiCommand other)
@@ -154,7 +97,7 @@ public class PlutoCommandDrawMesh extends LiCommandDrawMesh
             }
         });
 
-        this.addIndices(pcdm.indices);
+        this.addIndices(pcdm.getIndices());
 
         return this;
     }

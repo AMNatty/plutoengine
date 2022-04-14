@@ -1,39 +1,40 @@
 package org.plutoengine.demo;
 
+import org.joml.primitives.Rectanglef;
 import org.lwjgl.glfw.GLFW;
-import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL33;
-
+import org.plutoengine.Pluto;
 import org.plutoengine.PlutoApplication;
+import org.plutoengine.PlutoLocal;
 import org.plutoengine.display.Display;
+import org.plutoengine.display.Framerate;
+import org.plutoengine.graphics.ImmediateFontRenderer;
 import org.plutoengine.graphics.PlutoGUIMod;
-import org.plutoengine.graphics.Renderer2D;
-import org.plutoengine.graphics.TestFontRenderer;
-import org.plutoengine.graphics.gl.vao.QuadPresets;
+import org.plutoengine.graphics.RectangleRenderer2D;
 import org.plutoengine.graphics.gui.FontShader;
-import org.plutoengine.graphics.texture.MagFilter;
-import org.plutoengine.graphics.texture.MinFilter;
-import org.plutoengine.graphics.texture.WrapMode;
-import org.plutoengine.graphics.texture.texture2d.Texture2D;
 import org.plutoengine.input.InputBus;
+import org.plutoengine.libra.paint.LiGradientPaint;
+import org.plutoengine.libra.paint.LiPaint;
+import org.plutoengine.libra.text.shaping.TextStyleOptions;
 import org.plutoengine.math.ProjectionMatrix;
+import org.plutoengine.mod.ModLoader;
 import org.plutoengine.shader.RenderShaderBuilder;
 import org.plutoengine.shader.uniform.auto.AutomaticUniforms;
-import org.plutoengine.tpl.ImageLoader;
+import org.plutoengine.util.color.Color;
+import org.plutoengine.util.color.EnumColorFormat;
+import org.plutoengine.util.color.HSB;
 
-import java.awt.image.BufferedImage;
-import java.nio.file.Path;
-import java.util.List;
+import java.util.stream.Collectors;
 
 public class Main extends PlutoApplication
 {
     public static Main INSTANCE;
 
-    public static void main(String[] args) throws Exception
+    public static void main(String[] args)
     {
         var config = new PlutoApplication.StartupConfig();
         config.vsync(1);
-        config.windowName("JSRClone " + VersionInfo.GAME_VERSION);
+        config.windowName("PlutoEngine Demo " + VersionInfo.GAME_VERSION);
 
         INSTANCE = new Main();
         INSTANCE.run(args, config);
@@ -42,13 +43,55 @@ public class Main extends PlutoApplication
     @Override
     public void loop()
     {
-        GL33.glEnable(GL11.GL_BLEND);
-        GL33.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+        GL33.glEnable(GL33.GL_BLEND);
+        GL33.glBlendFunc(GL33.GL_SRC_ALPHA, GL33.GL_ONE_MINUS_SRC_ALPHA);
 
         var projection = ProjectionMatrix.createOrtho2D(this.display.getWidth(), this.display.getHeight());
         AutomaticUniforms.VIEWPORT_PROJECTION.fire(projection);
 
-        TestFontRenderer.drawString(BasicApplicationDemoMod.font, "Testing ");
+        var style = new TextStyleOptions(20.0f);
+        style.setPaint(LiPaint.solidColor(Color.WHITE));
+
+        var mods = PlutoLocal.components().getComponent(ModLoader.class).getAllMods();
+
+        var modStr = mods.stream().map(mod -> {
+            var modManifest = mod.getManifest();
+            return String.format("%s %s", modManifest.displayName(), mod.getVersion());
+        }).collect(Collectors.joining("\n"));
+
+        ImmediateFontRenderer.drawString(5, 5, Framerate.getInterpolatedFPS() + " FPS", BasicApplicationDemoMod.font, style);
+        ImmediateFontRenderer.drawString(5, 30, modStr, BasicApplicationDemoMod.font, style);
+
+        var watermarkStyle = new TextStyleOptions(20.0f);
+        watermarkStyle.setHorizontalAlign(TextStyleOptions.TextAlign.CENTER);
+        watermarkStyle.setPaint(LiPaint.solidColor(Color.from(0x4f000000, EnumColorFormat.CF_INT_ARGB)));
+        ImmediateFontRenderer.drawString(this.display.getWidth() / 2.0f, 5, "PlutoEngine demo build licensed the MIT license...", BasicApplicationDemoMod.font, watermarkStyle);
+
+        RectangleRenderer2D.draw()
+                           .at(this.display.getWidth() / 2.0f - 150, this.display.getHeight() / 2.0f - 246, 300, 300)
+                           .recolor(0.5f, 0.5f, 0.5f, 1.0f)
+                           .texture(BasicApplicationDemoMod.plutoLogo).flush();
+
+        RectangleRenderer2D.draw()
+                           .at(this.display.getWidth() / 2.0f - 150, this.display.getHeight() / 2.0f - 250, 300, 300)
+                           .texture(BasicApplicationDemoMod.plutoLogo).flush();
+
+        var welcomeStyle = new TextStyleOptions(60.0f)
+            .setHorizontalAlign(TextStyleOptions.TextAlign.CENTER)
+            .setVerticalAlign(TextStyleOptions.TextAlign.CENTER)
+            .setOverflowX(TextStyleOptions.OverflowXStrategy.SCALE_TO_FIT)
+            .setFitBox(new Rectanglef(50.0f, 50.0f, this.display.getWidth() - 50.0f, this.display.getHeight() - 50.0f))
+            .setPaint(LiPaint.solidColor(Color.VERY_DARK_GRAY));
+        ImmediateFontRenderer.drawString(0, 102, "Welcome to PlutoEngine v. %s!".formatted(Pluto.VERSION), BasicApplicationDemoMod.font, welcomeStyle);
+        float gPos = (System.currentTimeMillis() % 7200) / 20.0f;
+        ImmediateFontRenderer.drawString(500, 50, "Hue: %f".formatted(gPos), BasicApplicationDemoMod.font, style);
+
+        var stops = new LiGradientPaint.Stop[16];
+        for (int i = 0; i < stops.length; i++)
+            stops[i] = new LiGradientPaint.Stop(i / (float) stops.length, Color.from(new HSB(gPos + i * 10, 1.0f, 1.0f).toRGBA()));
+
+        welcomeStyle.setPaint(LiPaint.horizontaLinearGradient(stops));
+        ImmediateFontRenderer.drawString(0, 100, "Welcome to PlutoEngine v. %s!".formatted(Pluto.VERSION), BasicApplicationDemoMod.font, welcomeStyle);
 
         if (InputBus.Keyboard.pressed(GLFW.GLFW_KEY_R))
         {
@@ -64,90 +107,8 @@ public class Main extends PlutoApplication
                 shader.stop();
                 shader.close();
                 PlutoGUIMod.fontShader = newShader;
-
-                newShader.start();
-                newShader.recolor.load(1, 1, 1, 1);
             }
         }
-
-        /*
-        var va = Renderer2D.standardQuad;
-        va.bind();
-        va.enableAllAttributes();
-
-        var font = BasicApplicationDemoMod.font;
-        var tex = font.getAtlas();
-
-        tex.bind();
-
-        var shader = PlutoGUIMod.fontShader;
-
-        shader.start();
-        shader.recolor.load(1, 1, 1, 1);
-        shader.italic.load(false);
-        shader.page.load(0);
-        shader.uvBase.load(0.0f, 0.0f);
-        shader.uvDelta.load(1.0f, 1.0f);
-
-        for (int i = 0; i < tex.getDepth(); i++)
-        {
-            var padding = 8;
-            var x = i % 3;
-            var y = i / 3;
-            var size = this.size;
-
-            shader.transformationMatrix.load(TransformationMatrix.create(20 + x * (size + padding), 20 + y * (size + padding), 0,
-                0, 0, 0,
-                size, size, 1));
-
-            shader.page.load(i);
-            va.draw(DrawMode.TRIANGLES);
-        }
-
-        this.size += InputBus.Mouse.getScrollY() * 20;
-
-        if (InputBus.Keyboard.pressed(GLFW.GLFW_KEY_R))
-        {
-            var newShader = new RenderShaderBuilder(
-                PlutoGUIMod.instance.getResource("shaders.VertexFontShader#glsl"),
-                PlutoGUIMod.instance.getResource("shaders.FragmentFontShader#glsl")
-            ).build(FontShader.class, false);
-
-            if (newShader != null)
-            {
-                shader.stop();
-                shader.close();
-                PlutoGUIMod.fontShader = newShader;
-            }
-        }
-
-         */
-
-        /*
-        var buildStr = String.format("Build %s", VersionInfo.GAME_BUILD);
-        var strWidth = FontHelper.calcStringWidth(buildStr, "default", 0.75f);
-        FontRenderer.drawString(this.display.getWidth() - strWidth + 1, 3, buildStr, 0, 0, 0, 1, 0.75f, true);
-        FontRenderer.drawString(this.display.getWidth() - strWidth, 2, buildStr, 0.7f, 0.7f, 0.7f, 1, 0.75f, false);
-
-        var fpsStr = String.format("%d FPS", Framerate.getInterpolatedFPS());
-        FontRenderer.drawString(3, 3, fpsStr, 0, 0, 0, 1, 0.75f, true);
-        FontRenderer.drawString(2, 2, fpsStr, 0.13f, 0.75f, 0.62f, 1, 0.75f, false);
-
-        var mods = PlutoLocal.components().getComponent(ModLoader.class).getAllMods();
-        int modNr = 0;
-
-        for (var mod : mods)
-        {
-            var modManifest = mod.getManifest();
-            var modStr = String.format("%s &c[0xff999999]&i1%s", modManifest.displayName(), mod.getVersion());
-
-            FontRenderer.drawString(8, 50 + modNr * 18, modStr, 0, 0, 0, 0, 0.7f, "default", true);
-            FontRenderer.drawString(7, 49 + modNr * 18, modStr, 1, 1, 1, 1, 0.7f, "default", false);
-
-            modNr++;
-        }
-
-         */
     }
 
     public static Display getDisplay()

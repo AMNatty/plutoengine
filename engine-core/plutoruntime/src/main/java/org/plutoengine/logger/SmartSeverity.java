@@ -31,7 +31,7 @@ public enum SmartSeverity implements ISeverity
     MODULE_MINUS("[-] [M] ", false),
     MODULE_WARNING("[!] [M] ", true),
     MODULE_ERROR("[X] [M] ", true),
-    MODULE_CHECK("[✓] [M] ", true),
+    MODULE_CHECK("[✓] [M] ", false),
 
     EVENT("[i] [E] ", false),
     EVENT_PLUS("[+] [E] ", false),

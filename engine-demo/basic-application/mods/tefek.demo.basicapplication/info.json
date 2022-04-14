@@ -10,6 +10,10 @@
     "fonts": {
       "path": "fonts.zip",
       "type": "zip"
+    },
+    "plutofonts": {
+      "path": "plutofonts",
+      "type": "open"
     }
   }
 }

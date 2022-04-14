@@ -1,26 +1,42 @@
-package org.plutoengine.graphics.gui;
+package org.plutoengine.graphics.gui.stbttf;
 
+import org.joml.primitives.Rectanglef;
 import org.lwjgl.system.MemoryUtil;
 import org.plutoengine.graphics.PlutoGUIMod;
-import org.plutoengine.graphics.gui.command.PlutoCommandDrawMesh;
+import org.plutoengine.graphics.gui.command.PlutoCommandDrawMeshDirectBuffer;
 import org.plutoengine.graphics.gui.command.PlutoCommandSwitchShader;
 import org.plutoengine.graphics.gui.command.PlutoCommandSwitchTexture;
 import org.plutoengine.libra.command.LiCommandBuffer;
+import org.plutoengine.libra.command.impl.LiCommandSetPaint;
+import org.plutoengine.libra.command.impl.LiCommandSpecial;
 import org.plutoengine.libra.text.LiTextInfo;
 import org.plutoengine.libra.text.font.GlyphInfo;
+import org.plutoengine.libra.text.font.LiFontFamily;
 import org.plutoengine.libra.text.shaping.IShapingStrategy;
 import org.plutoengine.libra.text.shaping.TextShaper;
+import org.plutoengine.libra.text.shaping.TextStyleOptions;
 
 import java.util.Arrays;
 import java.util.EnumSet;
+import java.util.Objects;
 
 public class STBTTBasicTextShaper implements IShapingStrategy<STBTTFont.STBTTGlyphMetrics, STBTTFont.STBTTGlyphAtlas, STBTTFont>
 {
+    private LiCommandBuffer commandBuffer;
+
+    public STBTTBasicTextShaper setCommandBuffer(LiCommandBuffer commandBuffer)
+    {
+        this.commandBuffer = commandBuffer;
+
+        return this;
+    }
 
     @Override
-    public LiTextInfo shape(EnumSet<TextShaper.EnumFeature> features, STBTTFont font, String text)
+    public LiTextInfo shape(EnumSet<TextShaper.EnumFeature> features, LiFontFamily<STBTTFont> fontFamily, String text, TextStyleOptions style)
     {
-        var commandBuf = new LiCommandBuffer();
+        var commandBuf = Objects.requireNonNullElseGet(this.commandBuffer, LiCommandBuffer::uncleared);
+
+        var font = style.pickFont(fontFamily);
 
         var atlas = font.getGlyphAtlas();
         var atlasTexture = atlas.getGlyphAtlasTexture();
@@ -31,9 +47,11 @@ public class STBTTBasicTextShaper implements IShapingStrategy<STBTTFont.STBTTGly
         var shaderSwitch = new PlutoCommandSwitchShader(shader);
         commandBuf.push(shaderSwitch);
 
+        commandBuf.push(new LiCommandSetPaint(style.getPaint()));
+
         var cpCount = (int) text.codePoints().count();
 
-        var mesh = new PlutoCommandDrawMesh();
+        var mesh = new PlutoCommandDrawMeshDirectBuffer();
 
         final var quadVerts = 4;
         final var twoTriVerts = 6;
@@ -43,6 +61,8 @@ public class STBTTBasicTextShaper implements IShapingStrategy<STBTTFont.STBTTGly
 
         var uvDim = 2;
         var uvBuf = MemoryUtil.memAllocFloat(uvDim * quadVerts * cpCount);
+
+        var paintUVBuf = MemoryUtil.memAllocFloat(uvDim * quadVerts * cpCount);
 
         var pageDim = 1;
         var pageBuf = MemoryUtil.memAllocInt(pageDim * quadVerts * cpCount);
@@ -60,14 +80,17 @@ public class STBTTBasicTextShaper implements IShapingStrategy<STBTTFont.STBTTGly
         float[] uvs = new float[uvDim * quadVerts];
         int[] pages = new int[pageDim * quadVerts];
 
-        float scale = 1 / (float) STBTTFont.PIXEL_HEIGHT;
+        float scale = font.getScale();
+
+        commandBuf.push(new LiCommandSpecial(cb -> PlutoGUIMod.fontShader.setPixelScale(style.getSize())));
 
         float x = 0;
         float y = 0;
 
-        GlyphInfo<STBTTFont.STBTTGlyphAtlas, STBTTFont.STBTTGlyphMetrics> info;
+        GlyphInfo<?, ?> info;
         STBTTFont.STBTTGlyphMetrics metrics = null;
         int cp;
+        float minX = Float.POSITIVE_INFINITY, maxX = Float.NEGATIVE_INFINITY, minY = Float.POSITIVE_INFINITY, maxY = Float.NEGATIVE_INFINITY;
 
         while (cpIt.hasNext())
         {
@@ -82,8 +105,8 @@ public class STBTTBasicTextShaper implements IShapingStrategy<STBTTFont.STBTTGly
                 }
             }
 
-            if (metrics != null)
-                x += metrics.getKerning(cp);
+            if (metrics != null && features.contains(TextShaper.EnumFeature.KERNING))
+                x += metrics.getKerning(cp) * scale;
 
             metrics = font.getGlyphMetrics(cp);
             info = atlas.getGlyph(cp);
@@ -91,17 +114,25 @@ public class STBTTBasicTextShaper implements IShapingStrategy<STBTTFont.STBTTGly
             if (metrics == null)
                 continue;
 
-            x += metrics.getLeftSideBearing() * scale;
-
             if (info != null)
             {
-                float gx = x;
-                float gy = y + font.getAscent() * scale - metrics.getCY0() * scale;
+                float gx = x + metrics.getXOrigin();
+                float gy = y + metrics.getYOrigin() + font.getAscent() * scale;
 
-                vertices[6] = vertices[0] = gx - STBTTFont.SDF_PADDING;
-                vertices[3] = vertices[1] = gy + STBTTFont.SDF_PADDING;
-                vertices[4] = vertices[2] = gx + metrics.getCX1() * scale - metrics.getCX0() * scale + STBTTFont.SDF_PADDING;
-                vertices[7] = vertices[5] = gy - metrics.getCY1() * scale + metrics.getCY0() * scale - STBTTFont.SDF_PADDING;
+                float xLow = gx - STBTTFont.SDF_PADDING;
+                float xHigh = gx + metrics.getCX1() * scale - metrics.getCX0() * scale + STBTTFont.SDF_PADDING;
+                float yLow = gy - STBTTFont.SDF_PADDING;
+                float yHigh = gy + metrics.getCY1() * scale - metrics.getCY0() * scale + STBTTFont.SDF_PADDING;
+
+                minX = Math.min(minX, xLow);
+                minY = Math.min(minY, yLow);
+                maxX = Math.max(maxX, xHigh);
+                maxY = Math.max(maxY, yHigh);
+
+                vertices[6] = vertices[0] = xLow;
+                vertices[3] = vertices[1] = yHigh;
+                vertices[4] = vertices[2] = xHigh;
+                vertices[7] = vertices[5] = yLow;
 
                 var uvRect = info.getRect();
                 uvs[6] = uvs[0] = uvRect.minX;
@@ -128,14 +159,23 @@ public class STBTTBasicTextShaper implements IShapingStrategy<STBTTFont.STBTTGly
             x += metrics.getAdvanceX() * scale;
         }
 
-        mesh.addAttribute(shader.position, vertexBuf.flip(), vertDim);
+        vertexBuf.flip();
+
+        while (vertexBuf.hasRemaining())
+        {
+            paintUVBuf.put((vertexBuf.get() - minX) / (maxX - minX));
+            paintUVBuf.put((vertexBuf.get() - minY) / (maxY - minY));
+        }
+
+        mesh.addAttribute(shader.position, vertexBuf.rewind(), vertDim);
         mesh.addAttribute(shader.uvCoords, uvBuf.flip(), uvDim);
         mesh.addAttribute(shader.page, pageBuf.flip(), pageDim);
+        mesh.addAttribute(shader.paintUVCoords, paintUVBuf.flip(), uvDim);
 
         mesh.addIndices(indexBuf.flip());
 
         commandBuf.push(mesh);
 
-        return new PlutoTextInfo(commandBuf);
+        return new LiTextInfo(commandBuf, new Rectanglef(minX, minY, maxX, maxY));
     }
 }

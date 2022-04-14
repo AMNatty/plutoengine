@@ -9,9 +9,6 @@ import org.plutoengine.graphics.gl.vbo.IndexArrayBuffer;
 
 import java.util.*;
 
-import org.plutoengine.logger.Logger;
-import org.plutoengine.logger.SmartSeverity;
-
 public class VertexArray implements AutoCloseable
 {
     protected final List<Integer> usedAttributes;
@@ -135,8 +132,6 @@ public class VertexArray implements AutoCloseable
             this.indices.close();
             this.indices = null;
         }
-
-        Logger.logf(SmartSeverity.REMOVED, "Vertex array ID %d deleted...\n", this.glID);
 
         GL33.glDeleteVertexArrays(this.glID);
 
