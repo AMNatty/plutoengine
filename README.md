@@ -45,7 +45,6 @@ See `NEXT_RELEASE_DRAFT.md` for details.
 ### To be fixed
 [ *Features or bugs that should be fixed **ASAP*** ]
  * Implement gradient variation support for Libra fills
- * Finish gradient rendering in FragmentFontShader.glsl
  * Improve code quality in PlutoGUI
 
 ### Very high priority
