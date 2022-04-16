@@ -4,21 +4,21 @@ import org.apache.commons.collections4.MultiValuedMap;
 import org.apache.commons.collections4.multimap.ArrayListValuedHashMap;
 import org.apache.commons.collections4.multimap.HashSetValuedHashMap;
 import org.apache.commons.lang3.ClassUtils;
+import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nonnull;
 import java.util.*;
 import java.util.stream.Stream;
 
-public class ComponentManager<R extends AbstractComponent>
+public class ComponentManager<R extends AbstractComponent<R>>
 {
     private final Class<R> base;
 
-    protected final MultiValuedMap<ComponentToken<? extends R>, R> components;
-    protected final Map<R, ComponentToken<? extends R>> tokens;
+    protected final MultiValuedMap<ComponentToken<?>, R> components;
+    protected final Map<R, ComponentToken<?>> tokens;
     protected final MultiValuedMap<Class<?>, R> implementationProviders;
     protected final MultiValuedMap<R, Class<?>> implementationReceivers;
 
-    public ComponentManager(@Nonnull Class<R> base)
+    public ComponentManager(@NotNull Class<R> base)
     {
         this.base = base;
         this.components = new HashSetValuedHashMap<>();
@@ -27,7 +27,7 @@ public class ComponentManager<R extends AbstractComponent>
         this.implementationReceivers = new ArrayListValuedHashMap<>();
     }
 
-    public <T extends R> T addComponent(@Nonnull ComponentToken<T> token)
+    public <T extends R> T addComponent(@NotNull ComponentToken<T> token)
     {
         T component = token.createInstance();
         var clazz = component.getClass();
@@ -52,7 +52,7 @@ public class ComponentManager<R extends AbstractComponent>
 
         try
         {
-            component.onMount();
+            component.initialize(this);
         }
         catch (Exception e)
         {
@@ -67,33 +67,33 @@ public class ComponentManager<R extends AbstractComponent>
         return this.base;
     }
 
-    public <T extends R> Stream<T> streamComponents(@Nonnull Class<T> componentClazz)
+    public <T extends R> Stream<T> streamComponents(@NotNull Class<T> componentClazz)
     {
         var providers = this.implementationProviders.get(componentClazz);
 
         return providers.stream().map(componentClazz::cast);
     }
 
-    public <T extends R> T getComponent(@Nonnull Class<T> componentClazz) throws NoSuchElementException
+    public <T extends R> T getComponent(@NotNull Class<T> componentClazz) throws NoSuchElementException
     {
         return this.streamComponents(componentClazz)
             .findAny()
             .orElseThrow();
     }
 
-    public <T extends R> T getComponent(@Nonnull Class<T> componentClazz, @Nonnull Comparator<T> heuristic) throws NoSuchElementException
+    public <T extends R> T getComponent(@NotNull Class<T> componentClazz, @NotNull Comparator<T> heuristic) throws NoSuchElementException
     {
         return this.streamComponents(componentClazz)
             .max(heuristic)
             .orElseThrow();
     }
 
-    public <T extends R> List<T> getComponents(@Nonnull Class<T> componentClazz)
+    public <T extends R> List<T> getComponents(@NotNull Class<T> componentClazz)
     {
         return this.streamComponents(componentClazz).toList();
     }
 
-    public void removeComponent(@Nonnull R component) throws IllegalArgumentException
+    public void removeComponent(@NotNull R component) throws IllegalArgumentException
     {
         var token = this.tokens.remove(component);
 
@@ -108,7 +108,7 @@ public class ComponentManager<R extends AbstractComponent>
 
         try
         {
-            component.onUnmount();
+            component.destroy(this);
         }
         catch (Exception e)
         {
@@ -116,7 +116,7 @@ public class ComponentManager<R extends AbstractComponent>
         }
     }
 
-    public <T extends R> void removeComponents(@Nonnull ComponentToken<T> componentToken)
+    public <T extends R> void removeComponents(@NotNull ComponentToken<T> componentToken)
     {
         var activeComponents = this.components.remove(componentToken);
 

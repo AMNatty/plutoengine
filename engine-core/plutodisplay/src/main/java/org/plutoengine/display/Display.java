@@ -5,7 +5,7 @@ import org.lwjgl.opengl.*;
 import org.lwjgl.system.MemoryUtil;
 
 import org.plutoengine.Pluto;
-import org.plutoengine.address.ThreadSensitive;
+import org.plutoengine.annotation.ThreadSensitive;
 import org.plutoengine.component.PlutoLocalComponent;
 import org.plutoengine.gl.GLDebugInfo;
 import org.plutoengine.logger.Logger;

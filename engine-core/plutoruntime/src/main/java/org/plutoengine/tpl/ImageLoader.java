@@ -1,17 +1,19 @@
 package org.plutoengine.tpl;
 
-import javax.annotation.Nullable;
-import javax.imageio.ImageIO;
-import java.awt.*;
-import java.awt.image.*;
-import java.nio.ByteBuffer;
-import java.nio.ByteOrder;
-import java.nio.file.Files;
-import java.nio.file.Path;
-
+import org.jetbrains.annotations.Nullable;
 import org.lwjgl.BufferUtils;
 import org.plutoengine.logger.Logger;
 import org.plutoengine.logger.SmartSeverity;
+
+import javax.imageio.ImageIO;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.awt.image.DataBuffer;
+import java.awt.image.DataBufferByte;
+import java.awt.image.Raster;
+import java.nio.ByteBuffer;
+import java.nio.file.Files;
+import java.nio.file.Path;
 
 /**
  * Quick ABGR (8-bit per channel, 32 bits per pixel) and grayscale image loader for OpenGL textures.

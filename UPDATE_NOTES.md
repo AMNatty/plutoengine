@@ -1,3 +1,15 @@
+## 22.2.0.0-alpha.0
+* `[PlutoRuntime,PlutoCore]` **Initial implementation of the layer system (formerly known as "stage")**
+* `[PlutoComponent]` **Added support for dependencies and strengtened type checks**
+* `[PlutoComponent]` *Removed* `IComponent` as it was redundant to `AbstractComponent`
+* `[Pluto*]` *Removed* JSR 305 annotations in favor of JetBrains annotations
+* `[Pluto*]` *Removed* the `ConstantExpression` annotation in favor of `Contract`
+* `[PlutoRuntime]` *Moved* `ThreadSensitive` to `org.plutoengine.address`
+* `[PlutoAudio]` Transformed into a PlutoLocalComponent
+* `[PlutoAudio]` `IAudioStream` is now `AutoCloseable`
+* `[PlutoCore]` `InputBus` now tied to a specific `Display` instead of searching for one in the Local 
+* `[PlutoCore]` Separated `Mouse` and `Keyboard` from `InputBus` into child components
+
 ## 22.1.0.0-alpha.1
 * `plutoengine-demos/basic-application` Made the gradient in the fragment font shader rotatable
 

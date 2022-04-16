@@ -1,6 +1,9 @@
 package org.plutoengine.component;
 
-public abstract class PlutoLocalComponent extends AbstractComponent
+import org.plutoengine.annotation.ThreadSensitive;
+
+@ThreadSensitive(localContexts = true)
+public abstract class PlutoLocalComponent extends AbstractComponent<PlutoLocalComponent>
 {
 
 }

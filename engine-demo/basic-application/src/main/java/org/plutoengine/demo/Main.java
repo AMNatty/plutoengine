@@ -12,7 +12,7 @@ import org.plutoengine.graphics.ImmediateFontRenderer;
 import org.plutoengine.graphics.PlutoGUIMod;
 import org.plutoengine.graphics.RectangleRenderer2D;
 import org.plutoengine.graphics.gui.FontShader;
-import org.plutoengine.input.InputBus;
+import org.plutoengine.input.Keyboard;
 import org.plutoengine.libra.paint.LiGradientPaint;
 import org.plutoengine.libra.paint.LiPaint;
 import org.plutoengine.libra.text.shaping.TextStyleOptions;
@@ -92,7 +92,7 @@ public class Main extends PlutoApplication
         welcomeStyle.setPaint(LiPaint.horizontaLinearGradient(stops));
         ImmediateFontRenderer.drawString(0, 100, "Welcome to PlutoEngine v. %s!".formatted(Pluto.VERSION), BasicApplicationDemoMod.font, welcomeStyle);
 
-        if (InputBus.Keyboard.pressed(GLFW.GLFW_KEY_R))
+        if (PlutoLocal.components().getComponent(Keyboard.class).pressed(GLFW.GLFW_KEY_R))
         {
             var shader = PlutoGUIMod.fontShader;
 

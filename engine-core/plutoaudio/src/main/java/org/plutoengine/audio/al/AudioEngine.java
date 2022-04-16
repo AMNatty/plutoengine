@@ -4,10 +4,11 @@ import org.joml.Vector3f;
 import org.lwjgl.openal.*;
 import org.lwjgl.system.MemoryUtil;
 import org.plutoengine.Pluto;
+import org.plutoengine.component.ComponentToken;
+import org.plutoengine.component.PlutoLocalComponent;
 import org.plutoengine.logger.Logger;
 import org.plutoengine.logger.SmartSeverity;
 
-import javax.annotation.concurrent.ThreadSafe;
 import java.nio.ByteBuffer;
 import java.nio.IntBuffer;
 
@@ -15,16 +16,21 @@ import java.nio.IntBuffer;
  * @author 493msi
  *
  */
-@ThreadSafe
-public class AudioEngine
+public class AudioEngine extends PlutoLocalComponent
 {
-    private static final ThreadLocal<Long> device = ThreadLocal.withInitial(() -> MemoryUtil.NULL);
+    private long device = MemoryUtil.NULL;
+    private long context = MemoryUtil.NULL;
+    private ALCapabilities capabilities;
 
-    private static final ThreadLocal<Long> context = ThreadLocal.withInitial(() -> MemoryUtil.NULL);
+    public static final ComponentToken<AudioEngine> TOKEN = ComponentToken.create(AudioEngine::new);
 
-    private static final ThreadLocal<ALCapabilities> capabilities = new ThreadLocal<>();
+    private AudioEngine()
+    {
 
-    public static void initialize()
+    }
+
+    @Override
+    protected void onMount(ComponentDependencyManager manager)
     {
         var devicePtr = ALC10.alcOpenDevice((ByteBuffer) null);
         if (devicePtr == MemoryUtil.NULL)
@@ -35,7 +41,7 @@ public class AudioEngine
             return;
         }
 
-        device.set(devicePtr);
+        this.device = devicePtr;
 
         var contextPtr = ALC10.alcCreateContext(devicePtr, (IntBuffer) null);
         if (contextPtr == MemoryUtil.NULL)
@@ -48,7 +54,7 @@ public class AudioEngine
             return;
         }
 
-        context.set(contextPtr);
+        this.context = contextPtr;
 
         EXTThreadLocalContext.alcSetThreadContext(contextPtr);
 
@@ -61,25 +67,27 @@ public class AudioEngine
             Logger.logf(SmartSeverity.AUDIO, "OpenAL11: %b\n", alCapabilities.OpenAL11);
         }
 
-        capabilities.set(alCapabilities);
+        this.capabilities = alCapabilities;
+
+        Logger.log(SmartSeverity.AUDIO_PLUS, "Audio engine started.");
     }
 
-    public static void setSpeed(Vector3f speed)
+    public void setSpeed(Vector3f speed)
     {
         AL10.alListener3f(AL10.AL_VELOCITY, speed.x, speed.y, speed.z);
     }
 
-    public static void setPosition(Vector3f position)
+    public void setPosition(Vector3f position)
     {
         AL10.alListener3f(AL10.AL_POSITION, position.x, position.y, position.z);
     }
 
-    public static void setVolume(float volume)
+    public void setVolume(float volume)
     {
         AL10.alListenerf(AL10.AL_GAIN, volume);
     }
 
-    public static void setOrientation(Vector3f at, Vector3f up)
+    public void setOrientation(Vector3f at, Vector3f up)
     {
         float[] data = new float[6];
         data[0] = at.x;
@@ -91,18 +99,29 @@ public class AudioEngine
         AL10.alListenerfv(AL10.AL_ORIENTATION, data);
     }
 
-    public static boolean isReady()
+    public boolean isReady()
     {
-        return capabilities.get() != null;
+        return this.capabilities != null;
     }
 
-    public static void exit()
+    @Override
+    protected void onUnmount()
     {
-        EXTThreadLocalContext.alcSetThreadContext(MemoryUtil.NULL);
-        ALC10.alcDestroyContext(context.get());
-        ALC10.alcCloseDevice(device.get());
+        Logger.log(SmartSeverity.AUDIO_MINUS, "Shutting down the audio engine.");
 
-        context.remove();
-        device.remove();
+        EXTThreadLocalContext.alcSetThreadContext(MemoryUtil.NULL);
+
+        ALC10.alcDestroyContext(this.context);
+        ALC10.alcCloseDevice(this.device);
+
+        this.context = MemoryUtil.NULL;
+        this.device = MemoryUtil.NULL;
+        this.capabilities = null;
+    }
+
+    @Override
+    public boolean isUnique()
+    {
+        return true;
     }
 }

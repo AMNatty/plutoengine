@@ -6,8 +6,9 @@ plugins {
 description = "A module acting as glue for all PlutoEngine components."
 
 dependencies {
-    api("org.apache.commons:commons-lang3:3.12.0")
-    api("org.apache.commons:commons-collections4:4.4")
+    api("org.jetbrains", "annotations", "23.0.0")
 
-    api("com.google.code.findbugs:jsr305:3.0.2")
+    implementation("org.apache.commons", "commons-lang3", "3.12.0")
+    implementation("org.apache.commons", "commons-collections4", "4.4")
+
 }

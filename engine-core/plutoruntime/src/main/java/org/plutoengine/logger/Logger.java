@@ -1,13 +1,13 @@
 package org.plutoengine.logger;
 
+import org.plutoengine.component.ComponentToken;
+import org.plutoengine.component.PlutoGlobalComponent;
+import org.plutoengine.resource.filesystem.ResourceManager;
+
 import java.io.OutputStream;
 import java.io.PrintStream;
 import java.nio.file.Files;
 import java.time.LocalDateTime;
-
-import org.plutoengine.component.ComponentToken;
-import org.plutoengine.component.PlutoGlobalComponent;
-import org.plutoengine.resource.filesystem.ResourceManager;
 
 /**
  * <p>
@@ -48,7 +48,7 @@ public class Logger extends PlutoGlobalComponent
      * @since pre-alpha
      * */
     @Override
-    public void onMount() throws Exception
+    protected void onMount(ComponentDependencyManager manager) throws Exception
     {
         this.onUnmount();
 
@@ -93,7 +93,7 @@ public class Logger extends PlutoGlobalComponent
      * @since pre-alpha
      * */
     @Override
-    public void onUnmount() throws Exception
+    protected void onUnmount() throws Exception
     {
         if (fileLog != null)
             fileLog.close();

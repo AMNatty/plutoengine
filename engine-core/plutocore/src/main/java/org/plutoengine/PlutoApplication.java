@@ -243,9 +243,8 @@ public abstract class PlutoApplication
 
         this.display.createOpenGLCapabilities();
 
-        components.addComponent(InputBus.TOKEN);
-
-        AudioEngine.initialize();
+        var inputBus = components.addComponent(InputBus.fromDisplay(this.display));
+        var audioEngine = components.addComponent(AudioEngine.TOKEN);
 
         var modLoader = components.addComponent(ModLoader.TOKEN);
 
@@ -259,7 +258,6 @@ public abstract class PlutoApplication
             this.display.setIcons(icons);
         }
 
-
         while (!this.display.isClosing())
         {
             GL33.glViewport(0, 0, this.display.getWidth(), this.display.getHeight());
@@ -270,20 +268,19 @@ public abstract class PlutoApplication
 
             this.display.swapBuffers();
 
-            InputBus.resetStates();
+            inputBus.resetStates();
 
             this.display.pollEvents();
         }
 
-        AudioEngine.exit();
+        components.removeComponent(audioEngine);
 
         modLoader.unload();
 
         GL.destroy();
 
         components.removeComponent(modLoader);
-
-        components.removeComponents(InputBus.TOKEN);
+        components.removeComponent(inputBus);
 
         this.display.destroy();
 

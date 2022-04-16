@@ -1,8 +1,7 @@
 package org.plutoengine;
 
-import org.plutoengine.address.ConstantExpression;
+import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nonnull;
 import java.util.Objects;
 
 public final class PlutoVersion implements IVersion<PlutoVersion>
@@ -75,12 +74,11 @@ public final class PlutoVersion implements IVersion<PlutoVersion>
         return this.prereleaseNumber;
     }
 
-    @ConstantExpression
-    public static PlutoVersion of(@Nonnull String str)
+    public static PlutoVersion of(@NotNull String str)
     {
         assert !str.isBlank();
 
-        assert str.matches("[0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+([+\\-][a-zA-Z0-9]+(\\.[0-9]+)?)?");
+        assert str.matches("\\d+\\.\\d+\\.\\d+\\.\\d+([+\\-][a-zA-Z\\d]+(\\.\\d+)?)?");
 
         var parts = str.split("[+\\-]");
 
@@ -141,7 +139,7 @@ public final class PlutoVersion implements IVersion<PlutoVersion>
     }
 
     @Override
-    public int compareTo(@Nonnull PlutoVersion o)
+    public int compareTo(@NotNull PlutoVersion o)
     {
         int yearDiff = this.year - o.year;
         if (yearDiff != 0)

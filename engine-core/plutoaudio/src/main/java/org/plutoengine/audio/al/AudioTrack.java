@@ -3,11 +3,10 @@ package org.plutoengine.audio.al;
 import org.lwjgl.openal.AL10;
 import org.lwjgl.openal.SOFTDirectChannels;
 import org.lwjgl.system.MemoryUtil;
+import org.plutoengine.audio.IAudioStream;
+import org.plutoengine.audio.ISeekableAudioTrack;
 
 import java.nio.ShortBuffer;
-
-import org.plutoengine.audio.ISeekableAudioTrack;
-import org.plutoengine.audio.IAudioStream;
 
 public class AudioTrack extends AudioSource
 {
@@ -56,10 +55,8 @@ public class AudioTrack extends AudioSource
 
     public boolean play()
     {
-        if (this.track instanceof ISeekableAudioTrack)
-        {
-            ((ISeekableAudioTrack) this.track).rewind();
-        }
+        if (this.track instanceof ISeekableAudioTrack seekableAudioTrack)
+            seekableAudioTrack.rewind();
 
         for (int buf : this.buffers)
         {
@@ -82,9 +79,7 @@ public class AudioTrack extends AudioSource
         int samplesPerChannel = this.track.getSamples(this.pcm);
 
         if (samplesPerChannel == 0)
-        {
             return;
-        }
 
         var samples = samplesPerChannel * this.track.getChannels();
         this.pcm.limit(samples);

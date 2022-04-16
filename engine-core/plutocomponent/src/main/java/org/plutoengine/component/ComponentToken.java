@@ -1,11 +1,12 @@
 package org.plutoengine.component;
 
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
+
 import java.util.Objects;
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.function.Supplier;
 
-public final class ComponentToken<T extends IComponent>
+public final class ComponentToken<T extends AbstractComponent<? super T>>
 {
     private static final AtomicLong ID_SOURCE = new AtomicLong();
 
@@ -18,7 +19,7 @@ public final class ComponentToken<T extends IComponent>
         this.supplier = valueSupplier;
     }
 
-    public static <T extends IComponent> ComponentToken<T> create(@Nonnull Supplier<T> valueSupplier)
+    public static <G extends AbstractComponent<? super G>> ComponentToken<G> create(@NotNull Supplier<G> valueSupplier)
     {
         return new ComponentToken<>(valueSupplier);
     }

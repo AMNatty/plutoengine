@@ -1,6 +1,6 @@
 package org.plutoengine;
 
-import org.plutoengine.address.ThreadSensitive;
+import org.plutoengine.annotation.ThreadSensitive;
 import org.plutoengine.component.PlutoLocalComponent;
 import org.plutoengine.component.ComponentManager;
 

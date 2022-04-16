@@ -3,19 +3,15 @@ package org.plutoengine.resource.filesystem;
 import org.plutoengine.address.VirtualAddress;
 import org.plutoengine.mod.Mod;
 
-import javax.annotation.concurrent.ThreadSafe;
 import java.io.Closeable;
 import java.io.IOException;
-import java.nio.file.FileSystems;
 import java.nio.file.Path;
 import java.nio.file.ProviderNotFoundException;
 import java.nio.file.spi.FileSystemProvider;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.ServiceConfigurationError;
-import java.util.ServiceLoader;
 
-@ThreadSafe
 public class ResourceManager implements Closeable
 {
     public static final Path GLOBAL_ROOT = Path.of("");

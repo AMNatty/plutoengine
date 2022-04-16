@@ -2,7 +2,7 @@ package org.plutoengine.audio;
 
 import java.nio.ShortBuffer;
 
-public interface IAudioStream
+public interface IAudioStream extends AutoCloseable
 {
     int getSamples(ShortBuffer pcm);
 

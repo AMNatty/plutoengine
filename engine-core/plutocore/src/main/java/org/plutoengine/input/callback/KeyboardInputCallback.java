@@ -1,4 +1,4 @@
-package org.plutoengine.input;
+package org.plutoengine.input.callback;
 
 import org.lwjgl.glfw.GLFWKeyCallback;
 

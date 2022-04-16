@@ -4,6 +4,9 @@ import org.lwjgl.stb.STBVorbis;
 import org.lwjgl.stb.STBVorbisInfo;
 import org.lwjgl.system.MemoryStack;
 import org.lwjgl.system.MemoryUtil;
+import org.plutoengine.buffer.BufferHelper;
+import org.plutoengine.logger.Logger;
+import org.plutoengine.logger.SmartSeverity;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
@@ -11,10 +14,6 @@ import java.nio.IntBuffer;
 import java.nio.ShortBuffer;
 import java.nio.file.Files;
 import java.nio.file.Path;
-
-import org.plutoengine.buffer.BufferHelper;
-import org.plutoengine.logger.Logger;
-import org.plutoengine.logger.SmartSeverity;
 
 public class AudioLoader
 {

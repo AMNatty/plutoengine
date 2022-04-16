@@ -17,13 +17,13 @@ object Versions {
     const val steamworks4jServerVersion = "1.8.0"
 
     const val versionYear = 22
-    const val versionMajor = 1
+    const val versionMajor = 2
     const val versionMinor = 0
     const val versionPatch = 0
 
     const val isPrerelease = true
     const val prereleaseName = "alpha"
-    const val prerealeaseUpdate = 1
+    const val prerealeaseUpdate = 0
 
     val versionFull =
         if (isPrerelease)

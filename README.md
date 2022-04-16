@@ -50,8 +50,7 @@ See `NEXT_RELEASE_DRAFT.md` for details.
 ### Very high priority
 [ *Implemented in the current release.* ]
  * Improve image loading capabilities, possibly rewrite PlutoLib#TPL
- * The stage system and automated asset loading
- 
+
 ### High priority
 [ *Implemented in the next release.* ]
  * Finish PlutoAudio

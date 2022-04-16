@@ -1,6 +1,7 @@
 package org.plutoengine.logger;
 
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
+
 import java.io.IOException;
 import java.io.OutputStream;
 
@@ -37,14 +38,14 @@ public class OutputSplitStream extends OutputStream
     }
 
     @Override
-    public void write(@Nonnull byte[] b) throws IOException
+    public void write(byte @NotNull [] b) throws IOException
     {
         this.outputStreamA.write(b);
         this.outputStreamB.write(b);
     }
 
     @Override
-    public void write(@Nonnull byte[] b, int off, int len) throws IOException
+    public void write(byte @NotNull [] b, int off, int len) throws IOException
     {
         this.outputStreamA.write(b, off, len);
         this.outputStreamB.write(b, off, len);
