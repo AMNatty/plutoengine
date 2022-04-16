@@ -1,6 +1,49 @@
 # plutoengine
 
+![Build Status](https://github.com/493msi/plutoengine/workflows/Gradle%20Package/badge.svg)
+![Maven Version](https://img.shields.io/github/v/tag/493msi/plutoengine?label=Latest%20Version)
+
 My hobby game engine. This repository unifies all my previous Pluto repositories.
+
+
+## How to use Pluto
+
+**Quick start**
+
+Download [the demo project](https://github.com/plutoengine/plutoengine-basic-demo) open it in IntelliJ IDEA.
+
+**Gradle**
+```groovy
+repositories {
+   mavenCentral()
+
+   maven {
+      name = "Vega"
+      url = uri("https://vega.botdiril.com/")
+   }
+}
+
+
+dependencies {
+   implementation group: "org.plutoengine", name: "plutocore", version: "22.1.0.0-alpha.1"
+}
+```
+
+**or for Gradle Kotlin DSL**
+```kotlin
+repositories {
+   mavenCentral()
+   
+   maven {
+      name = "Vega"
+      url = uri("https://vega.botdiril.com/")
+   }
+}
+
+dependencies {
+   implementation("org.plutoengine", "plutocore", "22.1.0.0-alpha.1")
+}
+```
 
 ### Versioning
 
