@@ -25,7 +25,7 @@ repositories {
 
 
 dependencies {
-   implementation group: "org.plutoengine", name: "plutocore", version: "22.1.0.0-alpha.1"
+   implementation group: "org.plutoengine", name: "plutocore", version: "22.2.0.0-alpha.0"
 }
 ```
 
@@ -41,7 +41,7 @@ repositories {
 }
 
 dependencies {
-   implementation("org.plutoengine", "plutocore", "22.1.0.0-alpha.1")
+   implementation("org.plutoengine", "plutocore", "22.2.0.0-alpha.0")
 }
 ```
 
