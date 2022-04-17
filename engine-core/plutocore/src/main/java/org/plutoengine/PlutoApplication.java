@@ -13,6 +13,8 @@ import org.plutoengine.l10n.PlutoL10n;
 import org.plutoengine.logger.Logger;
 import org.plutoengine.logger.SmartSeverity;
 import org.plutoengine.mod.ModLoader;
+import org.plutoengine.util.color.IRGBA;
+import org.plutoengine.util.color.RGBA;
 
 import java.nio.file.Path;
 import java.util.Locale;
@@ -29,6 +31,11 @@ public abstract class PlutoApplication
     protected Display display;
 
     protected abstract Class<?> getMainModule();
+
+    protected void init()
+    {
+
+    }
 
     protected abstract void loop();
 
@@ -98,6 +105,11 @@ public abstract class PlutoApplication
      *         <td><code>true</code></td>
      *         <td>Whether the window should be resizable</td>
      *     </tr>
+     *     <tr>
+     *         <td><code>clearColor</code></td>
+     *         <td><code>RGBA(0f, 0.7f, 1f, 0f)</code></td>
+     *         <td>What color to fill the screen buffer with when beginning a new frame.</td>
+     *     </tr>
      * </table>
      *
      * @author 493msi
@@ -118,6 +130,7 @@ public abstract class PlutoApplication
         private int vsync = 0;
         private boolean windowResizable = true;
         private Path[] icons = null;
+        private IRGBA clearColor = new RGBA(0f, 0.7f, 1f, 0f);
 
         public StartupConfig icons(Path... paths)
         {
@@ -173,6 +186,12 @@ public abstract class PlutoApplication
         public StartupConfig windowResizable(boolean windowResizable)
         {
             this.windowResizable = windowResizable;
+            return this;
+        }
+
+        public StartupConfig clearColor(IRGBA color)
+        {
+            this.clearColor = new RGBA(color.red(), color.green(), color.blue(), color.alpha());
             return this;
         }
 
@@ -258,10 +277,12 @@ public abstract class PlutoApplication
             this.display.setIcons(icons);
         }
 
+        this.init();
+
         while (!this.display.isClosing())
         {
             GL33.glViewport(0, 0, this.display.getWidth(), this.display.getHeight());
-            GL33.glClearColor(0f, 0.7f, 1f, 0f);
+            GL33.glClearColor(config.clearColor.red(), config.clearColor.green(), config.clearColor.blue(), config.clearColor.alpha());
             GL33.glClear(GL33.GL_COLOR_BUFFER_BIT | GL33.GL_DEPTH_BUFFER_BIT);
 
             this.loop();

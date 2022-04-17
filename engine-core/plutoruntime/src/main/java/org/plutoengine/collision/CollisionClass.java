@@ -27,4 +27,13 @@ public class CollisionClass
     {
         return this.id;
     }
+
+    @Override
+    public boolean equals(Object o)
+    {
+        if (this == o) return true;
+        if (o == null || this.getClass() != o.getClass()) return false;
+        CollisionClass that = (CollisionClass) o;
+        return this.id == that.id;
+    }
 }

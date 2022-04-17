@@ -1,5 +1,5 @@
-## Features targeted for 22.2.0.0-alpha.0
-* The layer subsystem
+## Features targeted for 22.3.0.0-alpha.0
+* `[PlutoRuntime,PlutoCore]` **Initial implementation of the layer system (formerly known as "stage")**
     * A "layer", in this context, is a set of assets bound together
       by programming logic.
       Layer switching and asset management are handled by the engine.
