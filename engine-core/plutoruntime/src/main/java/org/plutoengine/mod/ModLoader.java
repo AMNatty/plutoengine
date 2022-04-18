@@ -18,8 +18,6 @@ import java.util.*;
  */
 public final class ModLoader extends PlutoLocalComponent
 {
-    public static final ComponentToken<ModLoader> TOKEN = ComponentToken.create(ModLoader::new);
-
     private EnumModLoadingPhase loadingPhase;
     private final Map<VirtualAddress, Mod> modNameLookup;
     private final Map<Class<?>, Mod> modLookup;
@@ -41,6 +39,16 @@ public final class ModLoader extends PlutoLocalComponent
         this.loadedModStack = new LinkedList<>();
         this.loadList = new LinkedHashSet<>();
         this.entryPoints = new HashMap<>();
+    }
+
+    public static ComponentToken<ModLoader> with(Class<?>... modClasses)
+    {
+        return ComponentToken.create(() -> {
+            var ml = new ModLoader();
+            for (var modClass : modClasses)
+                ml.registerMod(modClass);
+            return ml;
+        });
     }
 
     /**
@@ -68,7 +76,7 @@ public final class ModLoader extends PlutoLocalComponent
      * @author 493msi
      * @since 20.2.0.0-alpha.3
      */
-    public void registerMod(Class<?> modClass)
+    void registerMod(Class<?> modClass)
     {
         if (loadingPhase != EnumModLoadingPhase.INITIAL && loadingPhase != EnumModLoadingPhase.CLASSLOADING_EXTERNAL)
         {
@@ -151,13 +159,8 @@ public final class ModLoader extends PlutoLocalComponent
         return Optional.ofNullable(this.modNameLookup.get(modID));
     }
 
-    /**
-     *
-     *
-     * @author 493msi
-     * @since 20.2.0.0-alpha.3
-     */
-    public void load()
+    @Override
+    protected void onMount(ComponentDependencyManager manager)
     {
         Logger.log(SmartSeverity.MODULE, "Number of pre-added mod/s: " + this.loadList.size());
 
@@ -229,13 +232,8 @@ public final class ModLoader extends PlutoLocalComponent
         }
     }
 
-    /**
-     *
-     *
-     * @author 493msi
-     * @since 20.2.0.0-alpha.3
-     */
-    public void unload()
+    @Override
+    protected void onUnmount()
     {
         this.loadingPhase = EnumModLoadingPhase.UNLOADING;
         Logger.log(SmartSeverity.MODULE_MINUS, "Unloading all mods.");

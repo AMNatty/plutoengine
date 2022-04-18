@@ -63,7 +63,7 @@ public class Display extends PlutoLocalComponent
             throw new IllegalStateException("Failed to create a window...");
         }
 
-        GLFWVidMode vidmode = GLFW.glfwGetVideoMode(GLFW.glfwGetPrimaryMonitor());
+        var vidmode = GLFW.glfwGetVideoMode(GLFW.glfwGetPrimaryMonitor());
 
         if (vidmode == null)
         {

@@ -1,3 +1,8 @@
+## 22.2.0.0-alpha.1
+* `plutoengine-demos/` Removed third-party fonts
+* `[PlutoRuntime]` The `ModLoader` component is now opaque, 
+  pre-added mods are now specified when creating the token
+
 ## 22.2.0.0-alpha.0
 * `[PlutoComponent]` **Added support for dependencies and strengtened type checks**
 * `[PlutoComponent]` *Removed* `IComponent` as it was redundant to `AbstractComponent`

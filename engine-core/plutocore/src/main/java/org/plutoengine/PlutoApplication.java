@@ -201,9 +201,6 @@ public abstract class PlutoApplication
         }
     }
 
-    /**
-     * TODO: Start the application in a new thread
-     * */
     public final void run(String[] args, StartupConfig config)
     {
         if (config == null)
@@ -213,7 +210,7 @@ public abstract class PlutoApplication
 
         var globalComponents = PlutoGlobal.COMPONENTS;
 
-        globalComponents.addComponent(Logger.TOKEN);
+        var logger = globalComponents.addComponent(Logger.TOKEN);
 
         Logger.log(SmartSeverity.INFO, "Debug mode: " + (Pluto.DEBUG_MODE ? "enabled" : "disabled"));
 
@@ -264,12 +261,7 @@ public abstract class PlutoApplication
 
         var inputBus = components.addComponent(InputBus.fromDisplay(this.display));
         var audioEngine = components.addComponent(AudioEngine.TOKEN);
-
-        var modLoader = components.addComponent(ModLoader.TOKEN);
-
-        modLoader.registerMod(this.getMainModule());
-
-        modLoader.load();
+        var modLoader = components.addComponent(ModLoader.with(this.getMainModule()));
 
         if (config.icons != null)
         {
@@ -295,12 +287,10 @@ public abstract class PlutoApplication
         }
 
         components.removeComponent(audioEngine);
-
-        modLoader.unload();
+        components.removeComponent(modLoader);
 
         GL.destroy();
 
-        components.removeComponent(modLoader);
         components.removeComponent(inputBus);
 
         this.display.destroy();
@@ -309,7 +299,7 @@ public abstract class PlutoApplication
 
         DisplayBuilder.destroyGLFW();
 
-        globalComponents.removeComponents(Logger.TOKEN);
+        globalComponents.removeComponent(logger);
     }
 
     public Display getDisplayInstance()

@@ -81,9 +81,7 @@ public class DisplayBuilder
     public static void initGLFW()
     {
         if (!GLFW.glfwInit())
-        {
             throw new IllegalStateException("Could not init GLFW!");
-        }
     }
 
     public static void destroyGLFW()
