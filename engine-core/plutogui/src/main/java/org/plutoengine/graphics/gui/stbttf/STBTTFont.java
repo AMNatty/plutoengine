@@ -349,11 +349,7 @@ public class STBTTFont extends LiFont<STBTTFont.STBTTGlyphAtlas, STBTTFont.STBTT
             {
                 STBTruetype.stbtt_GetKerningTable(fontInfo, kerningTable);
                 font.kerningTable = new HashMap<>();
-                kerningTable.forEach(e -> {
-                    // System.out.printf("%s -> %s = %d%n", Character.toString(e.glyph1()), Character.toString(e.glyph2()), e.advance());
-
-                    font.kerningTable.put(new KerningPair(e.glyph1(), e.glyph2()), e.advance());
-                });
+                kerningTable.forEach(e -> font.kerningTable.put(new KerningPair(e.glyph1(), e.glyph2()), e.advance()));
             }
 
             font.ascent = ascentBuf.get();
