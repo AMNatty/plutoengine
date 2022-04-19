@@ -1,7 +1,16 @@
 ## 22.2.0.0-alpha.1
+* `[PlutoGUI]` **Added support for bitmap fonts**
+* `[PlutoGUI]` Generalized the font renderer API
 * `plutoengine-demos/` Removed third-party fonts
 * `[PlutoRuntime]` The `ModLoader` component is now opaque, 
   pre-added mods are now specified when creating the token
+* `[PlutoRuntime]` Added a linting annotation to `Logger#logf`
+* `[PlutoRuntime]` Fixed a bug where creating relative resource paths
+   from URIs was not possible
+* `[PlutoLib]` Fixed `toRGBA` in `HSB` and `HSBA`
+* `[PlutoLib]` Added `BasicInterpolation`
+* `[PlutoSpritesheet]` Added `recolor(IRGBA)` to `RectangleRenderer2D` and `Renderer2D`
+* `[PlutoSpritesheet]` Added `TemporalSprite` and `OrientedSprite`
 
 ## 22.2.0.0-alpha.0
 * `[PlutoComponent]` **Added support for dependencies and strengtened type checks**

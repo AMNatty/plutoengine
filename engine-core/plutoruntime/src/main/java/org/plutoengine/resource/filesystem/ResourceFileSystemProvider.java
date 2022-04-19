@@ -110,6 +110,9 @@ public class ResourceFileSystemProvider extends FileSystemProvider
 
         var mod = modLoader.getModByID(urp.modID());
 
+        if (urp.relative())
+            return new ResourcePath(null, urp.pathAddress(), urp.extension(), null);
+
         if (mod.isEmpty())
             throw new IllegalArgumentException("No such mod exists!");
 

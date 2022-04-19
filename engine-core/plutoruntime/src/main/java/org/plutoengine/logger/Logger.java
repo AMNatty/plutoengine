@@ -1,5 +1,6 @@
 package org.plutoengine.logger;
 
+import org.intellij.lang.annotations.PrintFormat;
 import org.plutoengine.component.ComponentToken;
 import org.plutoengine.component.PlutoGlobalComponent;
 import org.plutoengine.resource.filesystem.ResourceManager;
@@ -215,7 +216,7 @@ public class Logger extends PlutoGlobalComponent
      *
      * @since pre-alpha
      * */
-    public static synchronized void logf(ISeverity s, String formatSpec, Object... o)
+    public static synchronized void logf(ISeverity s, @PrintFormat String formatSpec, Object... o)
     {
         (s.isStdErr() ? System.err : System.out).printf(s.getDisplayName() + formatSpec, o);
     }

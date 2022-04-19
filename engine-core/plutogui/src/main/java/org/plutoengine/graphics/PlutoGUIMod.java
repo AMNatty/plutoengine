@@ -28,11 +28,15 @@ public class PlutoGUIMod implements IModEntryPoint
 
     public static FontShader fontShader;
 
+    public static FontShader bitmapFontShader;
+
     public void onLoad(Mod mod)
     {
         instance = mod;
 
         fontShader = new RenderShaderBuilder(mod.getResource("shaders.VertexFontShader#glsl"), mod.getResource("shaders.FragmentFontShader#glsl")).build(FontShader.class, false);
+
+        bitmapFontShader = new RenderShaderBuilder(mod.getResource("shaders.VertexBitmapFontShader#glsl"), mod.getResource("shaders.FragmentBitmapFontShader#glsl")).build(FontShader.class, false);
 
         uiElementsAtlas = new RectangleTexture();
         uiElementsAtlas.load(mod.getResource("gui.elements#png"), MagFilter.NEAREST, MinFilter.NEAREST, WrapMode.CLAMP_TO_EDGE, WrapMode.CLAMP_TO_EDGE);

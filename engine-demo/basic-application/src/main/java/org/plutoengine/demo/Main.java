@@ -84,13 +84,33 @@ public class Main extends PlutoApplication
             .setPaint(LiPaint.solidColor(Color.VERY_DARK_GRAY));
         ImmediateFontRenderer.drawString(0, 102, "Welcome to PlutoEngine v. %s!".formatted(Pluto.VERSION), BasicApplicationDemoMod.font, welcomeStyle);
 
-        float gPos = (System.currentTimeMillis() % 7200) / 20.0f;
+        float gPos = Framerate.getAnimationTimer() * 50.0f;
         var stops = new LiGradientPaint.Stop[16];
         for (int i = 0; i < stops.length; i++)
             stops[i] = new LiGradientPaint.Stop(i / (float) stops.length, Color.from(new HSB(gPos + i * 10, 1.0f, 1.0f).toRGBA()));
 
         welcomeStyle.setPaint(LiPaint.horizontaLinearGradient(stops));
         ImmediateFontRenderer.drawString(0, 100, "Welcome to PlutoEngine v. %s!".formatted(Pluto.VERSION), BasicApplicationDemoMod.font, welcomeStyle);
+
+        var srCloneStyle = new TextStyleOptions(32);
+        srCloneStyle.setHorizontalAlign(TextStyleOptions.TextAlign.CENTER);
+        srCloneStyle.setVerticalAlign(TextStyleOptions.TextAlign.START);
+        srCloneStyle.setPaint(LiPaint.solidColor(Color.WHITE));
+        ImmediateFontRenderer.drawString(this.display.getWidth() / 2.0f, this.display.getHeight() - 5,
+            "\uD83C\uDF20\uD83D\uDFE2☀\uD83D\uDD3A\uD836\uDD53\uD83D\uDCA0", BasicApplicationDemoMod.srCloneFont, srCloneStyle);
+
+        var boxRender = RectangleRenderer2D.draw();
+
+        var cnt = 20;
+        for (int i = 0; i < cnt; i++)
+        {
+            var hsb = new HSB(Framerate.getAnimationTimer() * 20.0f + i * 10.0f, 1.0f, 1.0f);
+
+            boxRender.at(this.display.getWidth() / 2.0f - cnt / 2.0f * 64.0f + i * 64.0f, this.display.getHeight() - 128, 64, 64)
+                     .sprite(BasicApplicationDemoMod.srCloneBox.getFrameAt(Framerate.getAnimationTimer() + i * 0.05f))
+                     .recolor(hsb.toRGBA())
+                     .flush();
+        }
 
         if (PlutoLocal.components().getComponent(Keyboard.class).pressed(GLFW.GLFW_KEY_R))
         {

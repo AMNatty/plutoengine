@@ -3,8 +3,7 @@ package org.plutoengine.graphics;
 import org.joml.Matrix3f;
 import org.joml.primitives.Rectanglef;
 import org.plutoengine.graphics.gui.PlutoGUICommandParser;
-import org.plutoengine.graphics.gui.stbttf.STBTTBasicTextShaper;
-import org.plutoengine.graphics.gui.stbttf.STBTTFont;
+import org.plutoengine.graphics.gui.font.PlutoFont;
 import org.plutoengine.libra.command.LiCommandBuffer;
 import org.plutoengine.libra.command.impl.LiCommandSetTransform;
 import org.plutoengine.libra.text.LiTextInfo;
@@ -16,17 +15,19 @@ import java.util.EnumSet;
 
 public class ImmediateFontRenderer
 {
-    public static void drawString(float x, float y, String text, LiFontFamily<STBTTFont> font, TextStyleOptions style)
+    public static <T extends PlutoFont<T>> void drawString(float x, float y, String text, LiFontFamily<T> fontFamily, TextStyleOptions style)
     {
-        var shaper = new STBTTBasicTextShaper();
+        var font = style.pickFont(fontFamily);
+        var shaper = font.getDefaultShaper();
         var info = shaper.shape(EnumSet.of(TextShaper.EnumFeature.KERNING), font, text, style);
 
         draw(x, y, info, style);
     }
 
-    public static void drawStringNoKern(float x, float y, String text, LiFontFamily<STBTTFont> font, TextStyleOptions style)
+    public static <T extends PlutoFont<T>> void drawStringNoKern(float x, float y, String text, LiFontFamily<T> fontFamily, TextStyleOptions style)
     {
-        var shaper = new STBTTBasicTextShaper();
+        var font = style.pickFont(fontFamily);
+        var shaper = font.getDefaultShaper();
         var info = shaper.shape(EnumSet.noneOf(TextShaper.EnumFeature.class), font, text, style);
 
         draw(x, y, info, style);
@@ -38,7 +39,7 @@ public class ImmediateFontRenderer
 
         var fitBox = style.getFitBox();
 
-        var initialScale = style.getSize() / STBTTFont.PIXEL_HEIGHT;
+        var initialScale = style.getSize() / PlutoFont.NORMALIZED_PIXEL_HEIGHT;
         var scaleX = initialScale;
         var scaleY = initialScale;
 

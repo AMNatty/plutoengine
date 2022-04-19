@@ -57,7 +57,7 @@ public class HSB
      * @since 20.2.0.0-alpha.3
      * @author 493msi
      */
-    public RGB toRGBA()
+    public RGBA toRGBA()
     {
         return this.toRGBA(1.0f);
     }

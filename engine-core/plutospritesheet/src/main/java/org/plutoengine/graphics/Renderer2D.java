@@ -8,6 +8,7 @@ import org.plutoengine.graphics.gl.DrawMode;
 import org.plutoengine.graphics.gl.vao.QuadPresets;
 import org.plutoengine.graphics.gl.vao.VertexArray;
 import org.plutoengine.graphics.texture.texture2d.Texture2D;
+import org.plutoengine.util.color.IRGBA;
 
 import java.util.Stack;
 
@@ -212,6 +213,13 @@ public class Renderer2D
     public Renderer2D recolor(float r, float g, float b, float a)
     {
         this.customShader.loadRecolor(r, g, b, a);
+
+        return this;
+    }
+
+    public Renderer2D recolor(IRGBA rgba)
+    {
+        this.customShader.loadRecolor(rgba.red(), rgba.green(), rgba.blue(), rgba.alpha());
 
         return this;
     }

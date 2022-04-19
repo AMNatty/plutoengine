@@ -14,6 +14,8 @@ public class Framerate
 
     private static double frameTime = Double.NaN;
 
+    private static double animationTimer = 0;
+
     private static double FPS = Double.NaN;
 
     private static int interpolatedFPS;
@@ -37,6 +39,11 @@ public class Framerate
         return interpolatedFPS;
     }
 
+    public static float getAnimationTimer()
+    {
+        return (float) animationTimer;
+    }
+
     public static void tick()
     {
         var now = System.nanoTime();
@@ -45,6 +52,9 @@ public class Framerate
         {
             var frameTimeNs = now - lastDraw;
             frameTime = frameTimeNs / (double) TimeUnit.MILLISECONDS.toNanos(1);
+            animationTimer += frameTimeNs / (double) TimeUnit.SECONDS.toNanos(1);
+            // Maintain precision in case the engine runs for many hours
+            animationTimer %= TimeUnit.DAYS.toMinutes(1);
             FPS = TimeUnit.SECONDS.toMillis(1) / frameTime;
         }
 

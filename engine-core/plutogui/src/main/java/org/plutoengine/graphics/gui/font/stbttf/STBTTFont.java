@@ -1,16 +1,16 @@
-package org.plutoengine.graphics.gui.stbttf;
+package org.plutoengine.graphics.gui.font.stbttf;
 
 import org.joml.primitives.Rectanglef;
 import org.lwjgl.stb.*;
 import org.lwjgl.system.MemoryStack;
 import org.plutoengine.buffer.BufferHelper;
 import org.plutoengine.graphics.gui.SDFTextureArray;
+import org.plutoengine.graphics.gui.font.PlutoFont;
 import org.plutoengine.graphics.texture.MagFilter;
 import org.plutoengine.graphics.texture.MinFilter;
 import org.plutoengine.graphics.texture.WrapMode;
 import org.plutoengine.libra.text.font.GlyphInfo;
-import org.plutoengine.libra.text.font.GlyphMetrics;
-import org.plutoengine.libra.text.font.LiFont;
+import org.plutoengine.libra.text.shaping.IShapingStrategy;
 import org.plutoengine.logger.Logger;
 import org.plutoengine.logger.SmartSeverity;
 
@@ -24,157 +24,22 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
 import java.util.stream.IntStream;
 
-public class STBTTFont extends LiFont<STBTTFont.STBTTGlyphAtlas, STBTTFont.STBTTGlyphMetrics> implements AutoCloseable
+public class STBTTFont extends PlutoFont<STBTTFont>
 {
-    public static final int PIXEL_HEIGHT = 64;
     public static final int SDF_PADDING = 8;
     public static final int SHEET_SIZE = 1024;
-
-    private int descent;
-    private int ascent;
-    private int lineGap;
-    private int lineAdvance;
-
-    private float scale;
-
-    private Map<Integer, Integer> glyphIndexLookup;
-
-    private Map<KerningPair, Integer> kerningTable;
-
-    private record KerningPair(int left, int right)
-    {
-
-    }
 
     private STBTTFont(String name)
     {
         super(name);
     }
 
-    public float getScale()
-    {
-        return this.scale;
-    }
-
-    public int getAscent()
-    {
-        return this.ascent;
-    }
-
-    public int getDescent()
-    {
-        return this.descent;
-    }
-
-    public int getLineGap()
-    {
-        return this.lineGap;
-    }
-
-    public int getLineAdvance()
-    {
-        return this.lineAdvance;
-    }
-
-    public int getKerningOffset(int left, int right)
-    {
-        var sk = new KerningPair(glyphIndexLookup.getOrDefault(left, -1), glyphIndexLookup.getOrDefault(right, -1));
-        return this.kerningTable.getOrDefault(sk, 0);
-    }
-
     @Override
-    public void close()
+    public IShapingStrategy<STBTTFont.PlutoGlyphMetrics, STBTTFont.PlutoGlyphAtlas, STBTTFont> getDefaultShaper()
     {
-        var tex = this.getGlyphAtlas().getGlyphAtlasTexture();
-        tex.close();
-    }
-
-    public class STBTTGlyphAtlas extends LiFont<STBTTGlyphAtlas, STBTTGlyphMetrics>.GlyphAtlas
-    {
-        private SDFTextureArray glyphAtlasTexture;
-
-        public void setGlyphAtlasTexture(SDFTextureArray glyphAtlasTexture)
-        {
-            this.glyphAtlasTexture = glyphAtlasTexture;
-        }
-
-        public SDFTextureArray getGlyphAtlasTexture()
-        {
-            return this.glyphAtlasTexture;
-        }
-    }
-
-    public class STBTTGlyphMetrics extends GlyphMetrics
-    {
-        private final int codepoint;
-        private int advanceX;
-        private int leftSideBearing;
-
-        private int cx0;
-        private int cy0;
-        private int cx1;
-        private int cy1;
-
-        private int xOrigin;
-        private int yOrigin;
-
-        private STBTTGlyphMetrics(int codepoint)
-        {
-            this.codepoint = codepoint;
-        }
-
-        public int getAdvanceX()
-        {
-            return this.advanceX;
-        }
-
-        public int getLeftSideBearing()
-        {
-            return this.leftSideBearing;
-        }
-
-        public int getCodepoint()
-        {
-            return this.codepoint;
-        }
-
-        public int getKerning(int cp)
-        {
-            return STBTTFont.this.getKerningOffset(this.codepoint, cp);
-        }
-
-        public int getCX0()
-        {
-            return this.cx0;
-        }
-
-        public int getCY0()
-        {
-            return this.cy0;
-        }
-
-        public int getCX1()
-        {
-            return this.cx1;
-        }
-
-        public int getCY1()
-        {
-            return this.cy1;
-        }
-
-        public int getXOrigin()
-        {
-            return this.xOrigin;
-        }
-
-        public int getYOrigin()
-        {
-            return this.yOrigin;
-        }
+        return new STBTTTextShaper();
     }
 
     public static STBTTFont load(Path path)
@@ -210,7 +75,7 @@ public class STBTTFont extends LiFont<STBTTFont.STBTTGlyphAtlas, STBTTFont.STBTT
             Logger.logf(SmartSeverity.ADDED, "Loading font: %s%n", name);
 
             var font = new STBTTFont(name);
-            font.scale = STBTruetype.stbtt_ScaleForPixelHeight(fontInfo, PIXEL_HEIGHT);
+            font.scale = STBTruetype.stbtt_ScaleForPixelHeight(fontInfo, NORMALIZED_PIXEL_HEIGHT);
 
             var ascentBuf = stack.callocInt(1);
             var descentBuf = stack.callocInt(1);
@@ -238,16 +103,16 @@ public class STBTTFont extends LiFont<STBTTFont.STBTTGlyphAtlas, STBTTFont.STBTT
             var colorSpace = ColorSpace.getInstance(ColorSpace.CS_GRAY);
             var colorModel = new ComponentColorModel(colorSpace, new int[] { 8 }, false,false, Transparency.OPAQUE, DataBuffer.TYPE_BYTE);
 
-            font.atlas = font.new STBTTGlyphAtlas();
+            font.atlas = font.new PlutoGlyphAtlas();
             font.glyphIndexLookup = new HashMap<>();
 
             var advanceWidth = stack.mallocInt(1);
-            var leftSideBearing = stack.mallocInt(1);
+            var leftSideBearingBuf = stack.mallocInt(1);
 
-            var cx0 = stack.mallocInt(1);
-            var cy0 = stack.mallocInt(1);
-            var cx1 = stack.mallocInt(1);
-            var cy1 = stack.mallocInt(1);
+            var cx0Buf = stack.mallocInt(1);
+            var cy0Buf = stack.mallocInt(1);
+            var cx1Buf = stack.mallocInt(1);
+            var cy1Buf = stack.mallocInt(1);
 
             var onedgeValue = 128;
             var pixelDistScale = onedgeValue / (float) SDF_PADDING;
@@ -268,7 +133,7 @@ public class STBTTFont extends LiFont<STBTTFont.STBTTGlyphAtlas, STBTTFont.STBTT
                 var width = sdfWidthBuf.get(0);
                 var height = sdfHeightBuf.get(0);
 
-                var glyphInfo = (GlyphInfo<STBTTGlyphAtlas, STBTTGlyphMetrics>) null;
+                var glyphInfo = (GlyphInfo<STBTTFont.PlutoGlyphAtlas, STBTTFont.PlutoGlyphMetrics>) null;
 
                 if (buf != null)
                 {
@@ -319,20 +184,21 @@ public class STBTTFont extends LiFont<STBTTFont.STBTTGlyphAtlas, STBTTFont.STBTT
                     STBTruetype.stbtt_FreeSDF(buf);
                 }
 
-                STBTruetype.stbtt_GetCodepointHMetrics(fontInfo, cp, advanceWidth, leftSideBearing);
+                STBTruetype.stbtt_GetCodepointHMetrics(fontInfo, cp, advanceWidth, leftSideBearingBuf);
 
-                var glyphMetrics = font.new STBTTGlyphMetrics(cp);
-                glyphMetrics.advanceX = advanceWidth.get(0);
-                glyphMetrics.leftSideBearing = leftSideBearing.get(0);
+                var glyphMetrics = font.new PlutoGlyphMetrics(cp) {{
+                    this.advanceX = advanceWidth.get(0);
+                    this.leftSideBearing = leftSideBearingBuf.get(0);
 
-                glyphMetrics.xOrigin = xOffsBuf.get(0);
-                glyphMetrics.yOrigin = yOffsBuf.get(0);
+                    this.xOrigin = xOffsBuf.get(0);
+                    this.yOrigin = yOffsBuf.get(0);
 
-                STBTruetype.stbtt_GetCodepointBox(fontInfo, cp, cx0, cy0, cx1, cy1);
-                glyphMetrics.cx0 = cx0.get(0);
-                glyphMetrics.cy0 = cy0.get(0);
-                glyphMetrics.cx1 = cx1.get(0);
-                glyphMetrics.cy1 = cy1.get(0);
+                    STBTruetype.stbtt_GetCodepointBox(fontInfo, cp, cx0Buf, cy0Buf, cx1Buf, cy1Buf);
+                    this.cx0 = cx0Buf.get(0);
+                    this.cy0 = cy0Buf.get(0);
+                    this.cx1 = cx1Buf.get(0);
+                    this.cy1 = cy1Buf.get(0);
+                }};
 
                 font.addGlyph(cp, glyphMetrics, glyphInfo);
 
@@ -349,12 +215,12 @@ public class STBTTFont extends LiFont<STBTTFont.STBTTGlyphAtlas, STBTTFont.STBTT
             {
                 STBTruetype.stbtt_GetKerningTable(fontInfo, kerningTable);
                 font.kerningTable = new HashMap<>();
-                kerningTable.forEach(e -> font.kerningTable.put(new KerningPair(e.glyph1(), e.glyph2()), e.advance()));
+                kerningTable.forEach(e -> font.kerningTable.put(new PlutoFont.KerningPair(e.glyph1(), e.glyph2()), e.advance()));
             }
 
-            font.ascent = ascentBuf.get();
-            font.descent = descentBuf.get();
-            font.lineGap = lineGapBuf.get();
+            font.ascent = ascentBuf.get(0);
+            font.descent = descentBuf.get(0);
+            font.lineGap = lineGapBuf.get(0);
             font.lineAdvance = font.ascent - font.descent + font.lineGap;
             var tex = new SDFTextureArray();
             tex.loadImg(sheets, SHEET_SIZE, SHEET_SIZE, sheets.size(), MagFilter.LINEAR, MinFilter.LINEAR, WrapMode.MIRROR_CLAMP_TO_EDGE, WrapMode.MIRROR_CLAMP_TO_EDGE);

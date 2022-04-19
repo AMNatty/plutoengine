@@ -1,4 +1,4 @@
-package org.plutoengine.graphics.gui.stbttf;
+package org.plutoengine.graphics.gui.font.stbttf;
 
 import org.joml.primitives.Rectanglef;
 import org.lwjgl.system.MemoryUtil;
@@ -11,7 +11,6 @@ import org.plutoengine.libra.command.impl.LiCommandSetPaint;
 import org.plutoengine.libra.command.impl.LiCommandSpecial;
 import org.plutoengine.libra.text.LiTextInfo;
 import org.plutoengine.libra.text.font.GlyphInfo;
-import org.plutoengine.libra.text.font.LiFontFamily;
 import org.plutoengine.libra.text.shaping.IShapingStrategy;
 import org.plutoengine.libra.text.shaping.TextShaper;
 import org.plutoengine.libra.text.shaping.TextStyleOptions;
@@ -20,11 +19,11 @@ import java.util.Arrays;
 import java.util.EnumSet;
 import java.util.Objects;
 
-public class STBTTBasicTextShaper implements IShapingStrategy<STBTTFont.STBTTGlyphMetrics, STBTTFont.STBTTGlyphAtlas, STBTTFont>
+public class STBTTTextShaper implements IShapingStrategy<STBTTFont.PlutoGlyphMetrics, STBTTFont.PlutoGlyphAtlas, STBTTFont>
 {
     private LiCommandBuffer commandBuffer;
 
-    public STBTTBasicTextShaper setCommandBuffer(LiCommandBuffer commandBuffer)
+    public STBTTTextShaper setCommandBuffer(LiCommandBuffer commandBuffer)
     {
         this.commandBuffer = commandBuffer;
 
@@ -32,11 +31,9 @@ public class STBTTBasicTextShaper implements IShapingStrategy<STBTTFont.STBTTGly
     }
 
     @Override
-    public LiTextInfo shape(EnumSet<TextShaper.EnumFeature> features, LiFontFamily<STBTTFont> fontFamily, String text, TextStyleOptions style)
+    public LiTextInfo shape(EnumSet<TextShaper.EnumFeature> features, STBTTFont font, String text, TextStyleOptions style)
     {
         var commandBuf = Objects.requireNonNullElseGet(this.commandBuffer, LiCommandBuffer::uncleared);
-
-        var font = style.pickFont(fontFamily);
 
         var atlas = font.getGlyphAtlas();
         var atlasTexture = atlas.getGlyphAtlasTexture();
@@ -88,7 +85,7 @@ public class STBTTBasicTextShaper implements IShapingStrategy<STBTTFont.STBTTGly
         float y = 0;
 
         GlyphInfo<?, ?> info;
-        STBTTFont.STBTTGlyphMetrics metrics = null;
+        STBTTFont.PlutoGlyphMetrics metrics = null;
         int cp;
         float minX = Float.POSITIVE_INFINITY, maxX = Float.NEGATIVE_INFINITY, minY = Float.POSITIVE_INFINITY, maxY = Float.NEGATIVE_INFINITY;
 

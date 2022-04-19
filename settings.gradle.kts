@@ -13,6 +13,10 @@ file("engine-core").listFiles().forEach {
     if (!it.isDirectory)
         return@forEach
 
+    // Skip hidden files
+    if (it.name.startsWith("."))
+        return@forEach
+
     include("plutoengine:${it.name}")
 }
 
@@ -20,11 +24,19 @@ file("engine-ext").listFiles().forEach {
     if (!it.isDirectory)
         return@forEach
 
+    // Skip hidden files
+    if (it.name.startsWith("."))
+        return@forEach
+
     include("plutoengine-ext:${it.name}")
 }
 
 file("engine-demo").listFiles().forEach {
     if (!it.isDirectory)
+        return@forEach
+
+    // Skip hidden files
+    if (it.name.startsWith("."))
         return@forEach
 
     include("plutoengine-demos:${it.name}")

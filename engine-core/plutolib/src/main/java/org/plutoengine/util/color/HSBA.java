@@ -44,7 +44,7 @@ public class HSBA extends HSB
      * @author 493msi
      */
     @Override
-    public RGB toRGBA()
+    public RGBA toRGBA()
     {
         return this.toRGBA(this.a);
     }

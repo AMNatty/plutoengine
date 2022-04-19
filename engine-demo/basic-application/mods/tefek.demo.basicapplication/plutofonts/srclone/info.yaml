@@ -1,0 +1,240 @@
+name: SRClone
+meta:
+  scale: 8
+  ascent: 8
+  descent: 0
+  lineGap: 1
+atlas: "pluto+asl://!font#png"
+filtering: NEAREST
+kern:
+  -
+    left: 0
+    right: 0
+    offset: 0
+
+glyphs:
+  -
+    cp: 48 # 0
+    sprite:
+      x: 0
+      y: 0
+      w: 8
+      h: 8
+    leftBearing: 0
+    advance: 8
+  -
+    cp: 49 # 1
+    sprite:
+      x: 8
+      y: 0
+      w: 8
+      h: 8
+    leftBearing: 0
+    advance: 8
+  -
+    cp: 50 # 2
+    sprite:
+      x: 16
+      y: 0
+      w: 8
+      h: 8
+    leftBearing: 0
+    advance: 8
+  -
+    cp: 51 # 3
+    sprite:
+      x: 24
+      y: 0
+      w: 8
+      h: 8
+    leftBearing: 0
+    advance: 8
+  -
+    cp: 52 # 4
+    sprite:
+      x: 32
+      y: 0
+      w: 8
+      h: 8
+    leftBearing: 0
+    advance: 8
+  -
+    cp: 53 # 5
+    sprite:
+      x: 40
+      y: 0
+      w: 8
+      h: 8
+    leftBearing: 0
+    advance: 8
+  -
+    cp: 54 # 6
+    sprite:
+      x: 48
+      y: 0
+      w: 8
+      h: 8
+    leftBearing: 0
+    advance: 8
+  -
+    cp: 55 # 7
+    sprite:
+      x: 56
+      y: 0
+      w: 8
+      h: 8
+    leftBearing: 0
+    advance: 8
+  -
+    cp: 56 # 8
+    sprite:
+      x: 64
+      y: 0
+      w: 8
+      h: 8
+    leftBearing: 0
+    advance: 8
+  -
+    cp: 57 # 9
+    sprite:
+      x: 72
+      y: 0
+      w: 8
+      h: 8
+    leftBearing: 0
+    advance: 8
+  -
+    cp: 57 # 9
+    sprite:
+      x: 72
+      y: 0
+      w: 8
+      h: 8
+    leftBearing: 0
+    advance: 8
+  -
+    cp: 43 # +
+    sprite:
+      x: 80
+      y: 0
+      w: 8
+      h: 8
+    leftBearing: 0
+    advance: 8
+  -
+    cp: 45 # +
+    sprite:
+      x: 88
+      y: 0
+      w: 8
+      h: 8
+    leftBearing: 0
+    advance: 8
+  -
+    cp: 46 # .
+    sprite:
+      x: 96
+      y: 0
+      w: 8
+      h: 8
+    leftBearing: 0
+    advance: 8
+  -
+    cp: 120 # x
+    sprite:
+      x: 104
+      y: 0
+      w: 8
+      h: 8
+    leftBearing: 0
+    advance: 8
+  -
+    cp: 128150 # 💖 - sparkling heart because the default red one is two codepoints :(
+    sprite:
+      x: 112
+      y: 0
+      w: 8
+      h: 8
+    leftBearing: 0
+    advance: 8
+  -
+    cp: 105 # i
+    sprite:
+      x: 120
+      y: 0
+      w: 8
+      h: 8
+    leftBearing: 0
+    advance: 8
+  -
+    cp: 83 # S
+    sprite:
+      x: 0
+      y: 8
+      w: 8
+      h: 8
+    leftBearing: 0
+    advance: 8
+  -
+    cp: 127776 # 🌠 - shooting star
+    sprite:
+      x: 8
+      y: 8
+      w: 8
+      h: 8
+    leftBearing: 0
+    advance: 8
+  -
+    cp: 128994 # 🟢 - large green circle
+    sprite:
+      x: 16
+      y: 8
+      w: 8
+      h: 8
+    leftBearing: 0
+    advance: 8
+  -
+    cp: 9728 # ☀ - sun
+    sprite:
+      x: 24
+      y: 8
+      w: 8
+      h: 8
+    leftBearing: 0
+    advance: 8
+  -
+    cp: 128314 # 🔺 - red up triangle
+    sprite:
+      x: 32
+      y: 8
+      w: 8
+      h: 8
+    leftBearing: 0
+    advance: 8
+  -
+    cp: 121171 # 𝥓 - spiral arrow thingy
+    sprite:
+      x: 40
+      y: 8
+      w: 8
+      h: 8
+    leftBearing: 0
+    advance: 8
+  -
+    cp: 128160 # 💠 - diamond
+    sprite:
+      x: 48
+      y: 8
+      w: 8
+      h: 8
+    leftBearing: 0
+    advance: 8
+  -
+    cp: 8734 # ∞ - infinity
+    sprite:
+      x: 112
+      y: 0
+      w: 8
+      h: 8
+    leftBearing: 0
+    advance: 8

@@ -9,6 +9,7 @@ import org.plutoengine.graphics.gl.vao.QuadPresets;
 import org.plutoengine.graphics.gl.vao.VertexArray;
 import org.plutoengine.graphics.sprite.Sprite;
 import org.plutoengine.graphics.texture.texture2d.RectangleTexture;
+import org.plutoengine.util.color.IRGBA;
 
 import java.util.Stack;
 
@@ -230,6 +231,13 @@ public class RectangleRenderer2D
     public RectangleRenderer2D recolor(float r, float g, float b, float a)
     {
         this.customShader.loadRecolor(r, g, b, a);
+
+        return this;
+    }
+
+    public RectangleRenderer2D recolor(IRGBA rgba)
+    {
+        this.customShader.loadRecolor(rgba.red(), rgba.green(), rgba.blue(), rgba.alpha());
 
         return this;
     }
