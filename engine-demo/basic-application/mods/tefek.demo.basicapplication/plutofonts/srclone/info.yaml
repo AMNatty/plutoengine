@@ -212,7 +212,7 @@ glyphs:
     leftBearing: 0
     advance: 8
   -
-    cp: 121171 # 𝥓 - spiral arrow thingy
+    cp: 128160 # 💠 - diamond
     sprite:
       x: 40
       y: 8
@@ -221,7 +221,7 @@ glyphs:
     leftBearing: 0
     advance: 8
   -
-    cp: 128160 # 💠 - diamond
+    cp: 121171 # 𝥓 - spiral arrow thingy
     sprite:
       x: 48
       y: 8
