@@ -225,7 +225,6 @@ public class AudioLoader
 
                 this.channels = info.channels();
                 this.sampleRate = info.sample_rate();
-
             }
 
             this.samplesLength = STBVorbis.stb_vorbis_stream_length_in_samples(this.handle);

@@ -94,7 +94,7 @@ public final class ModLoader extends PlutoLocalComponent
 
         if (modInterface == null)
         {
-            Logger.logf(SmartSeverity.MODULE_WARNING, "Cannot create a mod from the class '%s', it is not annotated with @%s%n".formatted(modClass.getCanonicalName(), ModEntry.class.getName()));
+            Logger.logf(SmartSeverity.MODULE_WARNING, "Cannot create a mod from the class '%s', it is not annotated with @%s%n", modClass.getCanonicalName(), ModEntry.class.getName());
             return;
         }
 

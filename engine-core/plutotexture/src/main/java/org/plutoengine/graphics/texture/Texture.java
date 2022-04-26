@@ -2,16 +2,15 @@ package org.plutoengine.graphics.texture;
 
 import org.lwjgl.opengl.GL33;
 import org.lwjgl.system.MemoryUtil;
+import org.plutoengine.logger.Logger;
+import org.plutoengine.logger.SmartSeverity;
+import org.plutoengine.tpl.ImageABGR;
+import org.plutoengine.tpl.ImageLoader;
 
 import java.awt.image.BufferedImage;
 import java.nio.ByteBuffer;
 import java.nio.file.Path;
 import java.util.Arrays;
-
-import org.plutoengine.logger.Logger;
-import org.plutoengine.logger.SmartSeverity;
-import org.plutoengine.tpl.ImageABGR;
-import org.plutoengine.tpl.ImageLoader;
 
 public abstract class Texture implements AutoCloseable
 {

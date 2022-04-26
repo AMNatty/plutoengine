@@ -233,7 +233,7 @@ glyphs:
     cp: 8734 # ∞ - infinity
     sprite:
       x: 112
-      y: 0
+      y: 8
       w: 8
       h: 8
     leftBearing: 0

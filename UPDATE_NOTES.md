@@ -1,3 +1,6 @@
+## 22.2.0.0-alpha.2
+* `[PlutoSpritesheet]` Renamed `TemporalSprite#getSideCount` to `getFrameCount`
+
 ## 22.2.0.0-alpha.1
 * `[PlutoGUI]` **Added support for bitmap fonts**
 * `[PlutoGUI]` Generalized the font renderer API

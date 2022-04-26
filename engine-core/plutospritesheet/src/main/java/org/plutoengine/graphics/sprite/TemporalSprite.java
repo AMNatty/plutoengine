@@ -62,7 +62,7 @@ public class TemporalSprite implements Sprite<RectangleTexture>
         this.recomputeFromIndex(index);
     }
 
-    public int getSideCount()
+    public int getFrameCount()
     {
         return this.frames.length;
     }
