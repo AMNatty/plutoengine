@@ -43,7 +43,8 @@ public class EntityEnemyScout extends EntityEnemy
     {
         super.init(game, x, y);
         this.movementChangeTimer = this.movementChangeInterval;
-        this.weaponCooldown = this.ammo.getCooldown() * 10.0f;
+        var rand = this.game.getRandom();
+        this.weaponCooldown = this.ammo.getCooldown() * (9.0f + rand.nextFloat() * 3.0f);
     }
 
     @Override
