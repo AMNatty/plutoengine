@@ -13,7 +13,7 @@ import org.plutoengine.shader.uniform.auto.AutoViewportProjection;
 import org.plutoengine.util.color.IRGBA;
 
 @ShaderProgram
-public final class BitmapTextShader extends ShaderBase implements IGUIShader
+public final class BitmapFontShader extends ShaderBase implements IGUIShader
 {
     @AutoViewportProjection
     @Uniform(name = "projection")

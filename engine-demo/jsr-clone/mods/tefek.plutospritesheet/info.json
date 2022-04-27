@@ -1,0 +1,11 @@
+{
+  "displayName": "Pluto SpriteSheet",
+  "description": "A library to manage, store and draw sprites.",
+  "author": "Tefek",
+  "resourceRoots": {
+    "default": {
+      "path": "default",
+      "type": "open"
+    }
+  }
+}

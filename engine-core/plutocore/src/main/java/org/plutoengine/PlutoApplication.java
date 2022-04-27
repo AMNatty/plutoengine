@@ -281,6 +281,7 @@ public abstract class PlutoApplication
 
             this.display.swapBuffers();
 
+            audioEngine.update();
             inputBus.resetStates();
 
             this.display.pollEvents();

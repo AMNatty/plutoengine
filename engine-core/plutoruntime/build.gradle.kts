@@ -38,7 +38,10 @@ dependencies {
     implementation("org.lwjgl:lwjgl")
     implementation("org.lwjgl:lwjgl-xxhash")
     implementation("org.lwjgl:lwjgl-zstd")
-    runtimeOnly("org.lwjgl", "lwjgl", classifier = Versions.lwjglNatives)
-    runtimeOnly("org.lwjgl", "lwjgl-xxhash", classifier = Versions.lwjglNatives)
-    runtimeOnly("org.lwjgl", "lwjgl-zstd", classifier = Versions.lwjglNatives)
+
+    Versions.lwjglNatives.forEach {
+        runtimeOnly("org.lwjgl", "lwjgl", classifier = it)
+        runtimeOnly("org.lwjgl", "lwjgl-xxhash", classifier = it)
+        runtimeOnly("org.lwjgl", "lwjgl-zstd", classifier = it)
+    }
 }

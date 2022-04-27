@@ -16,7 +16,7 @@ public class Framerate
 
     private static double animationTimer = 0;
 
-    private static double FPS = Double.NaN;
+    private static double fps = Double.NaN;
 
     private static int interpolatedFPS;
 
@@ -31,7 +31,7 @@ public class Framerate
 
     public static double getFPS()
     {
-        return FPS;
+        return fps;
     }
 
     public static int getInterpolatedFPS()
@@ -55,7 +55,7 @@ public class Framerate
             animationTimer += frameTimeNs / (double) TimeUnit.SECONDS.toNanos(1);
             // Maintain precision in case the engine runs for many hours
             animationTimer %= TimeUnit.DAYS.toMinutes(1);
-            FPS = TimeUnit.SECONDS.toMillis(1) / frameTime;
+            fps = TimeUnit.SECONDS.toMillis(1) / frameTime;
         }
 
         var nowMs = System.currentTimeMillis();
@@ -77,7 +77,7 @@ public class Framerate
         }
         else
         {
-            interpolatedFPS = (int) Math.round(FPS);
+            interpolatedFPS = (int) Math.round(fps);
         }
 
         lastDraw = now;

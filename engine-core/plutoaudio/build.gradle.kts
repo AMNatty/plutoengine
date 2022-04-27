@@ -12,5 +12,7 @@ dependencies {
 
 	api("org.lwjgl:lwjgl-openal")
 
-	runtimeOnly("org.lwjgl", "lwjgl-openal", classifier = Versions.lwjglNatives)
+	org.plutoengine.Versions.lwjglNatives.forEach {
+		runtimeOnly("org.lwjgl", "lwjgl-openal", classifier = it)
+	}
 }

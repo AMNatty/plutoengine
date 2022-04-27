@@ -1,4 +1,8 @@
 ## 22.2.0.0-alpha.2
+* `[SDK]` The libraries now always reference natives for all architectures
+* `[SDK]` Replaced `NEXT_RELEASE_DRAFT.md` with [an issue tracker](https://github.com/493msi/plutoengine/issues) 
+* `[PlutoAudio]` **Partial rewrite and support for managed sound effects**
+* `plutoengine-demos/` **Added the `jsr-clone` demo**
 * `[PlutoSpritesheet]` Renamed `TemporalSprite#getSideCount` to `getFrameCount`
 
 ## 22.2.0.0-alpha.1

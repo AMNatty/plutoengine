@@ -25,7 +25,7 @@ repositories {
 
 
 dependencies {
-   implementation group: "org.plutoengine", name: "plutocore", version: "22.2.0.0-alpha.0"
+   implementation group: "org.plutoengine", name: "plutocore", version: "22.2.0.0-alpha.2"
 }
 ```
 
@@ -41,9 +41,16 @@ repositories {
 }
 
 dependencies {
-   implementation("org.plutoengine", "plutocore", "22.2.0.0-alpha.0")
+   implementation("org.plutoengine", "plutocore", "22.2.0.0-alpha.2")
 }
 ```
+
+### Licensing
+
+While all code of PlutoEngine is licensed under MIT, some media in this repository
+is licensed under different terms:
+
+* Music in the **jsr-clone** demo is made by Selulance, licensed under **CC - BY 3.0**
 
 ### Versioning
 
@@ -64,6 +71,9 @@ version numbers.*
 
 ## Usability status of submodules
 
+Keep in mind PlutoEngine is in alpha and all features are tentative.
+The following list simply provides an overview of how likely breaking changes are to occur.
+
 ### Safe submodules
  * **PlutoCore** - Stable
  * **PlutoFramebuffer** - Stable
@@ -74,12 +84,12 @@ version numbers.*
  * **PlutoDisplay** - Stable, collision API nowhere near completion
  * **PlutoUSS2** - Stable
  * **PlutoLib** - Mostly stable
- 
+ * **PlutoRuntime** - Mostly stable
+
 ### Unstable submodules
- * **PlutoGUI** - Recently rewritten, the API is highly unstable
- * **PlutoRuntime** - Somewhat tentative, the module API has been rewritten and might contain bugs
- * **PlutoAudio** - Somewhat usable, unfinished
- 
+ * **PlutoAudio** - Very tentative, work in progress
+ * **PlutoGUI** - Recently rewritten, the API is highly unstable, work in progress
+
  
 ## Current priorities
 
@@ -92,12 +102,11 @@ See `NEXT_RELEASE_DRAFT.md` for details.
 
 ### Very high priority
 [ *Implemented in the current release.* ]
+ * Implement the layer system and integrate all existing systems with it
  * Improve image loading capabilities, possibly rewrite PlutoLib#TPL
 
 ### High priority
 [ *Implemented in the next release.* ]
- * Finish PlutoAudio
-    * Depends on the stage system
  * Expand upon the Color API
     * Color mixing and blending
     * Color transformation

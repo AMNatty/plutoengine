@@ -1,45 +1,73 @@
 package org.plutoengine.audio.al;
 
+import org.jetbrains.annotations.MustBeInvokedByOverriders;
 import org.joml.Vector3fc;
 import org.lwjgl.openal.AL10;
 
 public abstract class AudioSource implements AutoCloseable
 {
-    protected final int source;
+    protected final int id;
+    protected Vector3fc position;
 
     protected AudioSource()
     {
-        this.source = AL10.alGenSources();
+        this.id = AL10.alGenSources();
     }
 
+    @MustBeInvokedByOverriders
+    public boolean play()
+    {
+        AL10.alSourcePlay(this.id);
+        return true;
+    }
+
+    @MustBeInvokedByOverriders
+    public void pause()
+    {
+        AL10.alSourcePause(this.id);
+    }
+
+    @MustBeInvokedByOverriders
     public void stop()
     {
-        AL10.alSourceStop(this.source);
+        AL10.alSourceStop(this.id);
     }
 
+    @MustBeInvokedByOverriders
     public void close()
     {
-        this.stop();
-        AL10.alDeleteSources(this.source);
+        AL10.alDeleteSources(this.id);
     }
 
-    public void position(Vector3fc pos)
+    @MustBeInvokedByOverriders
+    public void position(AudioContext context, Vector3fc pos)
     {
-        AL10.alSource3f(this.source, AL10.AL_POSITION, pos.x(), pos.y(), pos.z());
+        this.position = pos;
+        var tPos = context.transform(pos);
+        AL10.alSource3f(this.id, AL10.AL_POSITION, tPos.x(), tPos.y(), tPos.z());
     }
 
-    public void velocity(Vector3fc velocity)
+    public Vector3fc getPosition()
     {
-        AL10.alSource3f(this.source, AL10.AL_VELOCITY, velocity.x(), velocity.y(), velocity.z());
+        return this.position;
     }
 
+    @MustBeInvokedByOverriders
+    public void velocity(AudioContext context, Vector3fc velocity)
+    {
+        var tVelocity = context.transform(velocity);
+        AL10.alSource3f(this.id, AL10.AL_VELOCITY, tVelocity.x(), tVelocity.y(), tVelocity.z());
+    }
+
+    @MustBeInvokedByOverriders
     public void pitch(float f)
     {
-        AL10.alSourcef(this.source, AL10.AL_PITCH, f);
+        AL10.alSourcef(this.id, AL10.AL_PITCH, f);
     }
 
+    @MustBeInvokedByOverriders
     public void volume(float f)
     {
-        AL10.alSourcef(this.source, AL10.AL_GAIN, f);
+        AL10.alSourcef(this.id, AL10.AL_GAIN, f);
     }
 }

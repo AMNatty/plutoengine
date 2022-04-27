@@ -1,0 +1,19 @@
+{
+  "displayName": "SRClone",
+  "description": "Java reimplementation of SRClone.",
+  "author": "Tefek",
+  "resourceRoots": {
+    "default": {
+      "path": "default",
+      "type": "open"
+    },
+    "icons": {
+      "path": "icons",
+      "type": "open"
+    },
+    "plutofonts": {
+      "path": "plutofonts",
+      "type": "open"
+    }
+  }
+}

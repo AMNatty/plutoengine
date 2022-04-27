@@ -14,7 +14,9 @@ dependencies {
 	implementation("com.fasterxml.jackson.dataformat", "jackson-dataformat-yaml", "2.12.3")
 
 	implementation("org.lwjgl", "lwjgl-yoga")
-	runtimeOnly("org.lwjgl", "lwjgl-yoga", classifier = org.plutoengine.Versions.lwjglNatives)
+	org.plutoengine.Versions.lwjglNatives.forEach {
+		runtimeOnly("org.lwjgl", "lwjgl-yoga", classifier = it)
+	}
 
 	implementation("org.commonmark", "commonmark", "0.18.1")
 }

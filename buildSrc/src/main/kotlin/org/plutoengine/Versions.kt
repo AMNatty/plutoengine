@@ -5,11 +5,16 @@ import org.gradle.api.JavaVersion
 
 object Versions {
     const val lwjglVersion = "3.3.1"
-    val lwjglNatives = when (OperatingSystem.current()) {
-        OperatingSystem.LINUX -> "natives-linux"
-        OperatingSystem.WINDOWS -> "natives-windows"
-        else -> throw Error("Unsupported operating system!")
-    }
+    val lwjglNatives = listOf(
+        "natives-linux-arm64",
+        "natives-linux-arm32",
+        "natives-linux",
+        "natives-macos-arm64",
+        "natives-macos",
+        "natives-windows-arm64",
+        "natives-windows",
+        "natives-windows-x86"
+    )
 
     const val jomlVersion = "1.10.2"
     const val jomlPrimitivesVersion = "1.10.0"
@@ -23,7 +28,7 @@ object Versions {
 
     const val isPrerelease = true
     const val prereleaseName = "alpha"
-    const val prerealeaseUpdate = 1
+    const val prerealeaseUpdate = 2
 
     val versionFull =
         if (isPrerelease)

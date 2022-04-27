@@ -14,10 +14,13 @@ dependencies {
 	api("org.lwjgl", "lwjgl-glfw")
 	api("org.lwjgl", "lwjgl-opengl")
 	api("org.lwjgl", "lwjgl-stb")
-	runtimeOnly("org.lwjgl", "lwjgl", classifier = Versions.lwjglNatives)
-	runtimeOnly("org.lwjgl", "lwjgl-glfw", classifier = Versions.lwjglNatives)
-	runtimeOnly("org.lwjgl", "lwjgl-opengl", classifier = Versions.lwjglNatives)
-	runtimeOnly("org.lwjgl", "lwjgl-stb", classifier = Versions.lwjglNatives)
+
+	org.plutoengine.Versions.lwjglNatives.forEach {
+		runtimeOnly("org.lwjgl", "lwjgl", classifier = it)
+		runtimeOnly("org.lwjgl", "lwjgl-glfw", classifier = it)
+		runtimeOnly("org.lwjgl", "lwjgl-opengl", classifier = it)
+		runtimeOnly("org.lwjgl", "lwjgl-stb", classifier = it)
+	}
 
 	api("com.code-disaster.steamworks4j", "steamworks4j", Versions.steamworks4jVersion)
 	api("com.code-disaster.steamworks4j", "steamworks4j-server", Versions.steamworks4jServerVersion)

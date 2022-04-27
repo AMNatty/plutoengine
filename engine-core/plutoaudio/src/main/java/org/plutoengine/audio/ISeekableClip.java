@@ -1,11 +1,7 @@
 package org.plutoengine.audio;
 
-public interface ISeekableAudioTrack extends IAudioStream
+public interface ISeekableClip extends ISeekableTrack, IClip
 {
-    int getSampleOffset();
-
-    int getLengthInSamples();
-
     default void skip(int sampleCount)
     {
         this.seek(Math.min(Math.max(0, this.getSampleOffset() + sampleCount), this.getLengthInSamples()));
@@ -15,11 +11,4 @@ public interface ISeekableAudioTrack extends IAudioStream
     {
         this.seek(Math.round(this.getLengthInSamples() * offset0to1));
     }
-
-    default void rewind()
-    {
-        this.seek(0);
-    }
-
-    void seek(int sampleIndex);
 }
