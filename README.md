@@ -33,7 +33,7 @@ dependencies {
 ```kotlin
 repositories {
    mavenCentral()
-   
+
    maven {
       name = "Vega"
       url = uri("https://vega.botdiril.com/")
@@ -75,54 +75,22 @@ Keep in mind PlutoEngine is in alpha and all features are tentative.
 The following list simply provides an overview of how likely breaking changes are to occur.
 
 ### Safe submodules
- * **PlutoCore** - Stable
- * **PlutoFramebuffer** - Stable
- * **PlutoMesher** - Stable
- * **PlutoShader** - Stable
- * **PlutoTexture** - Stable
- * **PlutoSpriteSheet** - Stable, some features are unfinished
- * **PlutoDisplay** - Stable, collision API nowhere near completion
- * **PlutoUSS2** - Stable
- * **PlutoLib** - Mostly stable
- * **PlutoRuntime** - Mostly stable
+* **PlutoCore** - Stable
+* **PlutoFramebuffer** - Stable
+* **PlutoMesher** - Stable
+* **PlutoShader** - Stable
+* **PlutoTexture** - Stable
+* **PlutoSpriteSheet** - Stable, some features are unfinished
+* **PlutoDisplay** - Stable, collision API nowhere near completion
+* **PlutoUSS2** - Stable
+* **PlutoLib** - Mostly stable
+* **PlutoRuntime** - Mostly stable
 
 ### Unstable submodules
- * **PlutoAudio** - Very tentative, work in progress
- * **PlutoGUI** - Recently rewritten, the API is highly unstable, work in progress
+* **PlutoAudio** - Very tentative, work in progress
+* **PlutoGUI** - Recently rewritten, the API is highly unstable, work in progress
 
- 
+
 ## Current priorities
 
-See `NEXT_RELEASE_DRAFT.md` for details.
-
-### To be fixed
-[ *Features or bugs that should be fixed **ASAP*** ]
- * Implement gradient variation support for Libra fills
- * Improve code quality in PlutoGUI
-
-### Very high priority
-[ *Implemented in the current release.* ]
- * Implement the layer system and integrate all existing systems with it
- * Improve image loading capabilities, possibly rewrite PlutoLib#TPL
-
-### High priority
-[ *Implemented in the next release.* ]
- * Expand upon the Color API
-    * Color mixing and blending
-    * Color transformation
-    * High-performance serialization
- 
-### Normal priority
-[ *Planned for an upcoming release.* ]
- * The collision system for PlutoStatic
- 
-### Low priority
-[ *Items not required immediately, planned to be implemented eventually.* ]
- * Allow multiple running instances of Pluto
-    * Alternatively, if this deems too difficult to implement,
-    prohibit the creation of more than one instance per JVM to avoid issues
- * A networking API
- * Re-add support for external mod jars to the ModLoader
-    * This feature requires a full rewrite and possibly a complete overhaul
-    * Mods should have limited execution levels, for example restricted file access
-      or disabled native library loading (this is probably not possible)
+See [issues](https://github.com/493msi/plutoengine/issues) for details.
