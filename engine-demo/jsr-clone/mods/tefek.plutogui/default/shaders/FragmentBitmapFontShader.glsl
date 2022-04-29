@@ -3,6 +3,10 @@
 in vec2 uvCoordinates;
 in vec2 paintUVCoordinates;
 
+flat in float paintGradientAngleCos;
+flat in float paintGradientAngleSin;
+flat in float[2] paintGradientEndsUnrotated;
+
 uniform sampler2DRect textureSampler;
 
 uniform int paintType;
@@ -35,20 +39,23 @@ vec4 gammaMix(vec4 lCol, vec4 rCol, float ratio)
 
 vec4 gradientColor(void)
 {
-    float angle = atan(-paintGradientEnds[1].y + paintGradientEnds[0].y, paintGradientEnds[1].x - paintGradientEnds[0].x);
-    float rotatedStartX = paintGradientEnds[0].x * cos(angle) - paintGradientEnds[0].y * sin(angle);
-    float rotatedEndX = paintGradientEnds[1].x * cos(angle) - paintGradientEnds[1].y * sin(angle);
-    float d = rotatedEndX - rotatedStartX;
+    float tStart = paintGradientEndsUnrotated[0];
+    float gradientLength = paintGradientEndsUnrotated[1] - tStart;
 
-    float pX = paintUVCoordinates.x * cos(angle) - paintUVCoordinates.y * sin(angle);
+    float t = paintUVCoordinates.x * paintGradientAngleCos - paintUVCoordinates.y * paintGradientAngleSin;
 
-    float mr = smoothstep(rotatedStartX + paintGradientPositions[0] * d, rotatedStartX + paintGradientPositions[1] * d, pX);
-    vec4 col = gammaMix(paintGradientColors[0], paintGradientColors[1], mr);
+    float ti = paintGradientPositions[0] * gradientLength;
+    float tni;
+    vec4 col = paintGradientColors[0];
 
-    for (int i = 1; i < paintGradientStopCount - 1; i++)
+    for (int i = 0; i < paintGradientStopCount - 1; i++)
     {
-        mr = smoothstep(rotatedStartX + paintGradientPositions[i] * d, rotatedStartX + paintGradientPositions[i + 1] * d, pX);
-        col = gammaMix(col, paintGradientColors[i + 1], mr);
+        tni = paintGradientPositions[i + 1] * gradientLength;
+
+        float mixValue = smoothstep(tStart + ti, tStart + tni, t);
+        col = gammaMix(col, paintGradientColors[i + 1], mixValue);
+
+        ti = tni;
     }
 
     return col;
