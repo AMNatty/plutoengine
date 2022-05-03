@@ -1,17 +1,15 @@
 package org.plutoengine.graphics;
 
-import org.plutoengine.ModLWJGL;
 import org.plutoengine.Pluto;
+import org.plutoengine.graphics.shader.RenderShaderBuilder;
 import org.plutoengine.graphics.spritesheet.FramebufferTiledSpriteSheet;
 import org.plutoengine.mod.IModEntryPoint;
 import org.plutoengine.mod.Mod;
 import org.plutoengine.mod.ModEntry;
-import org.plutoengine.shader.PlutoShaderMod;
-import org.plutoengine.shader.RenderShaderBuilder;
 
 @ModEntry(modID = PlutoSpriteSheetMod.MOD_ID,
         version = Pluto.VERSION,
-        dependencies = { ModLWJGL.class, PlutoShaderMod.class })
+        dependencies = { PlutoRendererMod.class })
 public class PlutoSpriteSheetMod implements IModEntryPoint
 {
     public static final String MOD_ID = "tefek.plutospritesheet";

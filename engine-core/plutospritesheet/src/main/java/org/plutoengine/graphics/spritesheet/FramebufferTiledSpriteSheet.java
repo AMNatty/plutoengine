@@ -5,8 +5,8 @@ import org.lwjgl.opengl.GL33;
 
 import org.plutoengine.graphics.IRectangleShader2D;
 import org.plutoengine.graphics.RectangleRenderer2D;
-import org.plutoengine.graphics.gl.fbo.Framebuffer;
-import org.plutoengine.graphics.gl.fbo.FramebufferTexture;
+import org.plutoengine.graphics.fbo.Framebuffer;
+import org.plutoengine.graphics.fbo.FramebufferTexture;
 import org.plutoengine.graphics.sprite.Sprite;
 import org.plutoengine.graphics.sprite.TileSprite;
 import org.plutoengine.graphics.texture.MagFilter;

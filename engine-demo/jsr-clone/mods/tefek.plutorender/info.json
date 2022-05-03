@@ -1,0 +1,7 @@
+{
+  "displayName": "PlutoRender",
+  "description": "OpenGL-based renderer for PlutoEngine.",
+  "author": "Tefek",
+  "resourceRoots": {
+  }
+}

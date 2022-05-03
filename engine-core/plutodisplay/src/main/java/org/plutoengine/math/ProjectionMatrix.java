@@ -24,7 +24,7 @@ public class ProjectionMatrix
     }
 
     /**
-     * Create a centered 2D orthogonal projection Matrix3x2f based on the width and
+     * Create a centered 2D orthogonal projection Matrix4f based on the width and
      * height.
      * 
      * @param width  The ortho width

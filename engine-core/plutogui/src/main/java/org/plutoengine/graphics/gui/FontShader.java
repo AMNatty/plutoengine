@@ -1,15 +1,15 @@
 package org.plutoengine.graphics.gui;
 
 import org.joml.Matrix3fc;
-import org.plutoengine.graphics.gl.vao.attrib.ReservedAttributes;
+import org.plutoengine.graphics.vao.attrib.ReservedAttributes;
+import org.plutoengine.graphics.shader.uniform.*;
 import org.plutoengine.libra.paint.LiColorPaint;
 import org.plutoengine.libra.paint.LiGradientPaint;
 import org.plutoengine.libra.paint.LiPaint;
-import org.plutoengine.shader.ShaderBase;
-import org.plutoengine.shader.ShaderProgram;
-import org.plutoengine.shader.VertexArrayAttribute;
-import org.plutoengine.shader.uniform.*;
-import org.plutoengine.shader.uniform.auto.AutoViewportProjection;
+import org.plutoengine.graphics.shader.ShaderBase;
+import org.plutoengine.graphics.shader.ShaderProgram;
+import org.plutoengine.graphics.shader.VertexArrayAttribute;
+import org.plutoengine.graphics.shader.uniform.auto.AutoViewportProjection;
 import org.plutoengine.util.color.IRGBA;
 
 @ShaderProgram

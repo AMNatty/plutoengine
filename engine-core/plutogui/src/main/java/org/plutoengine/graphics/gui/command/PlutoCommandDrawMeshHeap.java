@@ -1,7 +1,7 @@
 package org.plutoengine.graphics.gui.command;
 
-import org.plutoengine.graphics.gl.vao.attrib.AttributeInfo;
-import org.plutoengine.graphics.gl.vbo.EnumArrayBufferType;
+import org.plutoengine.graphics.vao.attrib.AttributeInfo;
+import org.plutoengine.graphics.vbo.EnumArrayBufferType;
 import org.plutoengine.libra.command.impl.LiCommand;
 
 import java.nio.FloatBuffer;

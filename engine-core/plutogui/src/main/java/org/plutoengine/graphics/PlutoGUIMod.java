@@ -10,7 +10,7 @@ import org.plutoengine.graphics.texture.texture2d.RectangleTexture;
 import org.plutoengine.mod.IModEntryPoint;
 import org.plutoengine.mod.Mod;
 import org.plutoengine.mod.ModEntry;
-import org.plutoengine.shader.RenderShaderBuilder;
+import org.plutoengine.graphics.shader.RenderShaderBuilder;
 
 /**
  * @author 493msi

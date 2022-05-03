@@ -8,7 +8,7 @@ application {
 
 launch4j {
     mainClassName = "cz.tefek.srclone.Main"
-    bundledJrePath = "jre"
+    bundledJrePath = "jre-windows"
 }
 
 java {

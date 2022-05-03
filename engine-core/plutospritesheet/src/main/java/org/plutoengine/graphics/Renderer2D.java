@@ -5,8 +5,8 @@ import org.joml.Matrix3x2fc;
 import org.joml.Vector4f;
 import org.lwjgl.opengl.GL33;
 import org.plutoengine.graphics.gl.DrawMode;
-import org.plutoengine.graphics.gl.vao.QuadPresets;
-import org.plutoengine.graphics.gl.vao.VertexArray;
+import org.plutoengine.graphics.vao.QuadPresets;
+import org.plutoengine.graphics.vao.VertexArray;
 import org.plutoengine.graphics.texture.texture2d.Texture2D;
 import org.plutoengine.util.color.IRGBA;
 

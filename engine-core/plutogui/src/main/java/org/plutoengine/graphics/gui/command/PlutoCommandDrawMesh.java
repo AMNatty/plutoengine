@@ -1,6 +1,6 @@
 package org.plutoengine.graphics.gui.command;
 
-import org.plutoengine.graphics.gl.vao.attrib.AttributeInfo;
+import org.plutoengine.graphics.vao.attrib.AttributeInfo;
 import org.plutoengine.libra.command.impl.LiCommand;
 import org.plutoengine.libra.command.impl.LiCommandDrawMesh;
 

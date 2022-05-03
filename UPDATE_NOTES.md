@@ -1,3 +1,10 @@
+## 22.3.0.0-alpha.0
+* `[SDK]` **Combined `PlutoFramebuffer`, `PlutoMesher`, `PlutoShader` and `PlutoTexture`
+  into `PlutoRender`**
+  * Unified the package structure
+* `[SDK]` **Added the license to all source files**
+* `plutoengine-demos/jsr-clone` Added a proper license file for the music
+
 ## 22.2.0.0-alpha.2
 * `[SDK]` The libraries now always reference natives for all architectures
 * `[SDK]` Replaced `NEXT_RELEASE_DRAFT.md` with [an issue tracker](https://github.com/493msi/plutoengine/issues) 

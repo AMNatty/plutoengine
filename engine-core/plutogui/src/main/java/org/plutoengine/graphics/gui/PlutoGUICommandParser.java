@@ -1,8 +1,8 @@
 package org.plutoengine.graphics.gui;
 
 import org.plutoengine.graphics.gl.DrawMode;
-import org.plutoengine.graphics.gl.vao.VertexArray;
-import org.plutoengine.graphics.gl.vao.VertexArrayBuilder;
+import org.plutoengine.graphics.vao.VertexArray;
+import org.plutoengine.graphics.vao.VertexArrayBuilder;
 import org.plutoengine.graphics.gui.command.PlutoCommandDrawMesh;
 import org.plutoengine.graphics.gui.command.PlutoCommandDrawMeshDirectBuffer;
 import org.plutoengine.graphics.gui.command.PlutoCommandSwitchShader;
@@ -13,7 +13,7 @@ import org.plutoengine.libra.command.LiCommandBuffer;
 import org.plutoengine.libra.command.impl.LiCommandSetPaint;
 import org.plutoengine.libra.command.impl.LiCommandSetTransform;
 import org.plutoengine.libra.command.impl.LiCommandSpecial;
-import org.plutoengine.shader.ShaderBase;
+import org.plutoengine.graphics.shader.ShaderBase;
 
 import java.util.ArrayDeque;
 import java.util.ArrayList;

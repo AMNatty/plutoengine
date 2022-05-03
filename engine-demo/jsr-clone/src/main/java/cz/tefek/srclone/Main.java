@@ -10,7 +10,7 @@ import org.plutoengine.input.Keyboard;
 import org.plutoengine.libra.paint.LiPaint;
 import org.plutoengine.libra.text.shaping.TextStyleOptions;
 import org.plutoengine.math.ProjectionMatrix;
-import org.plutoengine.shader.uniform.auto.AutomaticUniforms;
+import org.plutoengine.graphics.shader.uniform.auto.AutomaticUniforms;
 import org.plutoengine.util.color.Color;
 
 import java.util.concurrent.TimeUnit;

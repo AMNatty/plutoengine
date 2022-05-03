@@ -3,16 +3,16 @@ package org.plutoengine.graphics;
 import org.joml.Matrix3x2fc;
 import org.joml.Matrix4fc;
 
-import org.plutoengine.graphics.gl.vao.attrib.ReservedAttributes;
-import org.plutoengine.shader.ShaderBase;
-import org.plutoengine.shader.ShaderProgram;
-import org.plutoengine.shader.VertexArrayAttribute;
-import org.plutoengine.shader.uniform.Uniform;
-import org.plutoengine.shader.uniform.UniformMat3x2;
-import org.plutoengine.shader.uniform.UniformMat4;
-import org.plutoengine.shader.uniform.UniformVec2;
-import org.plutoengine.shader.uniform.UniformVec4;
-import org.plutoengine.shader.uniform.auto.AutoViewportProjection;
+import org.plutoengine.graphics.vao.attrib.ReservedAttributes;
+import org.plutoengine.graphics.shader.ShaderBase;
+import org.plutoengine.graphics.shader.ShaderProgram;
+import org.plutoengine.graphics.shader.VertexArrayAttribute;
+import org.plutoengine.graphics.shader.uniform.Uniform;
+import org.plutoengine.graphics.shader.uniform.UniformMat3x2;
+import org.plutoengine.graphics.shader.uniform.UniformMat4;
+import org.plutoengine.graphics.shader.uniform.UniformVec2;
+import org.plutoengine.graphics.shader.uniform.UniformVec4;
+import org.plutoengine.graphics.shader.uniform.auto.AutoViewportProjection;
 
 /**
  * @author 493msi

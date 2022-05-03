@@ -1,6 +1,6 @@
 {
-  "displayName": "Pluto Engine GUI Renderer",
-  "description": "",
+  "displayName": "PlutoGUI",
+  "description": "PlutoEngine's GUI Renderer.",
   "author": "Tefek",
   "resourceRoots": {
     "default": {

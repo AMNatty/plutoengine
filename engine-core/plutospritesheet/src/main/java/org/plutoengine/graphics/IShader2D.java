@@ -5,7 +5,7 @@ import org.joml.Matrix4fc;
 import org.joml.Vector2fc;
 import org.joml.Vector4fc;
 
-import org.plutoengine.shader.IShaderProgram;
+import org.plutoengine.graphics.shader.IShaderProgram;
 
 public interface IShader2D extends IShaderProgram
 {

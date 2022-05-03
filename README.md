@@ -25,7 +25,7 @@ repositories {
 
 
 dependencies {
-   implementation group: "org.plutoengine", name: "plutocore", version: "22.2.0.0-alpha.2"
+   implementation group: "org.plutoengine", name: "plutocore", version: "22.3.0.0-alpha.0"
 }
 ```
 
@@ -41,7 +41,7 @@ repositories {
 }
 
 dependencies {
-   implementation("org.plutoengine", "plutocore", "22.2.0.0-alpha.2")
+   implementation("org.plutoengine", "plutocore", "22.3.0.0-alpha.0")
 }
 ```
 
@@ -76,19 +76,19 @@ The following list simply provides an overview of how likely breaking changes ar
 
 ### Safe submodules
 * **PlutoCore** - Stable
-* **PlutoFramebuffer** - Stable
-* **PlutoMesher** - Stable
-* **PlutoShader** - Stable
-* **PlutoTexture** - Stable
-* **PlutoSpriteSheet** - Stable, some features are unfinished
+* **PlutoSpritesheet** - Stable, some features are unfinished
 * **PlutoDisplay** - Stable, collision API nowhere near completion
-* **PlutoUSS2** - Stable
 * **PlutoLib** - Mostly stable
+* **PlutoRender** - Stable
 * **PlutoRuntime** - Mostly stable
 
 ### Unstable submodules
 * **PlutoAudio** - Very tentative, work in progress
 * **PlutoGUI** - Recently rewritten, the API is highly unstable, work in progress
+
+### Extensions
+* **PlutoUSS2** - Stable
+* **PlutoGameObject** - Stable
 
 
 ## Current priorities
