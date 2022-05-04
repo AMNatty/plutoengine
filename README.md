@@ -47,10 +47,9 @@ dependencies {
 
 ### Licensing
 
-While all code of PlutoEngine is licensed under MIT, some media in this repository
-is licensed under different terms:
+The code of PlutoEngine is licensed under the MIT license.
 
-* Music in the **jsr-clone** demo is made by Selulance, licensed under **CC - BY 3.0**
+See [LICENSING_INFO](https://github.com/493msi/plutoengine/blob/master/LICENSING_INFO.txt) for further information.
 
 ### Versioning
 
