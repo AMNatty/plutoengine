@@ -2,7 +2,7 @@
 * `[SDK]` **Combined `PlutoFramebuffer`, `PlutoMesher`, `PlutoShader` and `PlutoTexture`
   into `PlutoRender`**
   * Unified the package structure
-* `[SDK]` **Added the license to all source files**
+* `[SDK]` **Added the license text to all source files to conform with the MIT license requirements**
 * `plutoengine-demos/jsr-clone` Added a proper license file for the music
 
 ## 22.2.0.0-alpha.2
