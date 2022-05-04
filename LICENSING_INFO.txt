@@ -1,0 +1,35 @@
+SOFTWARE LICENSING
+==================
+While PlutoEngine is licensed under the MIT license, see
+individual libraries and their license requirements.
+
+MEDIA LICENSING
+===============
+This repository contains some first-party media files, such as audio,
+fonts and images. See "Third party media within this repository" for
+exceptions.
+
+Unless specified otherwise:
+    This content may be freely used under the https://creativecommons.org/publicdomain/zero/1.0/ license
+    as long as it is used within an application based on PlutoEngine and does not misrepresent
+    PlutoEngine or any of the PlutoEngine authors and does not remove this restriction.
+
+     OR
+
+    This content may be freely used under the https://creativecommons.org/licenses/by-nd/4.0/ license
+    with no further restrictions.
+
+     OR
+
+    This content may be freely used under the https://creativecommons.org/licenses/by-sa/4.0/ license
+    with no further restrictions.
+
+
+
+Third party media within this repository
+========================================
+file "engine-demo/jsr-clone/mods/tefek.srclone/default/sound/game_st.ogg":
+    "Safehouse" by Selulance
+    https://www.youtube.com/watch?v=-kNx6sqReFk
+
+    Licensed under https://creativecommons.org/licenses/by/3.0/
