@@ -25,12 +25,11 @@
 package org.plutoengine.graphics.fbo;
 
 import org.lwjgl.opengl.GL33;
+import org.plutoengine.logger.Logger;
+import org.plutoengine.logger.SmartSeverity;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import org.plutoengine.logger.Logger;
-import org.plutoengine.logger.SmartSeverity;
 
 public class Framebuffer
 {

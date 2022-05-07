@@ -87,7 +87,7 @@ abstract class AudioDoubleBufferedSource extends AudioSource
         if (this.closed)
             return false;
 
-        var state = AL10.alGetSourcei(this.id, AL10.AL_SOURCE_STATE);
+        var state = this.getState();
 
         return switch (state)
         {
@@ -147,7 +147,11 @@ abstract class AudioDoubleBufferedSource extends AudioSource
         }
 
         return unqueued;
+    }
 
+    private int getState()
+    {
+        return AL10.alGetSourcei(this.id, AL10.AL_SOURCE_STATE);
     }
 
     public boolean update()
@@ -158,7 +162,9 @@ abstract class AudioDoubleBufferedSource extends AudioSource
         var unqueued = this.unqueueBuffers();
         unqueued.forEach(this::stream);
 
-        if (AL10.alGetSourcei(this.id, AL10.AL_SOURCE_STATE) == AL10.AL_STOPPED)
+        var sourceState = this.getState();
+
+        if (sourceState == AL10.AL_STOPPED)
         {
             if (this.audioBufferDepleted)
                 return false;
