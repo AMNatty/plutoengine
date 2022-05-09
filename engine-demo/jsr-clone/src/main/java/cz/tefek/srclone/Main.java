@@ -36,6 +36,7 @@ import org.plutoengine.libra.text.shaping.TextStyleOptions;
 import org.plutoengine.math.ProjectionMatrix;
 import org.plutoengine.graphics.shader.uniform.auto.AutomaticUniforms;
 import org.plutoengine.util.color.Color;
+import org.plutoengine.util.color.RGBA;
 
 import java.util.concurrent.TimeUnit;
 
@@ -47,6 +48,7 @@ public class Main extends PlutoApplication
         var cfg = new PlutoApplication.StartupConfig();
         cfg.windowInitialDimensions(1280, 720);
         cfg.windowName("jsr-clone");
+        cfg.clearColor(new RGBA(0.0f, 0.0f, 0.0f, 1.0f));
         // cfg.vsync(1);
         app.run(args, cfg);
     }
@@ -70,9 +72,6 @@ public class Main extends PlutoApplication
     {
         GL33.glEnable(GL33.GL_BLEND);
         GL33.glBlendFunc(GL33.GL_SRC_ALPHA, GL33.GL_ONE_MINUS_SRC_ALPHA);
-
-        GL33.glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
-        GL33.glClear(GL33.GL_COLOR_BUFFER_BIT);
 
         var projection = ProjectionMatrix.createOrtho2D(this.display.getWidth(), this.display.getHeight());
         AutomaticUniforms.VIEWPORT_PROJECTION.fire(projection);
