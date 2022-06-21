@@ -186,7 +186,7 @@ public class Game
 
         var scoreFont = new TextStyleOptions(24)
             .setPaint(LiPaint.solidColor(Color.WHITE));
-        ImmediateFontRenderer.drawString(5.0f, 5.0f, ("S %010.0f").formatted(this.entityPlayer.getScore()), SRCloneMod.srCloneFont, scoreFont);
+        ImmediateFontRenderer.drawString(5.0f, 5.0f, "S %010.0f".formatted(this.entityPlayer.getScore()), SRCloneMod.srCloneFont, scoreFont);
 
         if (this.deathScreenAnimation > 1.0f)
         {

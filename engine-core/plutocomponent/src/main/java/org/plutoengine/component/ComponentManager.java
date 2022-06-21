@@ -28,6 +28,7 @@ import org.apache.commons.collections4.MultiValuedMap;
 import org.apache.commons.collections4.multimap.ArrayListValuedHashMap;
 import org.apache.commons.collections4.multimap.HashSetValuedHashMap;
 import org.apache.commons.lang3.ClassUtils;
+import org.jetbrains.annotations.MustBeInvokedByOverriders;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
@@ -74,6 +75,14 @@ public class ComponentManager<R extends AbstractComponent<R>>
         this.components.put(token, component);
         this.tokens.put(component, token);
 
+        this.onComponentAdded(component);
+
+        return component;
+    }
+
+    @MustBeInvokedByOverriders
+    protected void onComponentAdded(R component)
+    {
         try
         {
             component.initialize(this);
@@ -82,8 +91,6 @@ public class ComponentManager<R extends AbstractComponent<R>>
         {
             throw new RuntimeException("An exception has occured while mounting the component", e);
         }
-
-        return component;
     }
 
     public Class<R> getComponentBase()
@@ -130,6 +137,12 @@ public class ComponentManager<R extends AbstractComponent<R>>
 
         classes.forEach(clazz -> this.implementationProviders.removeMapping(clazz, component));
 
+        this.onComponentRemoved(component);
+    }
+
+    @MustBeInvokedByOverriders
+    protected void onComponentRemoved(R component)
+    {
         try
         {
             component.destroy(this);
@@ -151,14 +164,7 @@ public class ComponentManager<R extends AbstractComponent<R>>
 
             classes.forEach(clazz -> this.implementationProviders.removeMapping(clazz, component));
 
-            try
-            {
-                component.onUnmount();
-            }
-            catch (Exception e)
-            {
-                throw new RuntimeException("An exception has occured whiile unmounting the component", e);
-            }
+            this.onComponentRemoved(component);
         });
     }
 }

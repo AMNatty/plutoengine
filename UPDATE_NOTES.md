@@ -1,3 +1,7 @@
+## 22.3.0.0-alpha.1
+* `[PlutoComponent]` Removing components using a token should have the same semantics as removing individual components
+* `[PlutoComponent]` Made the addition and removal of components hookable before mount events are fired
+
 ## 22.3.0.0-alpha.0
 * `[SDK]` **Combined `PlutoFramebuffer`, `PlutoMesher`, `PlutoShader` and `PlutoTexture`
   into `PlutoRender`**
