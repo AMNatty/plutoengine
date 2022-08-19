@@ -30,7 +30,7 @@ import cz.tefek.srclone.EnumTeam;
 import cz.tefek.srclone.SRCloneMod;
 import cz.tefek.srclone.ammo.EnumAmmo;
 
-public class EntityProjectileEnemyHeatStar extends EntityProjectileHeatStar
+public class EntityProjectileEnemyHeatStar extends EntityProjectileAmmo
 {
     public EntityProjectileEnemyHeatStar()
     {
