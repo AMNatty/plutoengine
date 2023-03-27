@@ -45,7 +45,7 @@ subprojects {
         repositories {
             maven {
                 name = "Vega"
-                url = uri("https://vega.botdiril.com/")
+                url = uri("https://vega.botdiril.com/releases")
                 credentials {
                     val vegaUsername: String? by project
                     val vegaPassword: String? by project

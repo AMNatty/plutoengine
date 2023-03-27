@@ -38,4 +38,9 @@ public class AngleUtil
 
         return angle;
     }
+
+    public static float snapToDirections(float angle, int directions)
+    {
+        return (float) (2.0f * Math.PI * Math.round(angle / 2.0f / Math.PI * directions) / directions);
+    }
 }

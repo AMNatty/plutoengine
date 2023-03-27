@@ -19,7 +19,7 @@ repositories {
 
    maven {
       name = "Vega"
-      url = uri("https://vega.botdiril.com/")
+      url = uri("https://vega.botdiril.com/releases")
    }
 }
 
@@ -36,7 +36,7 @@ repositories {
 
    maven {
       name = "Vega"
-      url = uri("https://vega.botdiril.com/")
+      url = uri("https://vega.botdiril.com/releases")
    }
 }
 

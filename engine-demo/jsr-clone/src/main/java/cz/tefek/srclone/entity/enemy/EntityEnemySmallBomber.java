@@ -124,10 +124,42 @@ public class EntityEnemySmallBomber extends EntityEnemy
     {
         float w = 128, h = 128;
 
-        RectangleRenderer2D.draw(SRCloneMod.centeredQuad)
-                           .at(this.getRenderX(), this.getRenderY(), w, h)
-                           .sprite(SRCloneMod.enemySmallBomber.getSideFromAngle(this.rotation))
-                           .flush();
+        float engineOffset = 15;
+
+        float engineX = this.getRenderX() - (float) (Math.sin(this.rotation) * engineOffset);
+        float engineY = this.getRenderY() - (float) (Math.cos(this.rotation) * engineOffset);
+
+        float nozzleRot = (float) (-this.rotation + Math.PI / 4.0f * 3.0f);
+
+        if (Math.cos(this.rotation) > 0.3f)
+        {
+            RectangleRenderer2D.draw(SRCloneMod.centeredQuad)
+                               .at(engineX, engineY, w, h)
+                               .rotate(AngleUtil.snapToDirections(nozzleRot, SRCloneMod.enemySmallBomber.getSideCount()))
+                               .recolor(1.0f, 0.0f, 1.0f, 0.3f)
+                               .texture(SRCloneMod.rocketNozzle)
+                               .flush();
+
+            RectangleRenderer2D.draw(SRCloneMod.centeredQuad)
+                               .at(this.getRenderX(), this.getRenderY(), w, h)
+                               .sprite(SRCloneMod.enemySmallBomber.getSideFromAngle(this.rotation))
+                               .flush();
+        }
+        else
+        {
+
+            RectangleRenderer2D.draw(SRCloneMod.centeredQuad)
+                               .at(this.getRenderX(), this.getRenderY(), w, h)
+                               .sprite(SRCloneMod.enemySmallBomber.getSideFromAngle(this.rotation))
+                               .flush();
+
+            RectangleRenderer2D.draw(SRCloneMod.centeredQuad)
+                               .at(engineX, engineY, w, h)
+                               .rotate(AngleUtil.snapToDirections(nozzleRot, SRCloneMod.enemySmallBomber.getSideCount()))
+                               .recolor(1.0f, 0.0f, 1.0f, 0.3f)
+                               .texture(SRCloneMod.rocketNozzle)
+                               .flush();
+        }
     }
 
     @Override
